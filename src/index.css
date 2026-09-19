@@ -1,0 +1,51 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+:root{
+  --primaryBright:#F1F1F1;  
+  --primaryGreen: #8EE4AF;
+  --primaryDark: #181818;
+  --primaryBlue: #37d5f9;
+  --secondaryBlue:#1a4ffc;
+  --gradientPink: rgb(173, 7, 239);
+  --gradientBlue: rgb(49, 97, 228) ;
+  --gradientPinkDark: rgb(69, 14, 91);
+  --gradientBlueDark: rgb(18, 31, 65) ;
+  --shadow: rgba(246, 246, 246, 0.273);
+}
+
+
+
+
+
+.aboutScroll::-webkit-scrollbar {
+  display: none;
+  scroll-behavior: smooth;
+}
+
+body::-webkit-scrollbar {
+  display: none;
+  scroll-behavior: smooth;
+}
+
+
+
+.projectScroll::-webkit-scrollbar {
+  width: 8px;
+}
+
+.projectScroll::-webkit-scrollbar-thumb {
+  background: linear-gradient(var(--gradientBlue), var(--gradientPink)); /* Change this to your preferred color */
+  border-radius: 6px;
+}
+
+.textArea::-webkit-scrollbar {
+  width: 8px;
+}
+
+.textArea::-webkit-scrollbar-thumb {
+  background: linear-gradient(var(--gradientBlue), var(--gradientPink)); /* Change this to your preferred color */
+  border-radius: 6px;
+}

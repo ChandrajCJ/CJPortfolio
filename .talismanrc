@@ -1,0 +1,7 @@
+# npm lockfiles contain base64 SHA-512 integrity digests for every package.
+# These are content hashes, not credentials — Talisman's filecontent detector
+# flags them as false positives.
+fileignoreconfig:
+  - filename: package-lock.json
+    ignore_detectors:
+      - filecontent
