@@ -1,0 +1,151 @@
+/**
+ * `needsReview: true` marks copy inferred from the project title and stack
+ * rather than taken from a source of truth. Rewrite those in your own words.
+ *
+ * `repo` is null wherever the public repository URL is unknown - cards hide the
+ * link rather than guessing a URL.
+ */
+export const projects = [
+  {
+    slug: 'chat-app',
+    title: 'Real-Time Chat App',
+    year: 2025,
+    featured: true,
+    image: null,
+    blurb: 'Serverless 1:1 real-time messaging with voice notes, reactions, and read receipts.',
+    description:
+      'A serverless 1:1 real-time messaging app with voice notes, reactions, replies, read receipts, and typing/presence indicators. Firestore drives live sync, Firebase Auth handles multi-user sign-up and login, and Cloud Storage holds voice messages.',
+    tech: ['React 18', 'TypeScript', 'Vite', 'Tailwind CSS', 'Firebase'],
+    demo: 'https://cjchatapp.netlify.app/',
+    repo: null,
+    highlights: [
+      'Live message sync and presence via Firestore listeners, with no backend server to operate.',
+      'Voice notes recorded in-browser and stored in Firebase Cloud Storage.',
+      'Read receipts, typing indicators, threaded replies, and emoji reactions.',
+    ],
+    needsReview: false,
+  },
+  {
+    slug: 'eventhub',
+    title: 'EventHub',
+    year: 2024,
+    featured: true,
+    image: 'eventhub',
+    blurb: 'Event registration and enrollment platform for colleges and universities.',
+    description:
+      'A web platform for colleges and universities enabling event registration, enrollment, and advertising for students and institutions, with real-time data via Firebase.',
+    tech: ['ReactJS', 'Tailwind CSS', 'Node.js', 'Firebase'],
+    demo: 'https://eventhubproject.netlify.app/',
+    repo: null,
+    highlights: [
+      'Separate flows for students discovering events and institutions publishing them.',
+      'Real-time registration and enrollment state backed by Firebase.',
+    ],
+    needsReview: false,
+  },
+  {
+    slug: 'ecommerce',
+    title: 'eCommerce App',
+    year: 2024,
+    featured: false,
+    image: 'ecommerce',
+    blurb: 'Storefront with product browsing and cart, backed by a Node.js API.',
+    description: 'A storefront interface covering product browsing and cart management, served by a Node.js backend.',
+    tech: ['ReactJS', 'CSS', 'Node.js'],
+    demo: null,
+    repo: null,
+    highlights: [],
+    needsReview: true,
+  },
+  {
+    slug: 'connect',
+    title: 'Connect',
+    year: 2023,
+    featured: false,
+    image: 'connect',
+    blurb: 'Responsive multi-section web interface built with vanilla JavaScript.',
+    description: 'A responsive multi-section web interface built without a framework, using plain HTML, CSS, and JavaScript.',
+    tech: ['HTML', 'CSS', 'JavaScript'],
+    demo: null,
+    repo: null,
+    highlights: [],
+    needsReview: true,
+  },
+  {
+    slug: 'studentportal',
+    title: 'Student Portal',
+    year: 2023,
+    featured: false,
+    image: 'studentportal',
+    blurb: 'Front-end for a student-facing academic portal.',
+    description: 'A front-end implementation of a student-facing academic portal layout.',
+    tech: ['HTML', 'CSS'],
+    demo: null,
+    repo: null,
+    highlights: [],
+    needsReview: true,
+  },
+  {
+    slug: 'todo',
+    title: 'Todo',
+    year: 2023,
+    featured: false,
+    image: 'todo',
+    blurb: 'Task manager persisting state to browser LocalStorage.',
+    description: 'A task manager that creates, completes, and removes items, persisting state to browser LocalStorage.',
+    tech: ['HTML', 'CSS', 'JavaScript', 'LocalStorage'],
+    demo: null,
+    repo: null,
+    highlights: [],
+    needsReview: true,
+  },
+  {
+    slug: 'olx',
+    title: 'OLX Clone',
+    year: 2023,
+    featured: false,
+    image: 'olx',
+    blurb: 'Classifieds marketplace listing interface.',
+    description: 'A classifieds marketplace listing interface modelled on OLX, built as a layout and styling exercise.',
+    tech: ['HTML', 'CSS'],
+    demo: null,
+    repo: null,
+    highlights: [],
+    needsReview: true,
+  },
+  {
+    slug: 'restmenu',
+    title: 'Restaurant Menu',
+    year: 2022,
+    featured: false,
+    image: 'restmenu',
+    blurb: 'Categorised digital menu for a restaurant.',
+    description: 'A categorised digital restaurant menu covering layout, typography, and responsive behaviour.',
+    tech: ['HTML', 'CSS'],
+    demo: null,
+    repo: null,
+    highlights: [],
+    needsReview: true,
+  },
+  {
+    slug: 'travels',
+    title: 'Travels Landing Page',
+    year: 2022,
+    featured: false,
+    image: 'travels',
+    blurb: 'Marketing landing page for a travel brand.',
+    description: 'A marketing landing page for a travel brand, focused on hero composition and responsive sections.',
+    tech: ['HTML', 'CSS'],
+    demo: null,
+    repo: null,
+    highlights: [],
+    needsReview: true,
+  },
+]
+
+/** Every distinct tech across all projects, for the filter bar. */
+export const allTech = [...new Set(projects.flatMap((p) => p.tech))].sort((a, b) => a.localeCompare(b))
+
+export const getProject = (slug) => projects.find((p) => p.slug === slug) ?? null
+
+export default projects

@@ -1,16 +1,19 @@
-import ReactDOM from 'react-dom/client'
-import React from 'react'
+import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
-import { StrictMode } from 'react';
-
+import { BrowserRouter } from 'react-router-dom'
 import App from './App.jsx'
+import ErrorBoundary from './components/ErrorBoundary.jsx'
+import { ThemeProvider } from './context/ThemeContext.jsx'
 import './index.css'
 
-const rootElement = document.getElementById('root');
-const root = createRoot(rootElement);
-
-root.render(
+createRoot(document.getElementById('root')).render(
   <StrictMode>
-      <App />
-  </StrictMode>
-);
+    <ErrorBoundary>
+      <ThemeProvider>
+        <BrowserRouter>
+          <App />
+        </BrowserRouter>
+      </ThemeProvider>
+    </ErrorBoundary>
+  </StrictMode>,
+)

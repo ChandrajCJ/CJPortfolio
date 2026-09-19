@@ -1,26 +1,45 @@
-import './App.css'
-import Navbar from './components/Navbar'
-import Home from './pages/Home'
-import About from './pages/About'
-import Project from './pages/Project'
-import Contact from './pages/Contact'
+import { Route, Routes } from 'react-router-dom'
+import Header from './components/Header'
+import Footer from './components/Footer'
 import Cursor from './components/Cursor'
+import SmoothScroll from './components/SmoothScroll'
+import ScrollProgress from './components/ScrollProgress'
+import Grain from './components/Grain'
+import Analytics from './components/Analytics'
+import ScrollManager from './components/ScrollManager'
+import Home from './pages/Home'
+import ProjectDetail from './pages/ProjectDetail'
+import PostDetail from './pages/PostDetail'
+import NotFound from './pages/NotFound'
 
-function App() {
-
+export default function App() {
   return (
-    
-    <div className='app'>
-      <Cursor/>
-      
-      <Navbar/>
-      <section id="home"><Home /></section>
-      <section id="about"><About /></section>
-      <section id="project"><Project /></section>
-      <section id="contact"><Contact /></section>
+    <>
+      <a
+        href="#main"
+        className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:rounded-md focus:bg-accent focus:px-4 focus:py-2 focus:font-medium focus:text-white"
+      >
+        Skip to content
+      </a>
 
-    </div>
+      <SmoothScroll />
+      <ScrollManager />
+      <ScrollProgress />
+      <Grain />
+      <Analytics />
+      <Cursor />
+      <Header />
+
+      <main id="main">
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/projects/:slug" element={<ProjectDetail />} />
+          <Route path="/writing/:slug" element={<PostDetail />} />
+          <Route path="*" element={<NotFound />} />
+        </Routes>
+      </main>
+
+      <Footer />
+    </>
   )
 }
-
-export default App

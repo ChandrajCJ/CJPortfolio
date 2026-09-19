@@ -2,12 +2,93 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/png" href="/src/assets/cjlogo.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>CJdev</title>
+
+    <title>Chandraj N — Software Engineer</title>
+    <meta
+      name="description"
+      content="Software engineer building secure, scalable web platforms — authentication infrastructure (SSO, MFA, OAuth, RBAC), micro-frontend performance, and AI-assisted developer tooling."
+    />
+    <meta name="author" content="Chandraj N" />
+    <link rel="canonical" href="https://developedbycj.netlify.app/" />
+    <meta name="theme-color" content="#181818" />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Chandraj N" />
+    <meta property="og:title" content="Chandraj N — Software Engineer" />
+    <meta
+      property="og:description"
+      content="Software engineer building secure, scalable web platforms — authentication, micro-frontend performance, and AI-assisted developer tooling."
+    />
+    <meta property="og:url" content="https://developedbycj.netlify.app/" />
+    <meta property="og:image" content="https://developedbycj.netlify.app/og-image.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+
+    <!-- Twitter / X -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Chandraj N — Software Engineer" />
+    <meta
+      name="twitter:description"
+      content="Software engineer building secure, scalable web platforms — authentication, micro-frontend performance, and AI-assisted developer tooling."
+    />
+    <meta name="twitter:image" content="https://developedbycj.netlify.app/og-image.png" />
+
+    <link rel="icon" type="image/png" href="/favicon.png" />
+    <link rel="apple-touch-icon" href="/favicon.png" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "Chandraj N",
+        "jobTitle": "Software Engineer",
+        "url": "https://developedbycj.netlify.app/",
+        "email": "mailto:chandraj1710@gmail.com",
+        "address": { "@type": "PostalAddress", "addressLocality": "Puducherry", "addressCountry": "IN" },
+        "worksFor": { "@type": "Organization", "name": "Contentstack" },
+        "alumniOf": { "@type": "CollegeOrUniversity", "name": "Sri Manakula Vinayagar Engineering College" },
+        "sameAs": [
+          "https://github.com/ChandrajCJ",
+          "https://www.linkedin.com/in/chandraj-n-1a5937258/"
+        ],
+        "knowsAbout": ["JavaScript", "TypeScript", "React", "Node.js", "OAuth 2.0", "SSO", "RBAC", "AI Engineering"]
+      }
+    </script>
+
+    <script>
+      // Apply the stored/OS theme before first paint so there is no flash.
+      (function () {
+        try {
+          var stored = localStorage.getItem('cj-theme')
+          var light = stored ? stored === 'light' : window.matchMedia('(prefers-color-scheme: light)').matches
+          if (light) {
+            document.documentElement.classList.add('light')
+            document.documentElement.style.colorScheme = 'light'
+            document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+          }
+        } catch (e) {
+          /* no-op: defaults to dark */
+        }
+      })()
+    </script>
   </head>
   <body>
     <div id="root"></div>
+    <noscript>
+      <p style="padding: 2rem; font-family: sans-serif">
+        This portfolio needs JavaScript. You can still reach me at
+        <a href="mailto:chandraj1710@gmail.com">chandraj1710@gmail.com</a>.
+      </p>
+    </noscript>
     <script type="module" src="/src/main.jsx"></script>
   </body>
 </html>

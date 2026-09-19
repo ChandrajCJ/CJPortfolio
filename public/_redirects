@@ -1,0 +1,2 @@
+# SPA fallback: every route is served by index.html so deep links work.
+/*  /index.html  200

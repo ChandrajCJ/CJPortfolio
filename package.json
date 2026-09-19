@@ -7,22 +7,25 @@
     "dev": "vite",
     "build": "vite build",
     "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "optimize:images": "node scripts/optimize-images.mjs",
+    "generate:og": "node scripts/generate-og.mjs",
+    "generate:sitemap": "node scripts/generate-sitemap.mjs",
+    "prebuild": "node scripts/generate-sitemap.mjs"
   },
   "dependencies": {
     "@emailjs/browser": "^3.12.1",
+    "@react-three/drei": "^9.122.0",
+    "@react-three/fiber": "^8.18.0",
     "framer-motion": "^10.16.16",
+    "lenis": "^1.3.26",
     "lottie-react": "^2.4.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-icons": "^4.12.0",
-    "react-intersection-observer": "^9.5.3",
     "react-router-dom": "^6.21.3",
-    "react-tsparticles": "^2.12.2",
     "react-type-animation": "^3.2.0",
-    "react-vertical-timeline-component": "^3.6.0",
-    "tsparticles": "^3.2.1",
-    "tsparticles-slim": "^2.12.0"
+    "three": "^0.169.0"
   },
   "devDependencies": {
     "@types/react": "^18.2.43",

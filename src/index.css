@@ -2,50 +2,143 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer base {
+  /*
+   * Colours are RGB triplets so Tailwind's `<alpha-value>` works.
+   * Dark is the default; `.light` on <html> flips the palette.
+   * Muted tones are chosen to clear WCAG AA (4.5:1) on their own background.
+   */
+  :root {
+    --bg: 24 24 24;
+    --surface: 32 32 34;
+    --elevated: 42 42 46;
+    --line: 56 56 62;
+    --fg: 241 241 241;
+    --muted: 161 161 170; /* 7.0:1 on --bg */
+    --accent: 125 164 255;
+    --accent-soft: 56 62 96;
+    --grad-from: 49 97 228;
+    --grad-to: 173 7 239;
+  }
 
-:root{
-  --primaryBright:#F1F1F1;  
-  --primaryGreen: #8EE4AF;
-  --primaryDark: #181818;
-  --primaryBlue: #37d5f9;
-  --secondaryBlue:#1a4ffc;
-  --gradientPink: rgb(173, 7, 239);
-  --gradientBlue: rgb(49, 97, 228) ;
-  --gradientPinkDark: rgb(69, 14, 91);
-  --gradientBlueDark: rgb(18, 31, 65) ;
-  --shadow: rgba(246, 246, 246, 0.273);
+  :root.light {
+    --bg: 255 255 255;
+    --surface: 246 246 247;
+    --elevated: 255 255 255;
+    --line: 228 228 231;
+    --fg: 24 24 27;
+    --muted: 82 82 91; /* 7.6:1 on white */
+    --accent: 37 70 175;
+    --accent-soft: 226 232 251;
+    --grad-from: 37 78 200;
+    --grad-to: 140 6 194;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    @apply bg-bg text-fg font-sans antialiased;
+  }
+
+  /* Anchored sections must clear the fixed header. */
+  [id] {
+    scroll-margin-top: 5rem;
+  }
+
+  /* A single, consistent, always-visible focus ring. */
+  :focus-visible {
+    @apply outline-none ring-2 ring-accent ring-offset-2 ring-offset-bg rounded-sm;
+  }
+
+  ::selection {
+    @apply bg-accent/30;
+  }
 }
 
+@layer components {
+  .gradient-text {
+    @apply bg-gradient-to-r from-gradFrom to-gradTo bg-clip-text text-transparent;
+  }
 
+  .gradient-bg {
+    @apply bg-gradient-to-r from-gradFrom to-gradTo;
+  }
 
+  .card {
+    @apply rounded-xl border border-line bg-surface;
+  }
 
+  /* Radial spotlight driven by --spot-x/--spot-y, set by TiltCard on pointer move. */
+  .spotlight::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+    z-index: 1;
+    background: radial-gradient(
+      420px circle at var(--spot-x, 50%) var(--spot-y, 50%),
+      rgb(var(--accent) / 0.14),
+      transparent 42%
+    );
+  }
 
-.aboutScroll::-webkit-scrollbar {
-  display: none;
-  scroll-behavior: smooth;
+  .spotlight:hover::before {
+    opacity: 1;
+  }
+
+  .thin-scroll::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+
+  .thin-scroll::-webkit-scrollbar-thumb {
+    @apply rounded-full bg-line;
+  }
+
+  .thin-scroll::-webkit-scrollbar-track {
+    background: transparent;
+  }
 }
 
-body::-webkit-scrollbar {
-  display: none;
-  scroll-behavior: smooth;
+/*
+ * Honour the OS "reduce motion" setting globally. Framer Motion variants are
+ * additionally gated in JS via useReducedMotion(); this is the CSS backstop.
+ */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }
 
-
-
-.projectScroll::-webkit-scrollbar {
-  width: 8px;
+/* Lenis requires these while smooth scrolling is active. */
+html.lenis,
+html.lenis body {
+  height: auto;
 }
 
-.projectScroll::-webkit-scrollbar-thumb {
-  background: linear-gradient(var(--gradientBlue), var(--gradientPink)); /* Change this to your preferred color */
-  border-radius: 6px;
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
 }
 
-.textArea::-webkit-scrollbar {
-  width: 8px;
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
 }
 
-.textArea::-webkit-scrollbar-thumb {
-  background: linear-gradient(var(--gradientBlue), var(--gradientPink)); /* Change this to your preferred color */
-  border-radius: 6px;
+.lenis.lenis-stopped {
+  overflow: hidden;
 }
