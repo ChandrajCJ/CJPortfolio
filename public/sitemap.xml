@@ -48,28 +48,4 @@
     <changefreq>yearly</changefreq>
     <priority>0.8</priority>
   </url>
-  <url>
-    <loc>https://developedbycj.netlify.app/projects/todo</loc>
-    <lastmod>2026-09-20</lastmod>
-    <changefreq>yearly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://developedbycj.netlify.app/projects/olx</loc>
-    <lastmod>2026-09-20</lastmod>
-    <changefreq>yearly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://developedbycj.netlify.app/projects/restmenu</loc>
-    <lastmod>2026-09-20</lastmod>
-    <changefreq>yearly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://developedbycj.netlify.app/projects/travels</loc>
-    <lastmod>2026-09-20</lastmod>
-    <changefreq>yearly</changefreq>
-    <priority>0.8</priority>
-  </url>
 </urlset>

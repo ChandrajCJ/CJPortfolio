@@ -223,30 +223,6 @@ export default {
       description: 'Eine Frontend-Umsetzung des Layouts für ein Studierendenportal im akademischen Umfeld.',
       highlights: [],
     },
-    todo: {
-      title: 'Todo',
-      blurb: 'Aufgabenverwaltung, die den Zustand im LocalStorage des Browsers speichert.',
-      description: 'Eine Aufgabenverwaltung zum Anlegen, Abschließen und Entfernen von Einträgen, die den Zustand im LocalStorage des Browsers speichert.',
-      highlights: [],
-    },
-    olx: {
-      title: 'OLX-Klon',
-      blurb: 'Oberfläche für Kleinanzeigen-Marktplatzeinträge.',
-      description: 'Eine an OLX angelehnte Oberfläche für Kleinanzeigeneinträge, entstanden als Layout- und Styling-Übung.',
-      highlights: [],
-    },
-    restmenu: {
-      title: 'Restaurantkarte',
-      blurb: 'Kategorisierte digitale Speisekarte für ein Restaurant.',
-      description: 'Eine kategorisierte digitale Speisekarte mit Fokus auf Layout, Typografie und responsives Verhalten.',
-      highlights: [],
-    },
-    travels: {
-      title: 'Reise-Landingpage',
-      blurb: 'Marketing-Landingpage für eine Reisemarke.',
-      description: 'Eine Marketing-Landingpage für eine Reisemarke, mit Fokus auf Hero-Komposition und responsive Abschnitte.',
-      highlights: [],
-    },
   },
 
   resume: {

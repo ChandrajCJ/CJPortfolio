@@ -228,30 +228,6 @@ export default {
       description: 'A front-end implementation of a student-facing academic portal layout.',
       highlights: [],
     },
-    todo: {
-      title: 'Todo',
-      blurb: 'Task manager persisting state to browser LocalStorage.',
-      description: 'A task manager that creates, completes, and removes items, persisting state to browser LocalStorage.',
-      highlights: [],
-    },
-    olx: {
-      title: 'OLX Clone',
-      blurb: 'Classifieds marketplace listing interface.',
-      description: 'A classifieds marketplace listing interface modelled on OLX, built as a layout and styling exercise.',
-      highlights: [],
-    },
-    restmenu: {
-      title: 'Restaurant Menu',
-      blurb: 'Categorised digital menu for a restaurant.',
-      description: 'A categorised digital restaurant menu covering layout, typography, and responsive behaviour.',
-      highlights: [],
-    },
-    travels: {
-      title: 'Travels Landing Page',
-      blurb: 'Marketing landing page for a travel brand.',
-      description: 'A marketing landing page for a travel brand, focused on hero composition and responsive sections.',
-      highlights: [],
-    },
   },
 
   resume: {

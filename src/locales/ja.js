@@ -223,30 +223,6 @@ export default {
       description: '学生向け学務ポータルのレイアウトをフロントエンドとして実装したもの。',
       highlights: [],
     },
-    todo: {
-      title: 'Todo',
-      blurb: 'ブラウザのLocalStorageに状態を保存するタスク管理アプリ。',
-      description: '項目の作成・完了・削除ができ、状態をブラウザのLocalStorageに保存するタスク管理アプリ。',
-      highlights: [],
-    },
-    olx: {
-      title: 'OLXクローン',
-      blurb: 'クラシファイド型マーケットプレイスの一覧UI。',
-      description: 'OLXを参考にしたクラシファイド型マーケットプレイスの一覧UI。レイアウトとスタイリングの練習として制作しました。',
-      highlights: [],
-    },
-    restmenu: {
-      title: 'レストランメニュー',
-      blurb: 'レストラン向けのカテゴリ分けされたデジタルメニュー。',
-      description: 'レイアウト、タイポグラフィ、レスポンシブ挙動を扱った、カテゴリ分けされたデジタルメニュー。',
-      highlights: [],
-    },
-    travels: {
-      title: '旅行ランディングページ',
-      blurb: '旅行ブランド向けのマーケティング用ランディングページ。',
-      description: 'ヒーロー部分の構成とレスポンシブなセクション設計に重点を置いた、旅行ブランド向けのランディングページ。',
-      highlights: [],
-    },
   },
 
   resume: {
