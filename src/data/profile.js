@@ -22,6 +22,9 @@ export const profile = {
 
   /** Spoken languages, as locale codes resolved through i18n. */
   spoken: ['English', 'Tamil', 'Hindi'],
+
+  /** Ids resolve to `hobbies.<id>` in the locale files. */
+  hobbies: ['swimming', 'running', 'cycling', 'cinema'],
 }
 
 export default profile

@@ -48,7 +48,6 @@ export default {
   },
 
   home: {
-    badge: '{company} の{role}',
     greeting: 'こんにちは、{name} です',
     scrollCta: 'スクロールして見る',
     aboutTitle: '私について',
@@ -58,7 +57,7 @@ export default {
     basedIn: '拠点',
     languages: '言語',
     degreeShort: '工学士、コンピュータサイエンス',
-    focus: '注力分野',
+    hobbies: '趣味',
     exploreMore: 'もっと見る',
   },
 
@@ -68,6 +67,13 @@ export default {
     '認証・セキュリティエンジニア',
     'AIの探求者',
   ],
+
+  hobbies: {
+    swimming: '水泳',
+    running: 'ランニング',
+    cycling: 'サイクリング',
+    cinema: '映画',
+  },
 
   stats: {
     heading: '数字で見る成果',

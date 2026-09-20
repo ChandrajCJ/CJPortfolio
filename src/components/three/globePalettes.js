@@ -13,7 +13,7 @@ export const GLOBE_PALETTES = {
   },
   light: {
     core: '#FFFFFF',
-    land: '#7C8695',
+    land: '#5F6976',
     marker: '#1F2937',
     dot: '#111827',
     accent: '#C2410C',

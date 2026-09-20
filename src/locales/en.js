@@ -53,7 +53,6 @@ export default {
   },
 
   home: {
-    badge: '{role} at {company}',
     greeting: "Hello, I'm {name}",
     scrollCta: 'Scroll to explore',
     aboutTitle: 'Who I am',
@@ -63,7 +62,7 @@ export default {
     basedIn: 'Based in',
     languages: 'Languages',
     degreeShort: 'B.Tech, Computer Science',
-    focus: 'Focus areas',
+    hobbies: 'Hobbies',
     exploreMore: 'Explore more',
   },
 
@@ -73,6 +72,13 @@ export default {
     'an Auth & Security Engineer',
     'an AI Tinkerer',
   ],
+
+  hobbies: {
+    swimming: 'Swimming',
+    running: 'Running',
+    cycling: 'Cycling',
+    cinema: 'Cinema',
+  },
 
   stats: {
     heading: 'Impact by the numbers',

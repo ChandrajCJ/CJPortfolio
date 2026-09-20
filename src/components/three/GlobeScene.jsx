@@ -46,7 +46,7 @@ function Borders({ palette }) {
 
   return (
     <lineSegments geometry={geometry}>
-      <lineBasicMaterial color={palette.land} transparent opacity={0.55} />
+      <lineBasicMaterial color={palette.land} transparent opacity={0.85} />
     </lineSegments>
   )
 }

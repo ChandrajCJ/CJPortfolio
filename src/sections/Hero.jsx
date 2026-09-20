@@ -46,14 +46,6 @@ export default function Hero() {
         className="relative mx-auto grid max-w-content items-center gap-10 md:grid-cols-[1.1fr_0.9fr]"
       >
         <motion.div {...enter}>
-          <p className="mb-4 inline-flex items-center gap-2 rounded-full border border-line bg-surface/80 px-3 py-1 text-xs font-medium text-muted backdrop-blur">
-            <span className="relative flex h-2 w-2">
-              <span className="absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75 motion-safe:animate-ping" />
-              <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-500" />
-            </span>
-            {fill(t('home.badge'), { role: t('meta.role'), company: profile.company })}
-          </p>
-
           <h1 className="text-4xl font-bold leading-[1.08] tracking-tight md:text-6xl">
             <span className="text-fg">{fill(t('home.greeting'), { name: profile.shortName })}</span>
           </h1>

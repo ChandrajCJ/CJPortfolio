@@ -48,7 +48,6 @@ export default {
   },
 
   home: {
-    badge: '{company} நிறுவனத்தில் {role}',
     greeting: 'வணக்கம், நான் {name}',
     scrollCta: 'மேலும் அறிய உருட்டுங்கள்',
     aboutTitle: 'நான் யார்',
@@ -58,7 +57,7 @@ export default {
     basedIn: 'இருப்பிடம்',
     languages: 'மொழிகள்',
     degreeShort: 'B.Tech, கணினி அறிவியல்',
-    focus: 'கவனம் செலுத்தும் துறைகள்',
+    hobbies: 'பொழுதுபோக்குகள்',
     exploreMore: 'மேலும் ஆராய',
   },
 
@@ -68,6 +67,13 @@ export default {
     'ஒரு Auth & Security பொறியாளர்',
     'ஒரு AI ஆர்வலர்',
   ],
+
+  hobbies: {
+    swimming: 'நீச்சல்',
+    running: 'ஓட்டம்',
+    cycling: 'சைக்கிளிங்',
+    cinema: 'சினிமா',
+  },
 
   stats: {
     heading: 'எண்களில் தாக்கம்',

@@ -1,15 +1,20 @@
-import { FiGlobe, FiMapPin, FiTarget } from 'react-icons/fi'
+import { FiGlobe, FiMapPin } from 'react-icons/fi'
+import { FaBicycle, FaFilm, FaRunning, FaSwimmer } from 'react-icons/fa'
 import { profile } from '../data/profile'
 import { education } from '../data/education'
 import { useI18n } from '../i18n/context'
 import Section from '../components/Section'
 import Reveal from '../components/Reveal'
 import TiltCard from '../components/TiltCard'
-import TechPill from '../components/TechPill'
 import Portrait from '../components/Portrait'
 
-/** Reuses already-translated skill-group labels, so no new copy to maintain. */
-const FOCUS_GROUPS = ['auth', 'frontend', 'ai', 'cloud']
+/** Icons keyed by the hobby ids in profile.hobbies. */
+const HOBBY_ICONS = {
+  swimming: FaSwimmer,
+  running: FaRunning,
+  cycling: FaBicycle,
+  cinema: FaFilm,
+}
 
 /**
  * Bento grid. Spans are chosen so the 3-column layout tiles completely with no
@@ -63,18 +68,19 @@ export default function AboutSection() {
         </Reveal>
 
         <Reveal delay={0.22} className="md:col-span-2">
-          <TiltCard max={4} className="card flex h-full items-start gap-3 p-6">
-            <FiTarget aria-hidden="true" className="mt-0.5 shrink-0 text-accent" />
-            <div>
-              <p className="text-xs font-semibold uppercase tracking-wider text-muted font-mono">{t('home.focus')}</p>
-              <ul className="mt-3 flex flex-wrap gap-1.5">
-                {FOCUS_GROUPS.map((id) => (
-                  <li key={id}>
-                    <TechPill>{t(`skills.groups.${id}`)}</TechPill>
+          <TiltCard max={4} className="card flex h-full flex-col justify-center p-6">
+            <p className="font-mono text-xs uppercase tracking-wider text-muted">{t('home.hobbies')}</p>
+            <ul className="mt-4 flex flex-wrap gap-x-7 gap-y-3">
+              {profile.hobbies.map((id) => {
+                const Icon = HOBBY_ICONS[id]
+                return (
+                  <li key={id} className="flex items-center gap-2 text-sm font-medium text-fg">
+                    {Icon && <Icon aria-hidden="true" className="shrink-0 text-accent" />}
+                    {t(`hobbies.${id}`)}
                   </li>
-                ))}
-              </ul>
-            </div>
+                )
+              })}
+            </ul>
           </TiltCard>
         </Reveal>
 

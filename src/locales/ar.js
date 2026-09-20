@@ -48,7 +48,6 @@ export default {
   },
 
   home: {
-    badge: '{role} في {company}',
     greeting: 'مرحبًا، أنا {name}',
     scrollCta: 'مرّر للاستكشاف',
     aboutTitle: 'من أنا',
@@ -58,7 +57,7 @@ export default {
     basedIn: 'المقر',
     languages: 'اللغات',
     degreeShort: 'بكالوريوس تقني، علوم الحاسب',
-    focus: 'مجالات التركيز',
+    hobbies: 'الهوايات',
     exploreMore: 'استكشف المزيد',
   },
 
@@ -68,6 +67,13 @@ export default {
     'مهندس مصادقة وأمن',
     'مستكشف للذكاء الاصطناعي',
   ],
+
+  hobbies: {
+    swimming: 'السباحة',
+    running: 'الجري',
+    cycling: 'ركوب الدراجات',
+    cinema: 'السينما',
+  },
 
   stats: {
     heading: 'الأثر بالأرقام',

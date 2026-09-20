@@ -48,7 +48,6 @@ export default {
   },
 
   home: {
-    badge: '{company} में {role}',
     greeting: 'नमस्ते, मैं {name} हूँ',
     scrollCta: 'और जानने के लिए स्क्रॉल करें',
     aboutTitle: 'मैं कौन हूँ',
@@ -58,7 +57,7 @@ export default {
     basedIn: 'स्थित',
     languages: 'भाषाएँ',
     degreeShort: 'B.Tech, कंप्यूटर साइंस',
-    focus: 'फोकस क्षेत्र',
+    hobbies: 'शौक',
     exploreMore: 'और देखें',
   },
 
@@ -68,6 +67,13 @@ export default {
     'एक Auth & Security इंजीनियर',
     'एक AI प्रयोगकर्ता',
   ],
+
+  hobbies: {
+    swimming: 'तैराकी',
+    running: 'दौड़',
+    cycling: 'साइक्लिंग',
+    cinema: 'सिनेमा',
+  },
 
   stats: {
     heading: 'आँकड़ों में प्रभाव',

@@ -48,7 +48,6 @@ export default {
   },
 
   home: {
-    badge: '{role} bei {company}',
     greeting: 'Hallo, ich bin {name}',
     scrollCta: 'Scrollen zum Entdecken',
     aboutTitle: 'Wer ich bin',
@@ -58,7 +57,7 @@ export default {
     basedIn: 'Standort',
     languages: 'Sprachen',
     degreeShort: 'B.Tech, Informatik',
-    focus: 'Schwerpunkte',
+    hobbies: 'Hobbys',
     exploreMore: 'Mehr entdecken',
   },
 
@@ -68,6 +67,13 @@ export default {
     'Auth- & Security-Engineer',
     'KI-Tüftler',
   ],
+
+  hobbies: {
+    swimming: 'Schwimmen',
+    running: 'Laufen',
+    cycling: 'Radfahren',
+    cinema: 'Kino',
+  },
 
   stats: {
     heading: 'Wirkung in Zahlen',
