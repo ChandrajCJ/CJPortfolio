@@ -181,10 +181,18 @@ renders instead.
 
 ## Adding your photo
 
-Drop an image at `public/portrait.jpg` (portrait orientation, ideally around
-720x900 or larger — it is rendered at a 4:5 aspect ratio). It becomes the hero
-visual and the About tile automatically. If the file is absent both fall back to
-a framed monogram, so the layout is identical either way and nothing breaks.
+The hero and the About tile read `public/portrait.webp` with `public/portrait.jpg`
+as the fallback, via `<picture>`. Both are rendered square (1:1), so supply a
+square image or expect a centre crop.
+
+To swap the photo, drop a new one in and regenerate both derivatives:
+
+```bash
+node -e "const s=require('sharp');['webp','jpg'].forEach(f=>s('YOUR_PHOTO.jpg').resize({width:640,withoutEnlargement:true})[f==='webp'?'webp':'jpeg']({quality:82}).toFile('public/portrait.'+f))"
+```
+
+If neither file exists, both places fall back to a framed monogram, so the
+layout is identical and nothing breaks.
 
 ## Colour
 

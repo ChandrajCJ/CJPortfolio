@@ -28,15 +28,18 @@ export default function Portrait({ className = '' }) {
   }
 
   return (
-    <img
-      src="/portrait.jpg"
-      alt={profile.name}
-      width="480"
-      height="480"
-      loading="lazy"
-      decoding="async"
-      onError={() => setFailed(true)}
-      className={`aspect-square w-full rounded-xl object-cover ${className}`}
-    />
+    <picture>
+      <source srcSet="/portrait.webp" type="image/webp" />
+      <img
+        src="/portrait.jpg"
+        alt={profile.name}
+        width="640"
+        height="640"
+        loading="lazy"
+        decoding="async"
+        onError={() => setFailed(true)}
+        className={`aspect-square w-full rounded-xl object-cover ${className}`}
+      />
+    </picture>
   )
 }
