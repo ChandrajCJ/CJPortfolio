@@ -67,7 +67,7 @@ export default function Header() {
                     {isActive && (
                       <motion.span
                         layoutId={reduced ? undefined : 'nav-underline'}
-                        className="gradient-bg absolute inset-x-3 -bottom-0.5 h-0.5 rounded-full"
+                        className="bg-accent absolute inset-x-3 -bottom-0.5 h-0.5 rounded-full"
                       />
                     )}
                   </a>

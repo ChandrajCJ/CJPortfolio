@@ -39,7 +39,7 @@ export default function ProjectsSection() {
                   aria-pressed={active}
                   className={`rounded-full border px-3.5 py-1.5 text-xs font-medium transition-colors ${
                     active
-                      ? 'gradient-bg border-transparent text-white'
+                      ? 'btn-accent border-transparent'
                       : 'border-line bg-elevated text-muted hover:border-accent/50 hover:text-fg'
                   }`}
                 >

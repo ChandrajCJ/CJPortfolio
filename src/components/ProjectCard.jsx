@@ -31,7 +31,7 @@ export default function ProjectCard({ project }) {
           />
         ) : (
           <div className="grid h-full w-full place-items-center">
-            <span className="gradient-text text-3xl font-bold">{title.charAt(0)}</span>
+            <span className="text-accent text-3xl font-bold">{title.charAt(0)}</span>
           </div>
         )}
       </div>

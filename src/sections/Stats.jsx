@@ -11,7 +11,7 @@ export default function Stats() {
       <div className="mx-auto grid max-w-content gap-8 sm:grid-cols-2 lg:grid-cols-4">
         {stats.map((stat, i) => (
           <Reveal key={stat.id} delay={i * 0.08} className="text-center lg:text-start">
-            <p className="gradient-text text-4xl font-bold tabular-nums md:text-5xl" dir="ltr">
+            <p className="text-accent text-4xl font-bold tabular-nums md:text-5xl" dir="ltr">
               <CountUp to={stat.value} />
               {stat.suffix}
             </p>

@@ -65,8 +65,8 @@ export default function ContactSection() {
     <Section id="contact">
       <div className="grid gap-12 md:grid-cols-2">
         <div>
-          <p className="mb-3 text-sm font-semibold uppercase tracking-[0.2em] text-muted">{t('contact.eyebrow')}</p>
-          <h2 className="gradient-text text-3xl font-bold md:text-4xl">{t('contact.title')}</h2>
+          <p className="mb-3 text-sm font-semibold uppercase tracking-[0.2em] text-muted font-mono">{t('contact.eyebrow')}</p>
+          <h2 className="text-fg text-3xl font-bold md:text-4xl">{t('contact.title')}</h2>
           <p className="mb-8 mt-4 text-base leading-relaxed text-muted">{t('contact.description')}</p>
           <a
             href={`mailto:${profile.email}`}
@@ -139,7 +139,7 @@ export default function ContactSection() {
             <button
               type="submit"
               disabled={status === 'sending'}
-              className="gradient-bg inline-flex h-12 items-center justify-center gap-2 rounded-full px-6 font-medium text-white transition-opacity hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-60"
+              className="btn-accent inline-flex h-12 items-center justify-center gap-2 rounded-full px-6 font-medium transition-opacity hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-60"
             >
               {status === 'sending' ? (
                 <>

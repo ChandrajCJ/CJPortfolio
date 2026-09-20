@@ -22,7 +22,7 @@ export default function ExperienceContent() {
       <section aria-labelledby="globe-heading" className="card mb-16 overflow-hidden p-6 md:p-8">
         <div className="grid items-center gap-8 md:grid-cols-2">
           <div>
-            <p className="text-sm font-semibold uppercase tracking-[0.2em] text-muted">{t('globe.eyebrow')}</p>
+            <p className="text-sm font-semibold uppercase tracking-[0.2em] text-muted font-mono">{t('globe.eyebrow')}</p>
             <h3 id="globe-heading" className="mt-2 text-2xl font-bold text-fg md:text-3xl">
               {t('globe.title')}
             </h3>
@@ -30,23 +30,23 @@ export default function ExperienceContent() {
 
             <dl className="mt-6 grid grid-cols-2 gap-4 sm:grid-cols-3">
               <div>
-                <dt className="text-xs uppercase tracking-wider text-muted">{t('globe.regions')}</dt>
-                <dd className="gradient-text text-2xl font-bold">{regions.length}</dd>
+                <dt className="text-xs uppercase tracking-wider text-muted font-mono">{t('globe.regions')}</dt>
+                <dd className="text-accent text-2xl font-bold">{regions.length}</dd>
               </div>
               <div>
-                <dt className="text-xs uppercase tracking-wider text-muted">{t('globe.hyperscalers')}</dt>
-                <dd className="gradient-text text-2xl font-bold">{hyperscalers.length}</dd>
+                <dt className="text-xs uppercase tracking-wider text-muted font-mono">{t('globe.hyperscalers')}</dt>
+                <dd className="text-accent text-2xl font-bold">{hyperscalers.length}</dd>
               </div>
               <div>
-                <dt className="text-xs uppercase tracking-wider text-muted">{t('globe.production')}</dt>
-                <dd className="gradient-text text-2xl font-bold">{environmentCounts.production}</dd>
+                <dt className="text-xs uppercase tracking-wider text-muted font-mono">{t('globe.production')}</dt>
+                <dd className="text-accent text-2xl font-bold">{environmentCounts.production}</dd>
               </div>
               <div>
-                <dt className="text-xs uppercase tracking-wider text-muted">{t('globe.staging')}</dt>
+                <dt className="text-xs uppercase tracking-wider text-muted font-mono">{t('globe.staging')}</dt>
                 <dd className="text-2xl font-bold text-fg">{environmentCounts.staging}</dd>
               </div>
               <div>
-                <dt className="text-xs uppercase tracking-wider text-muted">{t('globe.development')}</dt>
+                <dt className="text-xs uppercase tracking-wider text-muted font-mono">{t('globe.development')}</dt>
                 <dd className="text-2xl font-bold text-fg">{environmentCounts.development}</dd>
               </div>
             </dl>
@@ -82,7 +82,7 @@ export default function ExperienceContent() {
           <motion.div
             aria-hidden="true"
             style={{ scaleY }}
-            className="gradient-bg absolute start-0 top-0 h-full w-px origin-top"
+            className="bg-accent absolute start-0 top-0 h-full w-px origin-top"
           />
         )}
 
@@ -92,7 +92,7 @@ export default function ExperienceContent() {
               <span
                 aria-hidden="true"
                 className={`absolute -start-[26px] top-2 h-3.5 w-3.5 rounded-full border-4 border-bg md:-start-[42px] ${
-                  job.current ? 'gradient-bg' : 'bg-line'
+                  job.current ? 'bg-accent' : 'bg-line'
                 }`}
               />
 
@@ -106,7 +106,7 @@ export default function ExperienceContent() {
               </div>
 
               <p className="mt-1 text-sm font-medium text-accent">{job.company}</p>
-              <p className="text-xs uppercase tracking-wider text-muted">
+              <p className="text-xs uppercase tracking-wider text-muted font-mono">
                 {job.start} — {job.end ?? t('experience.present')}
               </p>
 

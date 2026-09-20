@@ -4,34 +4,35 @@
 
 @layer base {
   /*
-   * Colours are RGB triplets so Tailwind's `<alpha-value>` works.
-   * Dark is the default; `.light` on <html> flips the palette.
-   * Muted tones are chosen to clear WCAG AA (4.5:1) on their own background.
+   * One accent, no gradients. Colours are RGB triplets so Tailwind's
+   * `<alpha-value>` works. Dark is the default; `.light` on <html> flips it.
+   *
+   * --on-accent exists because the accent's luminance differs per theme:
+   * white text on bright orange fails AA, dark text on it passes (6.9:1),
+   * while the darker light-theme accent needs white (5.2:1).
    */
   :root {
-    --bg: 24 24 24;
-    --surface: 32 32 34;
-    --elevated: 42 42 46;
-    --line: 56 56 62;
-    --fg: 241 241 241;
-    --muted: 161 161 170; /* 7.0:1 on --bg */
-    --accent: 125 164 255;
-    --accent-soft: 56 62 96;
-    --grad-from: 49 97 228;
-    --grad-to: 173 7 239;
+    --bg: 10 11 13;
+    --surface: 18 20 25;
+    --elevated: 24 27 33;
+    --line: 35 39 47;
+    --fg: 232 234 237;
+    --muted: 155 161 172; /* 7.6:1 on --bg */
+    --accent: 255 107 53; /* 6.9:1 on --bg */
+    --on-accent: 10 11 13;
+    --accent-soft: 61 33 22;
   }
 
   :root.light {
     --bg: 255 255 255;
-    --surface: 246 246 247;
+    --surface: 250 250 249;
     --elevated: 255 255 255;
-    --line: 228 228 231;
-    --fg: 24 24 27;
-    --muted: 82 82 91; /* 7.6:1 on white */
-    --accent: 37 70 175;
-    --accent-soft: 226 232 251;
-    --grad-from: 37 78 200;
-    --grad-to: 140 6 194;
+    --line: 231 229 228;
+    --fg: 23 22 26;
+    --muted: 87 83 78; /* 7.6:1 on white */
+    --accent: 194 65 12; /* 5.2:1 on white */
+    --on-accent: 255 255 255;
+    --accent-soft: 254 236 226;
   }
 
   html {
@@ -59,12 +60,15 @@
 }
 
 @layer components {
-  .gradient-text {
-    @apply bg-gradient-to-r from-gradFrom to-gradTo bg-clip-text text-transparent;
+  /* Solid accent fill with a text colour that clears AA in both themes. */
+  .btn-accent {
+    background-color: rgb(var(--accent));
+    color: rgb(var(--on-accent));
   }
 
-  .gradient-bg {
-    @apply bg-gradient-to-r from-gradFrom to-gradTo;
+  /* Small-caps technical label. Used for eyebrows and field labels. */
+  .label {
+    @apply font-mono text-xs uppercase tracking-[0.18em] text-muted;
   }
 
   .card {

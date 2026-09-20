@@ -40,7 +40,7 @@ export default function Hero() {
     <section ref={ref} className="relative overflow-hidden px-5 pb-16 pt-28 md:px-8 md:pb-20 md:pt-36">
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute -top-40 left-1/2 h-[560px] w-[900px] -translate-x-1/2 rounded-full bg-gradient-to-r from-gradFrom/20 to-gradTo/20 blur-3xl"
+        className="pointer-events-none absolute -top-40 left-1/2 h-[560px] w-[900px] -translate-x-1/2 rounded-full bg-accent/10 blur-3xl"
       />
 
       <motion.div
@@ -57,7 +57,7 @@ export default function Hero() {
           </p>
 
           <h1 className="text-4xl font-bold leading-[1.08] tracking-tight md:text-6xl">
-            <span className="gradient-text">{fill(t('home.greeting'), { name: profile.shortName })}</span>
+            <span className="text-fg">{fill(t('home.greeting'), { name: profile.shortName })}</span>
           </h1>
 
           <p className="mt-3 min-h-[1.4em] text-2xl font-semibold text-fg md:text-4xl" aria-label={t('meta.role')}>
@@ -85,7 +85,7 @@ export default function Hero() {
               <a
                 href={profile.cv}
                 download
-                className="gradient-bg inline-flex h-12 items-center gap-2 rounded-full px-7 font-medium text-white shadow-lg shadow-gradTo/20 transition-opacity hover:opacity-90"
+                className="btn-accent inline-flex h-12 items-center gap-2 rounded-full px-7 font-medium transition-opacity hover:opacity-90"
               >
                 {t('common.downloadCV')} <FiDownload aria-hidden="true" />
               </a>

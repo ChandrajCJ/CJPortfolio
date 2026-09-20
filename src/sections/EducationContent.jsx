@@ -15,11 +15,11 @@ export default function EducationContent() {
           <Reveal as="li" key={item.id} delay={i * 0.06} className="relative">
             <span
               aria-hidden="true"
-              className="gradient-bg absolute -start-[41px] grid h-6 w-6 place-items-center rounded-full text-xs text-white"
+              className="bg-accent absolute -start-[41px] grid h-6 w-6 place-items-center rounded-full text-xs text-onAccent"
             >
               <FiBookOpen />
             </span>
-            <p className="text-xs font-medium uppercase tracking-wider text-muted">{item.date}</p>
+            <p className="text-xs font-medium uppercase tracking-wider text-muted font-mono">{item.date}</p>
             <h3 className="mt-1 text-lg font-semibold text-fg">{t(`education.${item.id}.title`)}</h3>
             <p className="text-sm text-muted">{item.institute}</p>
             <p className="text-sm text-muted">{t(`education.locations.${item.locationKey}`)}</p>

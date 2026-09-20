@@ -28,7 +28,7 @@ export default class ErrorBoundary extends Component {
           <button
             type="button"
             onClick={() => window.location.assign('/')}
-            className="gradient-bg mt-6 rounded-full px-6 py-2.5 font-medium text-white"
+            className="btn-accent mt-6 rounded-full px-6 py-2.5 font-medium"
           >
             Back to home
           </button>

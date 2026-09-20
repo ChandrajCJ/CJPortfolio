@@ -43,7 +43,7 @@ export default function ResumePage() {
           <a
             href={profile.cv}
             download
-            className="gradient-bg inline-flex h-11 items-center gap-2 rounded-full px-5 text-sm font-medium text-white"
+            className="btn-accent inline-flex h-11 items-center gap-2 rounded-full px-5 text-sm font-medium"
           >
             <FiDownload aria-hidden="true" /> {t('resume.downloadPdf')}
           </a>

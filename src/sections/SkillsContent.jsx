@@ -20,7 +20,7 @@ export default function SkillsContent() {
         {skillGroups.map((group, i) => (
           <Reveal key={group.id} delay={i * 0.04}>
             <TiltCard max={5} className="card h-full p-6">
-              <h3 className="text-sm font-semibold uppercase tracking-wider text-muted">
+              <h3 className="text-sm font-semibold uppercase tracking-wider text-muted font-mono">
                 {t(`skills.groups.${group.id}`)}
               </h3>
               <ul className="mt-4 flex flex-wrap gap-1.5">

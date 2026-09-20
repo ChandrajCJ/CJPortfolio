@@ -11,11 +11,11 @@ export default function NotFound() {
 
       <div className="mx-auto grid min-h-[70vh] max-w-content place-items-center px-5 py-24 text-center">
         <div>
-          <p className="gradient-text text-7xl font-bold">404</p>
+          <p className="text-accent text-7xl font-bold">404</p>
           <h1 className="mt-4 text-2xl font-bold text-fg">{t('notFound.title')}</h1>
           <p className="mx-auto mt-3 max-w-sm text-muted">{t('notFound.description')}</p>
           <div className="mt-8 flex flex-wrap justify-center gap-3">
-            <Link to="/home" className="gradient-bg inline-flex h-11 items-center rounded-full px-6 font-medium text-white">
+            <Link to="/home" className="btn-accent inline-flex h-11 items-center rounded-full px-6 font-medium">
               {t('common.backToHome')}
             </Link>
             <Link

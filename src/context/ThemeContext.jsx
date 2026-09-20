@@ -22,7 +22,7 @@ export function ThemeProvider({ children }) {
     const root = document.documentElement
     root.classList.toggle('light', theme === 'light')
     root.style.colorScheme = theme
-    document.querySelector('meta[name="theme-color"]')?.setAttribute('content', theme === 'light' ? '#ffffff' : '#181818')
+    document.querySelector('meta[name="theme-color"]')?.setAttribute('content', theme === 'light' ? '#ffffff' : '#0A0B0D')
     try {
       window.localStorage.setItem(STORAGE_KEY, theme)
     } catch {

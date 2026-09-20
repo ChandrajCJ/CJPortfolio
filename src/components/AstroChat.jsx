@@ -98,7 +98,7 @@ export default function AstroChat() {
         aria-expanded={open}
         aria-controls="astro-panel"
         aria-label={open ? t('chat.close') : t('chat.open')}
-        className="gradient-bg fixed bottom-5 end-5 z-[70] grid h-14 w-14 place-items-center rounded-full text-white shadow-xl shadow-gradTo/25 transition-transform hover:scale-105"
+        className="btn-accent fixed bottom-5 end-5 z-[70] grid h-14 w-14 place-items-center rounded-full shadow-xl shadow-black/30 transition-transform hover:scale-105"
       >
         {open ? <FiX aria-hidden="true" size={22} /> : <FiMessageCircle aria-hidden="true" size={22} />}
       </button>
@@ -117,7 +117,7 @@ export default function AstroChat() {
           >
             <header className="flex items-center justify-between gap-3 border-b border-line bg-surface px-4 py-3">
               <div className="flex items-center gap-2.5">
-                <span className="gradient-bg grid h-8 w-8 place-items-center rounded-full text-sm font-bold text-white">
+                <span className="btn-accent grid h-8 w-8 place-items-center rounded-full text-sm font-bold">
                   A
                 </span>
                 <div>
@@ -150,7 +150,7 @@ export default function AstroChat() {
                   <p
                     className={`max-w-[85%] whitespace-pre-wrap rounded-2xl px-3.5 py-2.5 text-sm leading-relaxed ${
                       m.role === 'user'
-                        ? 'gradient-bg rounded-ee-sm text-white'
+                        ? 'btn-accent rounded-ee-sm'
                         : 'rounded-ss-sm bg-surface text-fg'
                     }`}
                   >
@@ -217,7 +217,7 @@ export default function AstroChat() {
                   type="submit"
                   disabled={!input.trim() || status === 'sending'}
                   aria-label={t('chat.send')}
-                  className="gradient-bg grid h-10 w-10 shrink-0 place-items-center rounded-xl text-white transition-opacity disabled:opacity-40"
+                  className="btn-accent grid h-10 w-10 shrink-0 place-items-center rounded-xl transition-opacity disabled:opacity-40"
                 >
                   <FiSend aria-hidden="true" size={16} className="rtl:-scale-x-100" />
                 </button>

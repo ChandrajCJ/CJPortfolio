@@ -6,8 +6,9 @@ import { origin, regions } from '../../data/topology'
 import borders from '../../data/borders.json'
 
 const R = 1.6
-const BLUE = '#3161e4'
-const PURPLE = '#ad07ef'
+const ACCENT = '#FF6B35' // connections and the origin marker
+const LAND = '#6E7885'  // borders and coastlines
+const MARKER = '#E8EAED' // destination regions
 
 /** Lat/lon (degrees) -> point on a sphere of radius `r`. */
 function toVec3(lat, lon, r = R) {
@@ -47,7 +48,7 @@ function Borders() {
 
   return (
     <lineSegments geometry={geometry}>
-      <lineBasicMaterial color="#8aa2d8" transparent opacity={0.55} />
+      <lineBasicMaterial color={LAND} transparent opacity={0.55} />
     </lineSegments>
   )
 }
@@ -109,7 +110,7 @@ function Arc({ to, delay = 0 }) {
   return (
     <group>
       <mesh geometry={geometry}>
-        <meshBasicMaterial ref={line} color={PURPLE} transparent opacity={0.55} />
+        <meshBasicMaterial ref={line} color={ACCENT} transparent opacity={0.55} />
       </mesh>
       <mesh ref={dot}>
         <sphereGeometry args={[0.035, 12, 12]} />
@@ -137,7 +138,7 @@ function Marker({ point, origin: isOrigin = false }) {
       </mesh>
       <mesh ref={halo}>
         <sphereGeometry args={[isOrigin ? 0.12 : 0.09, 16, 16]} />
-        <meshBasicMaterial color={isOrigin ? PURPLE : BLUE} transparent opacity={0.4} />
+        <meshBasicMaterial color={isOrigin ? ACCENT : MARKER} transparent opacity={0.4} />
       </mesh>
     </group>
   )
@@ -153,8 +154,8 @@ export default function GlobeScene() {
   return (
     <>
       <ambientLight intensity={0.7} />
-      <pointLight position={[4, 3, 4]} intensity={26} color={BLUE} distance={18} />
-      <pointLight position={[-4, -2, -3]} intensity={20} color={PURPLE} distance={18} />
+      <pointLight position={[4, 3, 4]} intensity={24} color={MARKER} distance={18} />
+      <pointLight position={[-4, -2, -3]} intensity={18} color={ACCENT} distance={18} />
 
       <group ref={group} rotation={[0, -Math.PI / 2, 0]}>
         {/* Opaque core so borders on the far side stay hidden. */}
@@ -165,7 +166,7 @@ export default function GlobeScene() {
 
         <mesh>
           <sphereGeometry args={[R, 24, 18]} />
-          <meshBasicMaterial color={BLUE} wireframe transparent opacity={0.07} />
+          <meshBasicMaterial color={LAND} wireframe transparent opacity={0.07} />
         </mesh>
 
         <Borders />

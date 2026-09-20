@@ -19,7 +19,7 @@ export default function Portrait({ className = '' }) {
   if (failed) {
     return (
       <div
-        className={`gradient-bg grid aspect-square w-full place-items-center rounded-xl text-4xl font-bold text-white ${className}`}
+        className={`bg-accent grid aspect-square w-full place-items-center rounded-xl text-4xl font-bold text-onAccent ${className}`}
         aria-hidden="true"
       >
         {initials}

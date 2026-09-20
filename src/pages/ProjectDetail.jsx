@@ -32,10 +32,10 @@ export default function ProjectDetail() {
         </Link>
 
         <header className="mt-8">
-          <p className="text-xs uppercase tracking-[0.2em] text-muted" dir="ltr">
+          <p className="text-xs uppercase tracking-[0.2em] text-muted font-mono" dir="ltr">
             {project.year}
           </p>
-          <h1 className="gradient-text mt-2 text-3xl font-bold md:text-5xl">{title}</h1>
+          <h1 className="text-fg mt-2 text-3xl font-bold md:text-5xl">{title}</h1>
           <p className="mt-4 text-lg leading-relaxed text-muted">{t(`projects.${project.slug}.description`)}</p>
 
           <div className="mt-6 flex flex-wrap gap-3">
@@ -44,7 +44,7 @@ export default function ProjectDetail() {
                 href={project.demo}
                 target="_blank"
                 rel="noreferrer noopener"
-                className="gradient-bg inline-flex h-11 items-center gap-2 rounded-full px-5 text-sm font-medium text-white"
+                className="btn-accent inline-flex h-11 items-center gap-2 rounded-full px-5 text-sm font-medium"
               >
                 {t('common.viewLive')} <FiExternalLink aria-hidden="true" />
               </a>
@@ -103,7 +103,7 @@ export default function ProjectDetail() {
 
         {others.length > 0 && (
           <nav aria-label={t('projects.moreProjects')} className="mt-16 border-t border-line pt-8">
-            <h2 className="text-sm font-semibold uppercase tracking-wider text-muted">{t('projects.moreProjects')}</h2>
+            <h2 className="text-sm font-semibold uppercase tracking-wider text-muted font-mono">{t('projects.moreProjects')}</h2>
             <ul className="mt-4 divide-y divide-line">
               {others.map((p) => (
                 <li key={p.slug}>

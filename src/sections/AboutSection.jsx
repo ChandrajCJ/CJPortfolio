@@ -36,15 +36,15 @@ export default function AboutSection() {
 
         <Reveal delay={0.1}>
           <TiltCard max={6} className="card h-full p-6">
-            <p className="text-xs font-semibold uppercase tracking-wider text-muted">{t('home.currently')}</p>
+            <p className="text-xs font-semibold uppercase tracking-wider text-muted font-mono">{t('home.currently')}</p>
             <p className="mt-2 text-lg font-semibold text-fg">{t('meta.role')}</p>
-            <p className="gradient-text text-sm font-semibold">{profile.company}</p>
+            <p className="text-accent text-sm font-semibold">{profile.company}</p>
           </TiltCard>
         </Reveal>
 
         <Reveal delay={0.14}>
           <TiltCard max={6} className="card h-full p-6">
-            <p className="text-xs font-semibold uppercase tracking-wider text-muted">{t('home.education')}</p>
+            <p className="text-xs font-semibold uppercase tracking-wider text-muted font-mono">{t('home.education')}</p>
             <p className="mt-2 text-sm font-semibold text-fg">{t('home.degreeShort')}</p>
             <p className="text-sm text-muted">{t(`education.${education[0].id}.detail`)}</p>
           </TiltCard>
@@ -54,7 +54,7 @@ export default function AboutSection() {
           <TiltCard max={6} className="card flex h-full items-start gap-3 p-6">
             <FiMapPin aria-hidden="true" className="mt-0.5 shrink-0 text-accent" />
             <div>
-              <p className="text-xs font-semibold uppercase tracking-wider text-muted">{t('home.basedIn')}</p>
+              <p className="text-xs font-semibold uppercase tracking-wider text-muted font-mono">{t('home.basedIn')}</p>
               <p className="mt-2 text-sm font-semibold text-fg">
                 {t(`education.locations.${profile.locationKey}`)}
               </p>
@@ -66,7 +66,7 @@ export default function AboutSection() {
           <TiltCard max={4} className="card flex h-full items-start gap-3 p-6">
             <FiTarget aria-hidden="true" className="mt-0.5 shrink-0 text-accent" />
             <div>
-              <p className="text-xs font-semibold uppercase tracking-wider text-muted">{t('home.focus')}</p>
+              <p className="text-xs font-semibold uppercase tracking-wider text-muted font-mono">{t('home.focus')}</p>
               <ul className="mt-3 flex flex-wrap gap-1.5">
                 {FOCUS_GROUPS.map((id) => (
                   <li key={id}>
@@ -82,7 +82,7 @@ export default function AboutSection() {
           <TiltCard max={6} className="card flex h-full items-start gap-3 p-6">
             <FiGlobe aria-hidden="true" className="mt-0.5 shrink-0 text-accent" />
             <div>
-              <p className="text-xs font-semibold uppercase tracking-wider text-muted">{t('home.languages')}</p>
+              <p className="text-xs font-semibold uppercase tracking-wider text-muted font-mono">{t('home.languages')}</p>
               <p className="mt-2 text-sm font-semibold text-fg">{profile.spoken.join(' · ')}</p>
             </div>
           </TiltCard>

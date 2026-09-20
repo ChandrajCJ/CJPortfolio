@@ -26,11 +26,11 @@ export default function PostDetail() {
         </Link>
 
         <header className="mt-8">
-          <p className="text-xs uppercase tracking-wider text-muted">
+          <p className="text-xs uppercase tracking-wider text-muted font-mono">
             {new Date(post.date).toLocaleDateString(locale, { day: 'numeric', month: 'long', year: 'numeric' })}
             {post.readingMinutes ? ` · ${post.readingMinutes} ${t('common.minRead')}` : ''}
           </p>
-          <h1 className="gradient-text mt-2 text-3xl font-bold md:text-4xl">{post.title}</h1>
+          <h1 className="text-fg mt-2 text-3xl font-bold md:text-4xl">{post.title}</h1>
           {post.tags?.length > 0 && (
             <ul className="mt-4 flex flex-wrap gap-1.5">
               {post.tags.map((tag) => (
