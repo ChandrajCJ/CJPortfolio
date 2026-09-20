@@ -4,26 +4,38 @@ import { motion, useMotionValue, useReducedMotion } from 'framer-motion'
 /** Hit-test interval. Cheap enough to be imperceptible when hovering. */
 const HIT_TEST_MS = 90
 
-/** Fixed box size; every state is expressed as a scale of this. */
+/** Fixed box size; every state is a pure transform of this. */
 const SIZE = 30
+
+/**
+ * Each state is expressed as scaleX/scaleY on one fixed-size circle, never as
+ * width/height. A circle scaled thin reads as a text bar because the border
+ * radius scales with it, so the original three looks survive without ever
+ * touching layout.
+ */
+const STATES = {
+  default: { scaleX: 1, scaleY: 1 },
+  link: { scaleX: 1.75, scaleY: 1.75 },
+  text: { scaleX: 0.12, scaleY: 0.95 },
+}
 
 /**
  * Pointer ring.
  *
- * Three rules keep this smooth, each learned from breaking it:
- * - Position is written straight to motion values with no spring, so the ring
- *   sits exactly on the pointer instead of trailing it.
- * - Only `scale` is animated. Animating width/height/borderRadius triggers
- *   layout on every frame of the morph, which is what made it stutter.
- * - No mix-blend-mode: a blended fixed layer forces a full-viewport
- *   recomposite on every move.
+ * Three rules keep this smooth, each learned by breaking it:
+ * - Position is written straight to the motion values, no spring, so the ring
+ *   sits on the pointer instead of easing toward it.
+ * - Only transforms and opacity animate. Animating width/height/borderRadius
+ *   forces layout on every frame of the morph.
+ * - The blend lives on this 30px element only. A *full-screen* blend layer (the
+ *   old grain overlay) is what made blending expensive; a small one is not.
  */
 export default function Cursor() {
   const reduced = useReducedMotion()
-  const [hovering, setHovering] = useState(false)
+  const [variant, setVariant] = useState('default')
   const [visible, setVisible] = useState(false)
 
-  const hoveringRef = useRef(false)
+  const variantRef = useRef('default')
   const visibleRef = useRef(false)
   const posRef = useRef({ x: 0, y: 0 })
   const lastTestRef = useRef(0)
@@ -38,10 +50,16 @@ export default function Cursor() {
     const hitTest = () => {
       const { x: cx, y: cy } = posRef.current
       const el = document.elementFromPoint(cx, cy)
-      const next = Boolean(el?.closest('a, button, [role="tab"], input, textarea, select, summary'))
-      if (next !== hoveringRef.current) {
-        hoveringRef.current = next
-        setHovering(next)
+
+      let next = 'default'
+      if (el) {
+        if (el.closest('a, button, [role="tab"], input, textarea, select, summary')) next = 'link'
+        else if (el.closest('p, h1, h2, h3, h4, li, blockquote, label')) next = 'text'
+      }
+
+      if (next !== variantRef.current) {
+        variantRef.current = next
+        setVariant(next)
       }
     }
 
@@ -79,6 +97,8 @@ export default function Cursor() {
 
   if (reduced) return null
 
+  const state = STATES[variant]
+
   return (
     <motion.div
       aria-hidden="true"
@@ -91,12 +111,13 @@ export default function Cursor() {
         translateY: '-50%',
         willChange: 'transform',
       }}
-      // Transform + opacity only: both are compositor-only properties.
-      animate={{ scale: visible ? (hovering ? 1.75 : 1) : 0.4, opacity: visible ? 1 : 0 }}
+      animate={{
+        scaleX: visible ? state.scaleX : 0.4,
+        scaleY: visible ? state.scaleY : 0.4,
+        opacity: visible ? 1 : 0,
+      }}
       transition={{ type: 'spring', stiffness: 500, damping: 34, mass: 0.4 }}
-      className={`pointer-events-none fixed left-0 top-0 z-[999] hidden rounded-full border-2 border-accent md:block ${
-        hovering ? 'bg-accent/15' : ''
-      }`}
+      className="pointer-events-none fixed left-0 top-0 z-[999] hidden rounded-full bg-white mix-blend-difference md:block"
     />
   )
 }
