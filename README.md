@@ -77,16 +77,19 @@ A floating assistant that answers questions about the CV. The model call runs in
 a Netlify Function (`netlify/functions/astro.mjs`) so the API key stays
 server-side — it is never shipped to the browser.
 
-- Set `ANTHROPIC_API_KEY` in the Netlify UI. **No `VITE_` prefix** — that would
+Runs on **Google Gemini**, whose free tier needs no credit card.
+
+- Get a key at [aistudio.google.com/apikey](https://aistudio.google.com/apikey)
+  and set `GEMINI_API_KEY` in the Netlify UI. **No `VITE_` prefix** — that would
   inline it into the client bundle and leak it.
 - Without the key, `/api/astro` returns 503 and the widget degrades to a
-  "contact me directly" message.
+  "contact me directly" message, so the site is fine to deploy without one.
+- Defaults to `gemini-2.0-flash`; override with `GEMINI_MODEL`.
 - Its knowledge base is `netlify/functions/_knowledge.js`. Update it when the CV
   changes, or Astro will answer from stale facts.
 - Grounding: it answers only from that profile, refuses to invent details, and
   client-supplied `system` turns are rejected before reaching the model.
-- Uses `claude-opus-5` at `effort: low` with the profile cached as a stable
-  prompt prefix. Each answer is capped at 1024 output tokens.
+  Temperature is 0.3 — it should recite the CV, not embellish it.
 
 For a full local round-trip (functions included), use `netlify dev` rather than
 `npm run preview` — Vite's preview server does not run Netlify Functions, so

@@ -15,8 +15,8 @@
     "generate:borders": "node scripts/generate-borders.mjs"
   },
   "dependencies": {
-    "@anthropic-ai/sdk": "^0.127.0",
     "@emailjs/browser": "^3.12.1",
+    "@google/genai": "^1.0.0",
     "@react-three/drei": "^9.122.0",
     "@react-three/fiber": "^8.18.0",
     "framer-motion": "^10.16.16",
