@@ -71,15 +71,28 @@ export default async function handler(req) {
     }
 
     const reply = response.text?.trim()
-    if (!reply) return json({ error: 'empty_response' }, 502)
+    if (!reply) {
+      const finish = response.candidates?.[0]?.finishReason
+      console.error('astro: empty response, finishReason =', finish ?? '(none)')
+      return json({ error: 'empty_response', detail: `finishReason: ${finish ?? 'none'}` }, 502)
+    }
     return json({ reply })
   } catch (err) {
-    // Gemini surfaces HTTP status on the error; separate retryable from terminal.
-    const status = err?.status ?? err?.code
-    if (status === 429) return json({ error: 'rate_limited' }, 429)
-    if (status === 401 || status === 403) return json({ error: 'unconfigured' }, 503)
-    console.error('astro function error:', err?.message ?? err)
-    return json({ error: 'upstream_error' }, 502)
+    // @google/genai throws plain Error objects with no .status field - the HTTP
+    // status is embedded in the message (e.g. "got status: 404 Not Found").
+    // Checking err.status here silently collapsed every failure into a 502.
+    const message = String(err?.message ?? err)
+    const status = Number(err?.status ?? err?.code ?? message.match(/\b(4\d{2}|5\d{2})\b/)?.[1])
+
+    // Never echo anything that could carry the key back to the client.
+    const detail = message.replace(/AIza[0-9A-Za-z_-]+/g, '[redacted]').slice(0, 300)
+    console.error('astro function error:', status ?? '(no status)', detail)
+
+    if (status === 429) return json({ error: 'rate_limited', detail }, 429)
+    if (status === 401 || status === 403) return json({ error: 'unconfigured', detail }, 503)
+    if (status === 400) return json({ error: 'bad_upstream_request', detail }, 502)
+    if (status === 404) return json({ error: 'model_not_found', detail }, 502)
+    return json({ error: 'upstream_error', detail }, 502)
   }
 }
 
