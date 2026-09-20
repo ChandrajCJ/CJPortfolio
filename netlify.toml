@@ -5,6 +5,12 @@
 
 [build.environment]
   NODE_VERSION = "20"
+  # GEMINI_MODEL is a model name, not a credential, and it appears in the repo
+  # as the documented default. Netlify's secrets scanner treats every env var as
+  # a secret and fails the build when its value is found in source, so this key
+  # is exempted. GEMINI_API_KEY is deliberately NOT exempted - it must never
+  # appear in the repo.
+  SECRETS_SCAN_OMIT_KEYS = "GEMINI_MODEL"
 
 [[headers]]
   for = "/*"

@@ -1,2 +1,6 @@
-# SPA fallback: every route is served by index.html so deep links work.
+# The function route must be declared BEFORE the SPA catch-all, otherwise
+# /* would rewrite /api/astro to index.html and the chat would receive HTML.
+/api/astro  /.netlify/functions/astro  200
+
+# SPA fallback: every other route is served by index.html so deep links work.
 /*  /index.html  200
