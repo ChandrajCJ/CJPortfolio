@@ -51,6 +51,9 @@ export default {
     dark: 'داكن',
     light: 'فاتح',
     grey: 'تدرّج رمادي',
+    paper: 'ورقي',
+    terminal: 'طرفية',
+    ocean: 'محيط',
   },
 
   home: {

@@ -51,6 +51,9 @@ export default {
     dark: 'இருள்',
     light: 'ஒளி',
     grey: 'சாம்பல் நிறம்',
+    paper: 'காகிதம்',
+    terminal: 'டெர்மினல்',
+    ocean: 'கடல்',
   },
 
   home: {

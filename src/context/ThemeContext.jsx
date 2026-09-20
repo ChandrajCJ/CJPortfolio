@@ -1,31 +1,34 @@
 import { useEffect, useMemo, useState } from 'react'
+import { DEFAULT_THEME, THEME_IDS, getTheme } from '../data/themes'
 import { ThemeContext } from './themeContext'
 
 const STORAGE_KEY = 'cj-theme'
 
-/** Resolve the initial theme: stored choice first, then OS preference. */
+/** Stored choice if valid, otherwise the default. */
 function readInitialTheme() {
-  if (typeof window === 'undefined') return 'dark'
+  if (typeof window === 'undefined') return DEFAULT_THEME
   try {
     const stored = window.localStorage.getItem(STORAGE_KEY)
-    if (stored === 'light' || stored === 'dark' || stored === 'grey') return stored
+    if (stored && THEME_IDS.includes(stored)) return stored
   } catch {
-    // localStorage can throw in private mode - fall through to the OS setting.
+    // localStorage can throw in private mode - fall back to the default.
   }
-  return window.matchMedia?.('(prefers-color-scheme: light)').matches ? 'light' : 'dark'
+  return DEFAULT_THEME
 }
 
 export function ThemeProvider({ children }) {
-  const [theme, setTheme] = useState(readInitialTheme)
+  const [theme, setThemeState] = useState(readInitialTheme)
 
   useEffect(() => {
     const root = document.documentElement
-    root.classList.remove('light', 'grey')
-    if (theme !== 'dark') root.classList.add(theme)
-    // Greyscale is a dark scheme as far as form controls and scrollbars go.
-    root.style.colorScheme = theme === 'light' ? 'light' : 'dark'
-    const bar = theme === 'light' ? '#ffffff' : theme === 'grey' ? '#0B0B0B' : '#0A0B0D'
+    // Greyscale is :root, so it carries no class.
+    root.classList.remove(...THEME_IDS.filter((id) => id !== DEFAULT_THEME))
+    if (theme !== DEFAULT_THEME) root.classList.add(theme)
+
+    const { scheme, bar } = getTheme(theme)
+    root.style.colorScheme = scheme
     document.querySelector('meta[name="theme-color"]')?.setAttribute('content', bar)
+
     try {
       window.localStorage.setItem(STORAGE_KEY, theme)
     } catch {
@@ -33,23 +36,13 @@ export function ThemeProvider({ children }) {
     }
   }, [theme])
 
-  // Follow the OS only while the visitor has not made an explicit choice.
-  useEffect(() => {
-    const mq = window.matchMedia?.('(prefers-color-scheme: light)')
-    if (!mq) return
-    const onChange = (e) => {
-      try {
-        if (window.localStorage.getItem(STORAGE_KEY)) return
-      } catch {
-        // If storage is unreadable, assume no explicit choice was stored.
-      }
-      setTheme(e.matches ? 'light' : 'dark')
-    }
-    mq.addEventListener('change', onChange)
-    return () => mq.removeEventListener('change', onChange)
-  }, [])
-
-  const value = useMemo(() => ({ theme, setTheme }), [theme])
+  const value = useMemo(
+    () => ({
+      theme,
+      setTheme: (next) => THEME_IDS.includes(next) && setThemeState(next),
+    }),
+    [theme],
+  )
 
   return <ThemeContext.Provider value={value}>{children}</ThemeContext.Provider>
 }

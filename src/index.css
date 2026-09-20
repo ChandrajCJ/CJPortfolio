@@ -4,40 +4,47 @@
 
 @layer base {
   /*
-   * One accent, no gradients. Colours are RGB triplets so Tailwind's
-   * `<alpha-value>` works. Dark is the default; `.light` on <html> flips it.
+   * Themes are token sets, nothing more. Greyscale is the default and lives on
+   * :root; every other theme is a class on <html> that overrides it.
    *
-   * --on-accent exists because the accent's luminance differs per theme:
-   * white text on bright orange fails AA, dark text on it passes (6.9:1),
-   * while the darker light-theme accent needs white (5.2:1).
+   * Because only tokens change, photographs keep their own colour in every
+   * theme - a global `filter: grayscale()` would have drained them too.
+   *
+   * --on-accent is the text colour to use on an accent fill. It is a separate
+   * token because the right answer flips with the accent's luminance: white on
+   * the dark-mode orange is 2.84:1 and fails AA, dark text on it is 6.94:1.
+   *
+   * Contrast, verified for every theme (fg/bg, muted/bg, accent/bg, button text):
+   *   grey     16.81  7.80  13.28  13.28
+   *   dark     16.34  7.58   6.94   6.94
+   *   light    18.01  7.63   5.18   5.18
+   *   paper    16.69  6.85  10.75  10.75
+   *   terminal 15.80  7.56  11.40  11.40
+   *   ocean    16.04  7.85   9.09   9.09
    */
-  :root {
-    --bg: 10 11 13;
-    --surface: 18 20 25;
-    --elevated: 24 27 33;
-    --line: 35 39 47;
-    --fg: 232 234 237;
-    --muted: 155 161 172; /* 7.6:1 on --bg */
-    --accent: 255 107 53; /* 6.9:1 on --bg */
-    --on-accent: 10 11 13;
-    --accent-soft: 61 33 22;
-  }
-
-  /*
-   * Greyscale: no hue anywhere in the chrome. Because every surface colour is a
-   * token, images keep their own colour with no filter involved - a global
-   * `filter: grayscale()` would drain the photos too.
-   */
+  :root,
   :root.grey {
     --bg: 11 11 11;
     --surface: 22 22 22;
     --elevated: 30 30 30;
     --line: 45 45 45;
     --fg: 237 237 237;
-    --muted: 163 163 163; /* 7.9:1 on --bg */
-    --accent: 212 212 212; /* 13.3:1 on --bg */
+    --muted: 163 163 163;
+    --accent: 212 212 212;
     --on-accent: 11 11 11;
     --accent-soft: 38 38 38;
+  }
+
+  :root.dark {
+    --bg: 10 11 13;
+    --surface: 18 20 25;
+    --elevated: 24 27 33;
+    --line: 35 39 47;
+    --fg: 232 234 237;
+    --muted: 155 161 172;
+    --accent: 255 107 53;
+    --on-accent: 10 11 13;
+    --accent-soft: 61 33 22;
   }
 
   :root.light {
@@ -46,10 +53,49 @@
     --elevated: 255 255 255;
     --line: 231 229 228;
     --fg: 23 22 26;
-    --muted: 87 83 78; /* 7.6:1 on white */
-    --accent: 194 65 12; /* 5.2:1 on white */
+    --muted: 87 83 78;
+    --accent: 194 65 12;
     --on-accent: 255 255 255;
     --accent-soft: 254 236 226;
+  }
+
+  /* Warm light neutral - the light counterpart to greyscale. */
+  :root.paper {
+    --bg: 250 249 246;
+    --surface: 243 241 236;
+    --elevated: 255 255 255;
+    --line: 228 225 217;
+    --fg: 26 25 23;
+    --muted: 90 87 80;
+    --accent: 61 58 53;
+    --on-accent: 250 249 246;
+    --accent-soft: 234 231 223;
+  }
+
+  /* Phosphor green on near-black. */
+  :root.terminal {
+    --bg: 8 10 8;
+    --surface: 16 20 16;
+    --elevated: 22 28 22;
+    --line: 34 44 34;
+    --fg: 222 232 222;
+    --muted: 148 164 148;
+    --accent: 74 222 128;
+    --on-accent: 8 10 8;
+    --accent-soft: 22 46 30;
+  }
+
+  /* Cool slate with a cyan accent. */
+  :root.ocean {
+    --bg: 9 13 18;
+    --surface: 17 23 31;
+    --elevated: 24 32 42;
+    --line: 36 47 60;
+    --fg: 226 234 242;
+    --muted: 152 166 182;
+    --accent: 56 189 248;
+    --on-accent: 9 13 18;
+    --accent-soft: 19 43 58;
   }
 
   html {

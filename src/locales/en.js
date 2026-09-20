@@ -56,6 +56,9 @@ export default {
     dark: 'Dark',
     light: 'Light',
     grey: 'Greyscale',
+    paper: 'Paper',
+    terminal: 'Terminal',
+    ocean: 'Ocean',
   },
 
   home: {

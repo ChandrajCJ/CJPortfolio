@@ -142,7 +142,7 @@ function Marker({ point, origin: isOrigin = false, palette }) {
   )
 }
 
-export default function GlobeScene({ palette = GLOBE_PALETTES.dark }) {
+export default function GlobeScene({ palette = GLOBE_PALETTES.grey }) {
   const group = useRef(null)
 
   useFrame((_, delta) => {

@@ -1,13 +1,19 @@
 import { useEffect, useRef, useState } from 'react'
-import { FiCheck, FiCircle, FiMoon, FiSun } from 'react-icons/fi'
+import { FiCheck, FiCircle, FiDroplet, FiFeather, FiMoon, FiSun, FiTerminal } from 'react-icons/fi'
 import { useTheme } from '../context/themeContext'
 import { useI18n } from '../i18n/context'
+import { THEMES as THEME_LIST } from '../data/themes'
 
-const THEMES = [
-  { id: 'dark', Icon: FiMoon },
-  { id: 'light', Icon: FiSun },
-  { id: 'grey', Icon: FiCircle },
-]
+const ICONS = {
+  grey: FiCircle,
+  dark: FiMoon,
+  ocean: FiDroplet,
+  terminal: FiTerminal,
+  light: FiSun,
+  paper: FiFeather,
+}
+
+const THEMES = THEME_LIST.map((t) => ({ id: t.id, Icon: ICONS[t.id] ?? FiCircle }))
 
 /** Menu rather than a two-way toggle, so all three themes are reachable. */
 export default function ThemeSwitcher() {

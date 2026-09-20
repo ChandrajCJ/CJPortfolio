@@ -11,7 +11,7 @@
     />
     <meta name="author" content="Chandraj N" />
     <link rel="canonical" href="https://developedbycj.netlify.app/" />
-    <meta name="theme-color" content="#0A0B0D" />
+    <meta name="theme-color" content="#0B0B0B" />
 
     <!-- Open Graph -->
     <meta property="og:type" content="website" />
@@ -68,14 +68,15 @@
       // Apply the stored/OS theme before first paint so there is no flash.
       (function () {
         try {
+          var ids = ['grey', 'dark', 'ocean', 'terminal', 'light', 'paper']
+          var bars = { grey: '#0B0B0B', dark: '#0A0B0D', ocean: '#090D12', terminal: '#080A08', light: '#ffffff', paper: '#FAF9F6' }
           var stored = localStorage.getItem('cj-theme')
-          var theme = stored || (window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark')
-          if (theme !== 'dark') document.documentElement.classList.add(theme)
-          document.documentElement.style.colorScheme = theme === 'light' ? 'light' : 'dark'
-          var bar = theme === 'light' ? '#ffffff' : theme === 'grey' ? '#0B0B0B' : '#0A0B0D'
-          document.querySelector('meta[name="theme-color"]').setAttribute('content', bar)
+          var theme = ids.indexOf(stored) > -1 ? stored : 'grey'
+          if (theme !== 'grey') document.documentElement.classList.add(theme)
+          document.documentElement.style.colorScheme = theme === 'light' || theme === 'paper' ? 'light' : 'dark'
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', bars[theme])
         } catch (e) {
-          /* no-op: defaults to dark */
+          /* no-op: defaults to greyscale */
         }
       })()
     </script>

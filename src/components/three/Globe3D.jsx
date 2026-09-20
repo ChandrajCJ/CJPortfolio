@@ -45,7 +45,7 @@ export default function Globe3D() {
         style={{ background: 'transparent' }}
       >
         <Suspense fallback={null}>
-          <GlobeScene palette={GLOBE_PALETTES[theme] ?? GLOBE_PALETTES.dark} />
+          <GlobeScene palette={GLOBE_PALETTES[theme] ?? GLOBE_PALETTES.grey} />
         </Suspense>
       </Canvas>
     </div>

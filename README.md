@@ -199,19 +199,36 @@ layout is identical and nothing breaks.
 
 ## Themes
 
-Three, chosen from a menu in the header: **Dark** (default), **Light** and
-**Greyscale**. The choice persists in `localStorage`; with none stored the OS
-`prefers-color-scheme` decides between dark and light.
+Six, chosen from a menu in the header. **Greyscale is the default**; the choice
+persists in `localStorage`.
 
-Greyscale drains the hue from the interface but **not** from photographs. That
-works because every surface colour is a token, so the theme only has to swap
-token values — a global `filter: grayscale()` would have desaturated the images
-too. The globe carries a matching neutral palette.
+| Theme | Ground | Accent |
+| --- | --- | --- |
+| Greyscale *(default)* | `#0B0B0B` | neutral `#D4D4D4` |
+| Dark | `#0A0B0D` | signal orange `#FF6B35` |
+| Ocean | `#090D12` | cyan `#38BDF8` |
+| Terminal | `#080A08` | phosphor green `#4ADE80` |
+| Light | `#FFFFFF` | `#C2410C` |
+| Paper | `#FAF9F6` | warm neutral `#3D3A35` |
+
+A theme is nothing but a token set, declared in `src/index.css`. Greyscale lives
+on `:root`; every other theme is a class on `<html>`. Registry, `color-scheme`
+and browser theme-colour values live in `src/data/themes.js` — add an entry
+there plus a token block and a `themes.<id>` locale string, and it appears in
+the menu.
+
+Two consequences worth knowing:
+
+- **Photographs keep their colour in every theme**, greyscale included, because
+  only tokens change. A global `filter: grayscale()` would have drained them.
+- **Contrast is verified for all six** (fg/bg, muted/bg, accent/bg, and text on
+  an accent fill). The lowest figure across the set is 5.18:1, comfortably past
+  AA. The globe carries a matching palette per theme, each with borders clearing
+  the 3:1 floor for non-text graphics.
 
 ## Colour
 
-One accent, no gradients. Tokens live on `:root` in `src/index.css`, with
-`.light` and `.grey` overrides. `--on-accent` exists because the accent's luminance differs
+One accent per theme, no gradients anywhere. `--on-accent` exists because the accent's luminance differs
 per theme: white on the bright dark-mode orange is 2.84:1 and fails AA, whereas
 dark text on it is 6.94:1. Use the `.btn-accent` class for anything with text on
 an accent fill so the right pairing is applied automatically.
