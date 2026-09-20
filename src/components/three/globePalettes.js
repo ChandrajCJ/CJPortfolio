@@ -1,0 +1,21 @@
+/**
+ * Colours arrive as a prop rather than from theme context: react-three-fiber
+ * renders into its own reconciler root, so context from the page does not cross
+ * the <Canvas> boundary.
+ */
+export const GLOBE_PALETTES = {
+  dark: {
+    core: '#0E1018', // sphere body, hides far-side geometry
+    land: '#6E7885', // borders and coastlines
+    marker: '#E8EAED', // destination regions
+    dot: '#FFFFFF', // marker cores and the travelling dot
+    accent: '#FF6B35', // origin marker and its connections
+  },
+  light: {
+    core: '#FFFFFF',
+    land: '#7C8695',
+    marker: '#1F2937',
+    dot: '#111827',
+    accent: '#C2410C',
+  },
+}

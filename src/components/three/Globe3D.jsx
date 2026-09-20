@@ -1,6 +1,8 @@
 import { Suspense, useEffect, useRef, useState } from 'react'
 import { Canvas } from '@react-three/fiber'
 import GlobeScene from './GlobeScene'
+import { GLOBE_PALETTES } from './globePalettes'
+import { useTheme } from '../../context/themeContext'
 import GlobeFallback from './GlobeFallback'
 
 function supportsWebGL() {
@@ -13,6 +15,7 @@ function supportsWebGL() {
 }
 
 export default function Globe3D() {
+  const { theme } = useTheme()
   const wrapRef = useRef(null)
   const [ok] = useState(supportsWebGL)
   const [active, setActive] = useState(true)
@@ -42,7 +45,7 @@ export default function Globe3D() {
         style={{ background: 'transparent' }}
       >
         <Suspense fallback={null}>
-          <GlobeScene />
+          <GlobeScene palette={GLOBE_PALETTES[theme] ?? GLOBE_PALETTES.dark} />
         </Suspense>
       </Canvas>
     </div>

@@ -1,4 +1,4 @@
-import { lazy, Suspense, useRef } from 'react'
+import { useRef } from 'react'
 import { Link } from 'react-router-dom'
 import { FiArrowRight, FiDownload } from 'react-icons/fi'
 import { motion, useReducedMotion, useScroll, useTransform } from 'framer-motion'
@@ -7,9 +7,7 @@ import { profile } from '../data/profile'
 import { useI18n } from '../i18n/context'
 import SocialLinks from '../components/SocialLinks'
 import Magnetic from '../components/Magnetic'
-import Hero3DFallback from '../components/three/Hero3DFallback'
-
-const Hero3D = lazy(() => import('../components/three/Hero3D'))
+import HeroPortrait from '../components/HeroPortrait'
 
 const fill = (str, vars) => str.replace(/\{(\w+)\}/g, (_, k) => vars[k] ?? `{${k}}`)
 
@@ -107,9 +105,7 @@ export default function Hero() {
           {...(reduced ? {} : { ...enter, transition: { ...enter.transition, delay: 0.15 } })}
           className="relative mx-auto w-full max-w-md md:max-w-none"
         >
-          <Suspense fallback={<Hero3DFallback />}>
-            <Hero3D />
-          </Suspense>
+          <HeroPortrait />
         </motion.div>
       </motion.div>
     </section>

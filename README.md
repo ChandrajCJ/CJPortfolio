@@ -1,8 +1,8 @@
 # Chandraj N — Portfolio
 
 Personal portfolio built with React 18, Vite 5 and Tailwind CSS, with a
-react-three-fiber hero, a 3D deployment-topology globe, scroll-driven motion,
-six-language support (including RTL), and an AI assistant grounded in the CV.
+a 3D deployment-topology globe, scroll-driven motion, six-language support
+(including RTL), and an AI assistant grounded in the CV.
 
 **Live:** https://developedbycj.netlify.app
 
@@ -102,7 +102,7 @@ src/
   assets/raw/      Full-size source screenshots (never shipped)
   assets/optimized/ Generated WebP derivatives at 640w and 1280w
   components/      Reusable UI
-  components/three/ react-three-fiber scenes: hero blob + topology globe (lazy)
+  components/three/ react-three-fiber topology globe (lazy-loaded)
   i18n/            Locale provider, context and config
   locales/         One file per language
   context/         Theme provider
@@ -171,7 +171,7 @@ Chunks are split so the heavy 3D scene never blocks first paint:
 | `react` | ~53 KB | initial |
 | `motion` | ~38 KB | initial |
 | `index` | ~36 KB | initial |
-| `three` | ~227 KB | lazily, after the hero or globe mounts |
+| `three` | ~226 KB | lazily, with the Experience section |
 | `Globe3D` | ~31 KB | lazily, with the Experience section (includes border geometry) |
 | locale | ~6 KB | lazily, only the visitor's language |
 
@@ -181,9 +181,23 @@ renders instead.
 
 ## Adding your photo
 
-Drop a square image at `public/portrait.jpg`. It appears in the About grid
-automatically; if the file is absent the tile falls back to a gradient monogram,
-so nothing breaks either way.
+Drop an image at `public/portrait.jpg` (portrait orientation, ideally around
+720x900 or larger — it is rendered at a 4:5 aspect ratio). It becomes the hero
+visual and the About tile automatically. If the file is absent both fall back to
+a framed monogram, so the layout is identical either way and nothing breaks.
+
+## Colour
+
+One accent, no gradients. Tokens live on `:root` in `src/index.css`, with a
+`.light` override. `--on-accent` exists because the accent's luminance differs
+per theme: white on the bright dark-mode orange is 2.84:1 and fails AA, whereas
+dark text on it is 6.94:1. Use the `.btn-accent` class for anything with text on
+an accent fill so the right pairing is applied automatically.
+
+The globe takes its colours as a prop (`GLOBE_PALETTES` in
+`src/components/three/globePalettes.js`) rather than from theme context —
+react-three-fiber renders into its own reconciler root, so React context does
+not cross the `<Canvas>` boundary.
 
 ## Accessibility
 
