@@ -39,12 +39,18 @@ export default {
     current: 'Aktuell',
     language: 'Sprache',
     changeLanguage: 'Sprache ändern',
-    switchToLight: 'Zum hellen Design wechseln',
-    switchToDark: 'Zum dunklen Design wechseln',
+    theme: 'Design',
+    changeTheme: 'Design ändern',
     minRead: 'Min. Lesezeit',
     builtWith: 'Gebaut mit React & Tailwind',
     opensInNewTab: 'wird in neuem Tab geöffnet',
     more: 'Mehr',
+  },
+
+  themes: {
+    dark: 'Dunkel',
+    light: 'Hell',
+    grey: 'Graustufen',
   },
 
   home: {

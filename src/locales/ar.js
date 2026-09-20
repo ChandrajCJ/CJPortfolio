@@ -39,12 +39,18 @@ export default {
     current: 'حالي',
     language: 'اللغة',
     changeLanguage: 'تغيير اللغة',
-    switchToLight: 'التبديل إلى المظهر الفاتح',
-    switchToDark: 'التبديل إلى المظهر الداكن',
+    theme: 'المظهر',
+    changeTheme: 'تغيير المظهر',
     minRead: 'دقيقة قراءة',
     builtWith: 'بُني باستخدام React وTailwind',
     opensInNewTab: 'يُفتح في تبويب جديد',
     more: 'المزيد',
+  },
+
+  themes: {
+    dark: 'داكن',
+    light: 'فاتح',
+    grey: 'تدرّج رمادي',
   },
 
   home: {

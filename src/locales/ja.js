@@ -39,12 +39,18 @@ export default {
     current: '現職',
     language: '言語',
     changeLanguage: '言語を変更',
-    switchToLight: 'ライトテーマに切り替え',
-    switchToDark: 'ダークテーマに切り替え',
+    theme: 'テーマ',
+    changeTheme: 'テーマを変更',
     minRead: '分で読めます',
     builtWith: 'React と Tailwind で構築',
     opensInNewTab: '新しいタブで開きます',
     more: 'その他',
+  },
+
+  themes: {
+    dark: 'ダーク',
+    light: 'ライト',
+    grey: 'グレースケール',
   },
 
   home: {

@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useMemo, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { ThemeContext } from './themeContext'
 
 const STORAGE_KEY = 'cj-theme'
@@ -8,7 +8,7 @@ function readInitialTheme() {
   if (typeof window === 'undefined') return 'dark'
   try {
     const stored = window.localStorage.getItem(STORAGE_KEY)
-    if (stored === 'light' || stored === 'dark') return stored
+    if (stored === 'light' || stored === 'dark' || stored === 'grey') return stored
   } catch {
     // localStorage can throw in private mode - fall through to the OS setting.
   }
@@ -20,9 +20,12 @@ export function ThemeProvider({ children }) {
 
   useEffect(() => {
     const root = document.documentElement
-    root.classList.toggle('light', theme === 'light')
-    root.style.colorScheme = theme
-    document.querySelector('meta[name="theme-color"]')?.setAttribute('content', theme === 'light' ? '#ffffff' : '#0A0B0D')
+    root.classList.remove('light', 'grey')
+    if (theme !== 'dark') root.classList.add(theme)
+    // Greyscale is a dark scheme as far as form controls and scrollbars go.
+    root.style.colorScheme = theme === 'light' ? 'light' : 'dark'
+    const bar = theme === 'light' ? '#ffffff' : theme === 'grey' ? '#0B0B0B' : '#0A0B0D'
+    document.querySelector('meta[name="theme-color"]')?.setAttribute('content', bar)
     try {
       window.localStorage.setItem(STORAGE_KEY, theme)
     } catch {
@@ -46,8 +49,7 @@ export function ThemeProvider({ children }) {
     return () => mq.removeEventListener('change', onChange)
   }, [])
 
-  const toggleTheme = useCallback(() => setTheme((t) => (t === 'dark' ? 'light' : 'dark')), [])
-  const value = useMemo(() => ({ theme, setTheme, toggleTheme }), [theme, toggleTheme])
+  const value = useMemo(() => ({ theme, setTheme }), [theme])
 
   return <ThemeContext.Provider value={value}>{children}</ThemeContext.Provider>
 }

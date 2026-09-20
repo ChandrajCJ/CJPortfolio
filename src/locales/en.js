@@ -44,12 +44,18 @@ export default {
     current: 'Current',
     language: 'Language',
     changeLanguage: 'Change language',
-    switchToLight: 'Switch to light theme',
-    switchToDark: 'Switch to dark theme',
+    theme: 'Theme',
+    changeTheme: 'Change theme',
     minRead: 'min read',
     builtWith: 'Built with React & Tailwind',
     opensInNewTab: 'opens in a new tab',
     more: 'More',
+  },
+
+  themes: {
+    dark: 'Dark',
+    light: 'Light',
+    grey: 'Greyscale',
   },
 
   home: {

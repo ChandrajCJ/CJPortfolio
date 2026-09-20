@@ -39,12 +39,18 @@ export default {
     current: 'वर्तमान',
     language: 'भाषा',
     changeLanguage: 'भाषा बदलें',
-    switchToLight: 'लाइट थीम पर जाएँ',
-    switchToDark: 'डार्क थीम पर जाएँ',
+    theme: 'थीम',
+    changeTheme: 'थीम बदलें',
     minRead: 'मिनट पढ़ाई',
     builtWith: 'React और Tailwind से बनाया गया',
     opensInNewTab: 'नए टैब में खुलता है',
     more: 'और',
+  },
+
+  themes: {
+    dark: 'डार्क',
+    light: 'लाइट',
+    grey: 'ग्रेस्केल',
   },
 
   home: {

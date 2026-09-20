@@ -181,23 +181,37 @@ renders instead.
 
 ## Adding your photo
 
-The hero and the About tile read `public/portrait.webp` with `public/portrait.jpg`
-as the fallback, via `<picture>`. Both are rendered square (1:1), so supply a
-square image or expect a centre crop.
+Two images, both served as WebP with a JPEG fallback via `<picture>`:
+
+| File | Used by | Aspect |
+| --- | --- | --- |
+| `public/headshot.{webp,jpg}` | Hero | 4:5, anchored to the top |
+| `public/portrait.{webp,jpg}` | About tile | 1:1 |
 
 To swap the photo, drop a new one in and regenerate both derivatives:
 
 ```bash
-node -e "const s=require('sharp');['webp','jpg'].forEach(f=>s('YOUR_PHOTO.jpg').resize({width:640,withoutEnlargement:true})[f==='webp'?'webp':'jpeg']({quality:82}).toFile('public/portrait.'+f))"
+node -e "const s=require('sharp');['webp','jpg'].forEach(f=>s('YOUR_PHOTO.jpg').resize({width:880,withoutEnlargement:true})[f==='webp'?'webp':'jpeg']({quality:82}).toFile('public/headshot.'+f))"
 ```
 
 If neither file exists, both places fall back to a framed monogram, so the
 layout is identical and nothing breaks.
 
+## Themes
+
+Three, chosen from a menu in the header: **Dark** (default), **Light** and
+**Greyscale**. The choice persists in `localStorage`; with none stored the OS
+`prefers-color-scheme` decides between dark and light.
+
+Greyscale drains the hue from the interface but **not** from photographs. That
+works because every surface colour is a token, so the theme only has to swap
+token values — a global `filter: grayscale()` would have desaturated the images
+too. The globe carries a matching neutral palette.
+
 ## Colour
 
-One accent, no gradients. Tokens live on `:root` in `src/index.css`, with a
-`.light` override. `--on-accent` exists because the accent's luminance differs
+One accent, no gradients. Tokens live on `:root` in `src/index.css`, with
+`.light` and `.grey` overrides. `--on-accent` exists because the accent's luminance differs
 per theme: white on the bright dark-mode orange is 2.84:1 and fails AA, whereas
 dark text on it is 6.94:1. Use the `.btn-accent` class for anything with text on
 an accent fill so the right pairing is applied automatically.

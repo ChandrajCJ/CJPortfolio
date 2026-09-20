@@ -39,12 +39,18 @@ export default {
     current: 'தற்போதைய',
     language: 'மொழி',
     changeLanguage: 'மொழியை மாற்று',
-    switchToLight: 'வெளிர் தோற்றத்திற்கு மாற்று',
-    switchToDark: 'இருண்ட தோற்றத்திற்கு மாற்று',
+    theme: 'தீம்',
+    changeTheme: 'தீமை மாற்று',
     minRead: 'நிமிட வாசிப்பு',
     builtWith: 'React மற்றும் Tailwind மூலம் உருவாக்கப்பட்டது',
     opensInNewTab: 'புதிய தாவலில் திறக்கும்',
     more: 'மேலும்',
+  },
+
+  themes: {
+    dark: 'இருள்',
+    light: 'ஒளி',
+    grey: 'சாம்பல் நிறம்',
   },
 
   home: {

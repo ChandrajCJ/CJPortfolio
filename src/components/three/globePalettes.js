@@ -11,6 +11,13 @@ export const GLOBE_PALETTES = {
     dot: '#FFFFFF', // marker cores and the travelling dot
     accent: '#FF6B35', // origin marker and its connections
   },
+  grey: {
+    core: '#0B0B0B',
+    land: '#6F6F6F',
+    marker: '#EDEDED',
+    dot: '#FFFFFF',
+    accent: '#D4D4D4',
+  },
   light: {
     core: '#FFFFFF',
     land: '#5F6976',

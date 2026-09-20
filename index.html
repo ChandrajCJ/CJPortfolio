@@ -69,12 +69,11 @@
       (function () {
         try {
           var stored = localStorage.getItem('cj-theme')
-          var light = stored ? stored === 'light' : window.matchMedia('(prefers-color-scheme: light)').matches
-          if (light) {
-            document.documentElement.classList.add('light')
-            document.documentElement.style.colorScheme = 'light'
-            document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
-          }
+          var theme = stored || (window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark')
+          if (theme !== 'dark') document.documentElement.classList.add(theme)
+          document.documentElement.style.colorScheme = theme === 'light' ? 'light' : 'dark'
+          var bar = theme === 'light' ? '#ffffff' : theme === 'grey' ? '#0B0B0B' : '#0A0B0D'
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', bar)
         } catch (e) {
           /* no-op: defaults to dark */
         }

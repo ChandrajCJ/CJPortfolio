@@ -27,22 +27,22 @@ export default function HeroPortrait() {
     <figure className="mx-auto w-full max-w-sm md:max-w-md">
       <div className="relative overflow-hidden rounded-xl border border-line bg-surface">
         {failed ? (
-          <div className="grid aspect-square w-full place-items-center">
+          <div className="grid aspect-[4/5] w-full place-items-center">
             <span className="font-mono text-6xl font-bold text-accent">{initials}</span>
           </div>
         ) : (
           <picture>
-            <source srcSet="/portrait.webp" type="image/webp" />
+            <source srcSet="/headshot.webp" type="image/webp" />
             <img
-              src="/portrait.jpg"
+              src="/headshot.jpg"
               alt={`${profile.name}, ${t('meta.role')}`}
-              width="640"
-              height="640"
+              width="880"
+              height="1004"
               // Above the fold, so no lazy loading.
               loading="eager"
               decoding="async"
               onError={() => setFailed(true)}
-              className="aspect-square w-full object-cover"
+              className="aspect-[4/5] w-full object-cover object-top"
             />
           </picture>
         )}

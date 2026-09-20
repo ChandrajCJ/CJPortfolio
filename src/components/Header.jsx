@@ -7,7 +7,7 @@ import { profile } from '../data/profile'
 import { NAV_ITEMS } from '../data/nav'
 import { useI18n } from '../i18n/context'
 import useActiveSection from '../hooks/useActiveSection'
-import ThemeToggle from './ThemeToggle'
+import ThemeSwitcher from './ThemeSwitcher'
 import LanguageSwitcher from './LanguageSwitcher'
 
 export default function Header() {
@@ -79,7 +79,7 @@ export default function Header() {
 
         <div className="flex items-center gap-2">
           <LanguageSwitcher />
-          <ThemeToggle />
+          <ThemeSwitcher />
           <Link
             to="/resume"
             className="hidden items-center gap-2 rounded-full border border-line bg-surface px-4 py-2 text-sm font-medium text-fg transition-colors hover:bg-elevated md:inline-flex"
