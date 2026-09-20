@@ -11,13 +11,8 @@ import AstroChat from './components/AstroChat'
 import { useI18n } from './i18n/context'
 
 import Home from './pages/Home'
-import BackgroundPage from './pages/BackgroundPage'
-import ExpertisePage from './pages/ExpertisePage'
-import ProjectsPage from './pages/ProjectsPage'
 import ProjectDetail from './pages/ProjectDetail'
 import ResumePage from './pages/ResumePage'
-import ContactPage from './pages/ContactPage'
-import WritingPage from './pages/WritingPage'
 import PostDetail from './pages/PostDetail'
 import NotFound from './pages/NotFound'
 
@@ -45,19 +40,21 @@ export default function App() {
         <Routes>
           <Route path="/" element={<Navigate to="/home" replace />} />
           <Route path="/home" element={<Home />} />
-          <Route path="/experience" element={<BackgroundPage tab="experience" />} />
-          <Route path="/experience/education" element={<BackgroundPage tab="education" />} />
-          <Route path="/skills" element={<ExpertisePage tab="skills" />} />
-          <Route path="/skills/certifications" element={<ExpertisePage tab="certifications" />} />
-          {/* Old standalone routes now live as tabs. */}
-          <Route path="/education" element={<Navigate to="/experience/education" replace />} />
-          <Route path="/certifications" element={<Navigate to="/skills/certifications" replace />} />
-          <Route path="/projects" element={<ProjectsPage />} />
-          <Route path="/projects/:slug" element={<ProjectDetail />} />
           <Route path="/resume" element={<ResumePage />} />
-          <Route path="/contact" element={<ContactPage />} />
-          <Route path="/writing" element={<WritingPage />} />
+          <Route path="/projects/:slug" element={<ProjectDetail />} />
           <Route path="/writing/:slug" element={<PostDetail />} />
+
+          {/* The section routes are now anchors on the scrolling home page. */}
+          <Route path="/experience" element={<Navigate to="/home#experience" replace />} />
+          <Route path="/experience/education" element={<Navigate to="/home#experience" replace />} />
+          <Route path="/education" element={<Navigate to="/home#experience" replace />} />
+          <Route path="/skills" element={<Navigate to="/home#skills" replace />} />
+          <Route path="/skills/certifications" element={<Navigate to="/home#skills" replace />} />
+          <Route path="/certifications" element={<Navigate to="/home#skills" replace />} />
+          <Route path="/projects" element={<Navigate to="/home#projects" replace />} />
+          <Route path="/contact" element={<Navigate to="/home#contact" replace />} />
+          <Route path="/about" element={<Navigate to="/home#about" replace />} />
+
           <Route path="*" element={<NotFound />} />
         </Routes>
       </main>

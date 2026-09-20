@@ -15,7 +15,7 @@ const fill = (str, vars) => str.replace(/\{(\w+)\}/g, (_, k) => vars[k] ?? `{${k
 
 export default function Hero() {
   const reduced = useReducedMotion()
-  const { t, locale } = useI18n()
+  const { t } = useI18n()
   const ref = useRef(null)
 
   const { scrollYProgress } = useScroll({ target: ref, offset: ['start start', 'end start'] })
@@ -64,9 +64,11 @@ export default function Hero() {
             {reduced ? (
               rolesList[0]
             ) : (
-              // Remount on locale change so the typed sequence restarts in the new language.
+              // Key on the resolved strings, not `locale`: the locale flips
+              // immediately while its messages are still loading, so keying on
+              // it remounted the animation against the previous language.
               <TypeAnimation
-                key={locale}
+                key={rolesList.join('|')}
                 sequence={rolesList.flatMap((r) => [r, 1800])}
                 wrapper="span"
                 speed={50}

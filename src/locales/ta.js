@@ -58,6 +58,7 @@ export default {
     basedIn: 'இருப்பிடம்',
     languages: 'மொழிகள்',
     degreeShort: 'B.Tech, கணினி அறிவியல்',
+    focus: 'கவனம் செலுத்தும் துறைகள்',
     exploreMore: 'மேலும் ஆராய',
   },
 

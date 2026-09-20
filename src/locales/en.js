@@ -63,6 +63,7 @@ export default {
     basedIn: 'Based in',
     languages: 'Languages',
     degreeShort: 'B.Tech, Computer Science',
+    focus: 'Focus areas',
     exploreMore: 'Explore more',
   },
 

@@ -1,4 +1,3 @@
-import { Link } from 'react-router-dom'
 import { profile } from '../data/profile'
 import { useI18n } from '../i18n/context'
 import { NAV_ITEMS } from '../data/nav'
@@ -22,10 +21,10 @@ export default function Footer() {
           <nav aria-label={t('nav.primary')}>
             <ul className="grid grid-cols-2 gap-x-10 gap-y-2 text-sm">
               {NAV_ITEMS.map((item) => (
-                <li key={item.to}>
-                  <Link to={item.to} className="text-muted transition-colors hover:text-fg">
+                <li key={item.id}>
+                  <a href={`/home#${item.id}`} className="text-muted transition-colors hover:text-fg">
                     {t(`nav.${item.key}`)}
-                  </Link>
+                  </a>
                 </li>
               ))}
             </ul>

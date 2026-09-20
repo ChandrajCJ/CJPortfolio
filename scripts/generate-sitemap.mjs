@@ -13,16 +13,7 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const OUT = path.join(__dirname, '..', 'public', 'sitemap.xml')
 const today = new Date().toISOString().slice(0, 10)
 
-const STATIC_ROUTES = [
-  '/home',
-  '/experience',
-  '/experience/education',
-  '/skills',
-  '/skills/certifications',
-  '/projects',
-  '/resume',
-  '/contact',
-]
+const STATIC_ROUTES = ['/home', '/resume']
 
 const routes = [
   { loc: '/', priority: '1.0', changefreq: 'monthly' },

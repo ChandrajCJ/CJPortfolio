@@ -1,11 +1,12 @@
-import { useEffect, useState } from 'react'
-import { NavLink, Link } from 'react-router-dom'
+import { useEffect, useMemo, useState } from 'react'
+import { Link, useLocation } from 'react-router-dom'
 import { FiDownload, FiMenu, FiX } from 'react-icons/fi'
+import { motion, useReducedMotion } from 'framer-motion'
 import logo from '../assets/cjlogo.png'
 import { profile } from '../data/profile'
-import { posts } from '../data/posts'
 import { NAV_ITEMS } from '../data/nav'
 import { useI18n } from '../i18n/context'
+import useActiveSection from '../hooks/useActiveSection'
 import ThemeToggle from './ThemeToggle'
 import LanguageSwitcher from './LanguageSwitcher'
 
@@ -13,10 +14,12 @@ export default function Header() {
   const [open, setOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
   const { t } = useI18n()
+  const { pathname } = useLocation()
+  const reduced = useReducedMotion()
 
-  const items = posts.length
-    ? [...NAV_ITEMS.slice(0, 4), { to: '/writing', key: 'writing' }, NAV_ITEMS[4]]
-    : NAV_ITEMS
+  const onHome = pathname === '/home' || pathname === '/'
+  const ids = useMemo(() => NAV_ITEMS.map((i) => i.id), [])
+  const active = useActiveSection(ids, { enabled: onHome })
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 8)
@@ -32,10 +35,8 @@ export default function Header() {
     return () => window.removeEventListener('keydown', onKey)
   }, [open])
 
-  const linkClass = ({ isActive }) =>
-    `relative rounded-md px-2.5 py-2 text-sm font-medium transition-colors ${
-      isActive ? 'text-fg' : 'text-muted hover:text-fg'
-    }`
+  // From a detail route, anchors need to travel back to the home page first.
+  const hrefFor = (id) => (onHome ? `#${id}` : `/home#${id}`)
 
   return (
     <header
@@ -49,22 +50,30 @@ export default function Header() {
           <span className="text-sm font-semibold tracking-tight text-fg">{profile.shortName}</span>
         </Link>
 
-        <nav aria-label={t('nav.primary')} className="hidden lg:block">
-          <ul className="flex items-center gap-0.5">
-            {items.map((item) => (
-              <li key={item.to}>
-                <NavLink to={item.to} className={linkClass}>
-                  {({ isActive }) => (
-                    <>
-                      {t(`nav.${item.key}`)}
-                      {isActive && (
-                        <span aria-hidden="true" className="gradient-bg absolute inset-x-2.5 -bottom-0.5 h-0.5 rounded-full" />
-                      )}
-                    </>
-                  )}
-                </NavLink>
-              </li>
-            ))}
+        <nav aria-label={t('nav.primary')} className="hidden md:block">
+          <ul className="flex items-center gap-1">
+            {NAV_ITEMS.map((item) => {
+              const isActive = onHome && active === item.id
+              return (
+                <li key={item.id}>
+                  <a
+                    href={hrefFor(item.id)}
+                    aria-current={isActive ? 'true' : undefined}
+                    className={`relative rounded-md px-3 py-2 text-sm font-medium transition-colors ${
+                      isActive ? 'text-fg' : 'text-muted hover:text-fg'
+                    }`}
+                  >
+                    {t(`nav.${item.key}`)}
+                    {isActive && (
+                      <motion.span
+                        layoutId={reduced ? undefined : 'nav-underline'}
+                        className="gradient-bg absolute inset-x-3 -bottom-0.5 h-0.5 rounded-full"
+                      />
+                    )}
+                  </a>
+                </li>
+              )
+            })}
           </ul>
         </nav>
 
@@ -84,7 +93,7 @@ export default function Header() {
             aria-expanded={open}
             aria-controls="mobile-nav"
             aria-label={open ? t('nav.closeMenu') : t('nav.openMenu')}
-            className="grid h-10 w-10 place-items-center rounded-full border border-line bg-surface text-fg lg:hidden"
+            className="grid h-10 w-10 place-items-center rounded-full border border-line bg-surface text-fg md:hidden"
           >
             {open ? <FiX aria-hidden="true" /> : <FiMenu aria-hidden="true" />}
           </button>
@@ -92,23 +101,29 @@ export default function Header() {
       </div>
 
       {open && (
-        <nav id="mobile-nav" aria-label={t('nav.menu')} className="border-t border-line bg-bg lg:hidden">
+        <nav id="mobile-nav" aria-label={t('nav.menu')} className="border-t border-line bg-bg md:hidden">
           <ul className="mx-auto max-w-content px-5 py-3">
-            {[...items, { to: '/resume', key: 'resume' }].map((item) => (
-              <li key={item.to}>
-                <NavLink
-                  to={item.to}
+            {NAV_ITEMS.map((item) => (
+              <li key={item.id}>
+                <a
+                  href={hrefFor(item.id)}
                   onClick={() => setOpen(false)}
-                  className={({ isActive }) =>
-                    `block rounded-md px-2 py-3 text-base font-medium transition-colors ${
-                      isActive ? 'bg-surface text-fg' : 'text-muted hover:bg-surface hover:text-fg'
-                    }`
-                  }
+                  className="block rounded-md px-2 py-3 text-base font-medium text-muted transition-colors hover:bg-surface hover:text-fg"
                 >
                   {t(`nav.${item.key}`)}
-                </NavLink>
+                </a>
               </li>
             ))}
+            <li>
+              <Link
+                to="/resume"
+                onClick={() => setOpen(false)}
+                className="mt-2 flex items-center gap-2 rounded-md px-2 py-3 text-base font-medium text-accent"
+              >
+                <FiDownload aria-hidden="true" />
+                {t('nav.resume')}
+              </Link>
+            </li>
           </ul>
         </nav>
       )}

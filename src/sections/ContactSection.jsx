@@ -3,16 +3,14 @@ import { FiLoader, FiSend } from 'react-icons/fi'
 import emailjs from '@emailjs/browser'
 import { profile } from '../data/profile'
 import { useI18n } from '../i18n/context'
-import Seo from '../components/Seo'
-import Page from '../components/Page'
-import PageHeader from '../components/PageHeader'
+import Section from '../components/Section'
 import SocialLinks from '../components/SocialLinks'
 
 const SERVICE_ID = import.meta.env.VITE_EMAILJS_SERVICE_ID
 const TEMPLATE_ID = import.meta.env.VITE_EMAILJS_TEMPLATE_ID
 const PUBLIC_KEY = import.meta.env.VITE_EMAILJS_PUBLIC_KEY
 
-export default function ContactPage() {
+export default function ContactSection() {
   const { t } = useI18n()
   const formRef = useRef(null)
   const [values, setValues] = useState({ name: '', email: '', message: '' })
@@ -64,22 +62,22 @@ export default function ContactPage() {
   ]
 
   return (
-    <>
-      <Seo title={t('nav.contact')} description={t('contact.description')} path="/contact" />
-      <Page>
-        <div className="grid gap-12 md:grid-cols-2">
-          <div>
-            <PageHeader eyebrow={t('contact.eyebrow')} title={t('contact.title')} description={t('contact.description')} />
-            <a
-              href={`mailto:${profile.email}`}
-              dir="ltr"
-              className="text-lg font-medium text-fg underline decoration-line underline-offset-8 transition-colors hover:decoration-accent"
-            >
-              {profile.email}
-            </a>
-            <p className="mt-2 text-sm text-muted">{t(`education.locations.${profile.locationKey}`)}</p>
-            <SocialLinks className="mt-8" size="lg" />
-          </div>
+    <Section id="contact">
+      <div className="grid gap-12 md:grid-cols-2">
+        <div>
+          <p className="mb-3 text-sm font-semibold uppercase tracking-[0.2em] text-muted">{t('contact.eyebrow')}</p>
+          <h2 className="gradient-text text-3xl font-bold md:text-4xl">{t('contact.title')}</h2>
+          <p className="mb-8 mt-4 text-base leading-relaxed text-muted">{t('contact.description')}</p>
+          <a
+            href={`mailto:${profile.email}`}
+            dir="ltr"
+            className="text-lg font-medium text-fg underline decoration-line underline-offset-8 transition-colors hover:decoration-accent"
+          >
+            {profile.email}
+          </a>
+          <p className="mt-2 text-sm text-muted">{t(`education.locations.${profile.locationKey}`)}</p>
+          <SocialLinks className="mt-8" size="lg" />
+        </div>
 
           <form ref={formRef} onSubmit={onSubmit} noValidate className="flex flex-col gap-5">
             {fields.map((field) => (
@@ -166,8 +164,7 @@ export default function ContactPage() {
               )}
             </p>
           </form>
-        </div>
-      </Page>
-    </>
+      </div>
+    </Section>
   )
 }

@@ -58,6 +58,7 @@ export default {
     basedIn: 'Standort',
     languages: 'Sprachen',
     degreeShort: 'B.Tech, Informatik',
+    focus: 'Schwerpunkte',
     exploreMore: 'Mehr entdecken',
   },
 

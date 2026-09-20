@@ -53,8 +53,12 @@ function Borders() {
 }
 
 /**
- * Arc from the origin to a destination region, lifted off the surface. A
- * travelling dot runs along it to read as live traffic.
+ * Great-circle arc from the origin to a destination, lifted by a sine profile.
+ *
+ * Deliberately NOT a quadratic Bezier: for separations beyond ~110 degrees a
+ * Bezier's apex falls *inside* the sphere and the arc disappears behind the
+ * globe (this is what hid the India -> NA link). Slerping the direction and
+ * scaling the radius keeps every point above the surface at any separation.
  */
 function Arc({ to, delay = 0 }) {
   const dot = useRef(null)
@@ -63,25 +67,49 @@ function Arc({ to, delay = 0 }) {
   const curve = useMemo(() => {
     const a = toVec3(origin.lat, origin.lon)
     const b = toVec3(to.lat, to.lon)
-    const mid = a.clone().add(b).multiplyScalar(0.5)
-    // Longer hops arc higher so they stay clear of the surface.
-    const lift = 1 + 0.55 * (a.distanceTo(b) / (2 * R))
-    mid.normalize().multiplyScalar(R * (1 + 0.3 * lift))
-    return new THREE.QuadraticBezierCurve3(a, mid, b)
+
+    const na = a.clone().normalize()
+    const nb = b.clone().normalize()
+    const omega = Math.acos(THREE.MathUtils.clamp(na.dot(nb), -1, 1))
+    const sinOmega = Math.sin(omega)
+
+    // Longer hops arc higher, so they read clearly against the globe.
+    const height = 0.14 + 0.42 * (omega / Math.PI)
+
+    const steps = 96
+    const points = []
+    for (let i = 0; i <= steps; i++) {
+      const t = i / steps
+
+      // Spherical interpolation; falls back to lerp when the points coincide.
+      let dir
+      if (sinOmega < 1e-6) {
+        dir = na.clone().lerp(nb, t).normalize()
+      } else {
+        const s1 = Math.sin((1 - t) * omega) / sinOmega
+        const s2 = Math.sin(t * omega) / sinOmega
+        dir = na.clone().multiplyScalar(s1).add(nb.clone().multiplyScalar(s2)).normalize()
+      }
+
+      const altitude = R * (1 + height * Math.sin(Math.PI * t))
+      points.push(dir.multiplyScalar(altitude))
+    }
+
+    return new THREE.CatmullRomCurve3(points)
   }, [to])
 
-  const geometry = useMemo(() => new THREE.TubeGeometry(curve, 64, 0.011, 8, false), [curve])
+  const geometry = useMemo(() => new THREE.TubeGeometry(curve, 96, 0.011, 8, false), [curve])
 
   useFrame((state) => {
     const t = (state.clock.elapsedTime * 0.28 + delay) % 1
     if (dot.current) dot.current.position.copy(curve.getPointAt(t))
-    if (line.current) line.current.opacity = 0.42 + Math.sin(state.clock.elapsedTime * 1.4 + delay * 6) * 0.16
+    if (line.current) line.current.opacity = 0.45 + Math.sin(state.clock.elapsedTime * 1.4 + delay * 6) * 0.15
   })
 
   return (
     <group>
       <mesh geometry={geometry}>
-        <meshBasicMaterial ref={line} color={PURPLE} transparent opacity={0.5} />
+        <meshBasicMaterial ref={line} color={PURPLE} transparent opacity={0.55} />
       </mesh>
       <mesh ref={dot}>
         <sphereGeometry args={[0.035, 12, 12]} />

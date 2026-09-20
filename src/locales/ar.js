@@ -58,6 +58,7 @@ export default {
     basedIn: 'المقر',
     languages: 'اللغات',
     degreeShort: 'بكالوريوس تقني، علوم الحاسب',
+    focus: 'مجالات التركيز',
     exploreMore: 'استكشف المزيد',
   },
 

@@ -29,41 +29,28 @@ npm run dev
 | `npm run generate:sitemap` | Regenerates `public/sitemap.xml` (runs on `prebuild`) |
 | `npm run generate:borders` | Regenerates `src/data/borders.json` for the globe |
 
-## Routes
+## Structure
+
+The portfolio is **one scrolling page** at `/home`. Navigation links are in-page
+anchors with smooth scrolling and active-section highlighting. Only detail views
+get their own route.
 
 | Route | Page |
 | --- | --- |
 | `/` | Redirects to `/home` |
-| `/home` | Hero, impact stats, about |
-| `/experience` | Tab group — roles plus the 3D deployment-topology globe |
-| `/experience/education` | Tab group — education timeline |
-| `/skills` | Tab group — grouped tech stack |
-| `/skills/certifications` | Tab group — certificates |
-| `/projects`, `/projects/:slug` | Project grid and write-ups |
+| `/home` | Hero → stats → about → experience → skills → projects → contact |
 | `/resume` | HTML résumé (print-optimised) |
-| `/contact` | Contact form |
-| `/writing`, `/writing/:slug` | Blog — 404s while `posts.js` is empty |
+| `/projects/:slug` | Project write-up |
+| `/writing/:slug` | Blog post |
 
-Experience/Education and Skills/Certifications are tab groups, but each tab has
-its own URL, title and sitemap entry, so tabs stay shareable and indexable. The
-old `/education` and `/certifications` paths redirect to their new tab URLs.
+Within the scrolling page, two sections are tab groups:
 
-## The globe
+- **Experience** — Experience · Education
+- **Skills** — Skills · Certifications
 
-`/experience` renders a WebGL globe of the deployment topology: real country
-borders, a marker on Puducherry (South India), and animated arcs from there out
-to the NA, EU and AU regions.
-
-Border geometry is generated from Natural Earth 110m data:
-
-```bash
-npm run generate:borders
-```
-
-That writes `src/data/borders.json` (≈6,400 points, 28 KB gzip). It is committed,
-so a deploy never needs to regenerate it, and it loads only inside the globe's
-lazy chunk — visitors who never open `/experience` never download it. Edit
-`src/data/topology.js` to change the origin, regions or environment counts.
+Older section routes (`/experience`, `/skills`, `/education`, `/certifications`,
+`/projects`, `/contact`) redirect to their anchor on `/home`, so existing links
+keep working.
 
 ## Internationalisation
 
@@ -185,7 +172,7 @@ Chunks are split so the heavy 3D scene never blocks first paint:
 | `motion` | ~38 KB | initial |
 | `index` | ~36 KB | initial |
 | `three` | ~227 KB | lazily, after the hero or globe mounts |
-| `Globe3D` | ~31 KB | lazily, only on `/experience` (includes border geometry) |
+| `Globe3D` | ~31 KB | lazily, with the Experience section (includes border geometry) |
 | locale | ~6 KB | lazily, only the visitor's language |
 
 The WebGL canvas caps DPR at 1.75 and pauses its render loop when scrolled out

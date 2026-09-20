@@ -58,6 +58,7 @@ export default {
     basedIn: 'स्थित',
     languages: 'भाषाएँ',
     degreeShort: 'B.Tech, कंप्यूटर साइंस',
+    focus: 'फोकस क्षेत्र',
     exploreMore: 'और देखें',
   },
 

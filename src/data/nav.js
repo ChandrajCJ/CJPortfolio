@@ -1,14 +1,13 @@
 /**
- * Primary navigation. `key` resolves to `nav.<key>` in the locale files.
- * Experience/Education and Skills/Certifications are tab groups, so each pair
- * contributes a single top-level entry.
+ * Primary navigation. These are in-page anchors on the scrolling home page;
+ * `key` resolves to `nav.<key>` in the locale files.
  */
 export const NAV_ITEMS = [
-  { to: '/home', key: 'home' },
-  { to: '/experience', key: 'experience' },
-  { to: '/skills', key: 'skills' },
-  { to: '/projects', key: 'projects' },
-  { to: '/contact', key: 'contact' },
+  { id: 'about', key: 'home' },
+  { id: 'experience', key: 'experience' },
+  { id: 'skills', key: 'skills' },
+  { id: 'projects', key: 'projects' },
+  { id: 'contact', key: 'contact' },
 ]
 
 export default NAV_ITEMS

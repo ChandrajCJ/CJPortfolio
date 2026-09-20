@@ -58,6 +58,7 @@ export default {
     basedIn: '拠点',
     languages: '言語',
     degreeShort: '工学士、コンピュータサイエンス',
+    focus: '注力分野',
     exploreMore: 'もっと見る',
   },
 
