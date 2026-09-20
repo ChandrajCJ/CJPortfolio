@@ -1,7 +1,8 @@
 # Chandraj N — Portfolio
 
 Personal portfolio built with React 18, Vite 5 and Tailwind CSS, with a
-react-three-fiber hero and scroll-driven motion throughout.
+react-three-fiber hero, a 3D deployment-topology globe, scroll-driven motion,
+six-language support (including RTL), and an AI assistant grounded in the CV.
 
 **Live:** https://developedbycj.netlify.app
 
@@ -26,17 +27,97 @@ npm run dev
 | `npm run optimize:images` | Rebuilds responsive WebP from `src/assets/raw/` |
 | `npm run generate:og` | Regenerates `public/og-image.png` |
 | `npm run generate:sitemap` | Regenerates `public/sitemap.xml` (runs on `prebuild`) |
+| `npm run generate:borders` | Regenerates `src/data/borders.json` for the globe |
+
+## Routes
+
+| Route | Page |
+| --- | --- |
+| `/` | Redirects to `/home` |
+| `/home` | Hero, impact stats, about |
+| `/experience` | Tab group — roles plus the 3D deployment-topology globe |
+| `/experience/education` | Tab group — education timeline |
+| `/skills` | Tab group — grouped tech stack |
+| `/skills/certifications` | Tab group — certificates |
+| `/projects`, `/projects/:slug` | Project grid and write-ups |
+| `/resume` | HTML résumé (print-optimised) |
+| `/contact` | Contact form |
+| `/writing`, `/writing/:slug` | Blog — 404s while `posts.js` is empty |
+
+Experience/Education and Skills/Certifications are tab groups, but each tab has
+its own URL, title and sitemap entry, so tabs stay shareable and indexable. The
+old `/education` and `/certifications` paths redirect to their new tab URLs.
+
+## The globe
+
+`/experience` renders a WebGL globe of the deployment topology: real country
+borders, a marker on Puducherry (South India), and animated arcs from there out
+to the NA, EU and AU regions.
+
+Border geometry is generated from Natural Earth 110m data:
+
+```bash
+npm run generate:borders
+```
+
+That writes `src/data/borders.json` (≈6,400 points, 28 KB gzip). It is committed,
+so a deploy never needs to regenerate it, and it loads only inside the globe's
+lazy chunk — visitors who never open `/experience` never download it. Edit
+`src/data/topology.js` to change the origin, regions or environment counts.
+
+## Internationalisation
+
+Six locales: English, Tamil, Hindi, Arabic, German, Japanese. Arabic sets
+`dir="rtl"` on `<html>`, and the layout uses CSS logical properties
+(`ms-`/`me-`, `ps-`/`pe-`, `start-`/`end-`) so it genuinely mirrors rather than
+just swapping text.
+
+- Strings live in `src/locales/<code>.js`; `src/data/` holds only structure
+  (ids, dates, links, tech names).
+- Each locale is a separate chunk (~6 KB gzip) loaded on demand — visitors
+  download only their own language.
+- Missing keys fall back to English rather than rendering a raw key.
+- To add a locale: add an entry to `src/i18n/config.js` and a matching file in
+  `src/locales/`.
+
+**Translation review:** English is the source of truth. The Tamil, Hindi,
+Arabic, German and Japanese copy is machine-translated and has not been
+reviewed by a native speaker — check it before treating it as final.
+
+## Astro (AI assistant)
+
+A floating assistant that answers questions about the CV. The model call runs in
+a Netlify Function (`netlify/functions/astro.mjs`) so the API key stays
+server-side — it is never shipped to the browser.
+
+- Set `ANTHROPIC_API_KEY` in the Netlify UI. **No `VITE_` prefix** — that would
+  inline it into the client bundle and leak it.
+- Without the key, `/api/astro` returns 503 and the widget degrades to a
+  "contact me directly" message.
+- Its knowledge base is `netlify/functions/_knowledge.js`. Update it when the CV
+  changes, or Astro will answer from stale facts.
+- Grounding: it answers only from that profile, refuses to invent details, and
+  client-supplied `system` turns are rejected before reaching the model.
+- Uses `claude-opus-5` at `effort: low` with the profile cached as a stable
+  prompt prefix. Each answer is capped at 1024 output tokens.
+
+For a full local round-trip (functions included), use `netlify dev` rather than
+`npm run preview` — Vite's preview server does not run Netlify Functions, so
+`/api/astro` 404s and the widget shows its error state.
 
 ## Project layout
 
 ```
+netlify/functions/ Serverless functions (Astro chat endpoint)
 public/            Static files served as-is (CV, favicon, OG image, robots, sitemap)
 scripts/           Build-time generators (images, OG card, sitemap)
 src/
   assets/raw/      Full-size source screenshots (never shipped)
   assets/optimized/ Generated WebP derivatives at 640w and 1280w
   components/      Reusable UI
-  components/three/ react-three-fiber hero scene (lazy-loaded)
+  components/three/ react-three-fiber scenes: hero blob + topology globe (lazy)
+  i18n/            Locale provider, context and config
+  locales/         One file per language
   context/         Theme provider
   data/            All site content lives here - edit these, not components
   hooks/           Custom hooks
@@ -57,6 +138,9 @@ All copy lives in `src/data/` — you should rarely need to touch a component:
 | `skills.js` | Grouped tech stack |
 | `education.js` / `certifications.js` | Timeline and certificates |
 | `stats.js` | Headline metrics on the home page |
+| `topology.js` | Origin, regions and environment counts behind the 3D globe |
+| `borders.json` | Generated country borders — do not edit by hand |
+| `nav.js` | Primary navigation entries |
 | `posts.js` | Blog posts — section stays hidden while empty |
 | `testimonials.js` | Recommendations — section stays hidden while empty |
 
@@ -100,11 +184,19 @@ Chunks are split so the heavy 3D scene never blocks first paint:
 | `react` | ~53 KB | initial |
 | `motion` | ~38 KB | initial |
 | `index` | ~36 KB | initial |
-| `three` | ~223 KB | lazily, after the hero mounts |
+| `three` | ~227 KB | lazily, after the hero or globe mounts |
+| `Globe3D` | ~31 KB | lazily, only on `/experience` (includes border geometry) |
+| locale | ~6 KB | lazily, only the visitor's language |
 
 The WebGL canvas caps DPR at 1.75 and pauses its render loop when scrolled out
 of view or when the tab is hidden. If WebGL is unavailable, a static gradient
 renders instead.
+
+## Adding your photo
+
+Drop a square image at `public/portrait.jpg`. It appears in the About grid
+automatically; if the file is absent the tile falls back to a gradient monogram,
+so nothing breaks either way.
 
 ## Accessibility
 
@@ -114,6 +206,7 @@ renders instead.
   magnetic buttons, the custom cursor, and all scroll animations
 - Body and muted text clear WCAG AA (7:1) in both themes
 - Contact form has real labels, inline errors, and `aria-live` status
+- RTL layouts mirror via logical properties, not hard-coded left/right
 
 ## Deployment
 

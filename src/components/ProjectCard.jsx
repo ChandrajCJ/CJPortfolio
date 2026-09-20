@@ -1,11 +1,14 @@
 import { Link } from 'react-router-dom'
 import { FiArrowUpRight, FiExternalLink, FiGithub } from 'react-icons/fi'
 import { getProjectImage } from '../lib/images'
+import { useI18n } from '../i18n/context'
 import TechPill from './TechPill'
 import TiltCard from './TiltCard'
 
 export default function ProjectCard({ project }) {
+  const { t } = useI18n()
   const image = getProjectImage(project.image)
+  const title = t(`projects.${project.slug}.title`)
 
   return (
     <TiltCard
@@ -28,7 +31,7 @@ export default function ProjectCard({ project }) {
           />
         ) : (
           <div className="grid h-full w-full place-items-center">
-            <span className="gradient-text text-3xl font-bold">{project.title.charAt(0)}</span>
+            <span className="gradient-text text-3xl font-bold">{title.charAt(0)}</span>
           </div>
         )}
       </div>
@@ -36,15 +39,16 @@ export default function ProjectCard({ project }) {
       <div className="relative z-[2] flex flex-1 flex-col p-5">
         <div className="flex items-start justify-between gap-3">
           <h3 className="text-lg font-semibold text-fg">
-            {/* Stretched link: the whole card is clickable, but only one tab stop. */}
             <Link to={`/projects/${project.slug}`} className="after:absolute after:inset-0 focus-visible:underline">
-              {project.title}
+              {title}
             </Link>
           </h3>
-          <span className="shrink-0 text-xs font-medium text-muted">{project.year}</span>
+          <span className="shrink-0 text-xs font-medium text-muted" dir="ltr">
+            {project.year}
+          </span>
         </div>
 
-        <p className="mt-2 flex-1 text-sm leading-relaxed text-muted">{project.blurb}</p>
+        <p className="mt-2 flex-1 text-sm leading-relaxed text-muted">{t(`projects.${project.slug}.blurb`)}</p>
 
         <ul className="mt-4 flex flex-wrap gap-1.5">
           {project.tech.slice(0, 4).map((tech) => (
@@ -61,7 +65,7 @@ export default function ProjectCard({ project }) {
 
         <div className="relative z-10 mt-5 flex items-center gap-4 border-t border-line pt-4 text-sm">
           <Link to={`/projects/${project.slug}`} className="inline-flex items-center gap-1 font-medium text-accent">
-            Details <FiArrowUpRight aria-hidden="true" />
+            {t('common.details')} <FiArrowUpRight aria-hidden="true" className="rtl:-scale-x-100" />
           </Link>
           {project.demo && (
             <a
@@ -71,8 +75,10 @@ export default function ProjectCard({ project }) {
               className="inline-flex items-center gap-1.5 text-muted transition-colors hover:text-fg"
             >
               <FiExternalLink aria-hidden="true" />
-              <span>Live</span>
-              <span className="sr-only">demo of {project.title} (opens in a new tab)</span>
+              <span>{t('common.liveDemo')}</span>
+              <span className="sr-only">
+                — {title} ({t('common.opensInNewTab')})
+              </span>
             </a>
           )}
           {project.repo && (
@@ -83,8 +89,10 @@ export default function ProjectCard({ project }) {
               className="inline-flex items-center gap-1.5 text-muted transition-colors hover:text-fg"
             >
               <FiGithub aria-hidden="true" />
-              <span>Code</span>
-              <span className="sr-only">for {project.title} (opens in a new tab)</span>
+              <span>{t('common.code')}</span>
+              <span className="sr-only">
+                — {title} ({t('common.opensInNewTab')})
+              </span>
             </a>
           )}
         </div>

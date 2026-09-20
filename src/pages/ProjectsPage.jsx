@@ -1,12 +1,17 @@
 import { useMemo, useState } from 'react'
 import { allTech, projects } from '../data/projects'
-import SectionHeading from '../components/SectionHeading'
+import { useI18n } from '../i18n/context'
+import Seo from '../components/Seo'
+import Page from '../components/Page'
+import PageHeader from '../components/PageHeader'
 import ProjectCard from '../components/ProjectCard'
 import Reveal from '../components/Reveal'
 
-const ALL = 'All'
+const ALL = '__all__'
+const fill = (str, vars) => String(str).replace(/\{(\w+)\}/g, (_, k) => vars[k] ?? `{${k}}`)
 
-export default function Projects() {
+export default function ProjectsPage() {
+  const { t } = useI18n()
   const [filter, setFilter] = useState(ALL)
 
   const visible = useMemo(
@@ -14,23 +19,18 @@ export default function Projects() {
     [filter],
   )
 
-  const filters = [ALL, ...allTech]
-
   return (
-    <section id="projects" className="border-t border-line bg-surface/30 px-5 py-20 md:px-8 md:py-28">
-      <div className="mx-auto max-w-content">
-        <SectionHeading
-          eyebrow="Projects"
-          title="Things I've built"
-          description="A mix of production work and side projects. Click any card for the full write-up."
-        />
+    <>
+      <Seo title={t('nav.projects')} description={t('projects.description')} path="/projects" />
+      <Page>
+        <PageHeader eyebrow={t('projects.eyebrow')} title={t('projects.title')} description={t('projects.description')} />
 
         <div className="mb-8">
-          <h3 className="sr-only" id="filter-heading">
-            Filter projects by technology
-          </h3>
-          <ul aria-labelledby="filter-heading" className="thin-scroll flex flex-wrap gap-2">
-            {filters.map((tech) => {
+          <h2 className="sr-only" id="filter-heading">
+            {t('projects.filterHeading')}
+          </h2>
+          <ul aria-labelledby="filter-heading" className="flex flex-wrap gap-2">
+            {[ALL, ...allTech].map((tech) => {
               const active = filter === tech
               return (
                 <li key={tech}>
@@ -44,7 +44,7 @@ export default function Projects() {
                         : 'border-line bg-elevated text-muted hover:border-accent/50 hover:text-fg'
                     }`}
                   >
-                    {tech}
+                    {tech === ALL ? t('projects.filterAll') : tech}
                   </button>
                 </li>
               )
@@ -52,10 +52,8 @@ export default function Projects() {
           </ul>
         </div>
 
-        {/* Announce result count changes to screen readers. */}
         <p aria-live="polite" className="sr-only">
-          {visible.length} {visible.length === 1 ? 'project' : 'projects'} shown
-          {filter !== ALL ? ` for ${filter}` : ''}
+          {fill(t('projects.shown'), { count: visible.length })}
         </p>
 
         {visible.length ? (
@@ -67,9 +65,9 @@ export default function Projects() {
             ))}
           </ul>
         ) : (
-          <p className="card p-8 text-center text-muted">No projects use {filter} yet.</p>
+          <p className="card p-8 text-center text-muted">{fill(t('projects.none'), { tech: filter })}</p>
         )}
-      </div>
-    </section>
+      </Page>
+    </>
   )
 }

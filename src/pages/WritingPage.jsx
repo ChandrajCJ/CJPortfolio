@@ -1,21 +1,28 @@
 import { Link } from 'react-router-dom'
 import { FiArrowUpRight, FiExternalLink } from 'react-icons/fi'
 import { posts } from '../data/posts'
-import SectionHeading from '../components/SectionHeading'
+import { useI18n } from '../i18n/context'
+import Seo from '../components/Seo'
+import Page from '../components/Page'
+import PageHeader from '../components/PageHeader'
 import Reveal from '../components/Reveal'
 import TechPill from '../components/TechPill'
+import NotFound from './NotFound'
 
-const formatDate = (iso) =>
-  new Date(iso).toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' })
+export default function WritingPage() {
+  const { t, locale } = useI18n()
 
-/** Renders nothing until there is at least one post - an empty blog is worse than none. */
-export default function Writing() {
-  if (!posts.length) return null
+  // No posts yet - don't ship an empty section, 404 the route instead.
+  if (!posts.length) return <NotFound />
+
+  const formatDate = (iso) =>
+    new Date(iso).toLocaleDateString(locale, { day: 'numeric', month: 'short', year: 'numeric' })
 
   return (
-    <section id="writing" className="border-t border-line px-5 py-20 md:px-8 md:py-28">
-      <div className="mx-auto max-w-content">
-        <SectionHeading eyebrow="Writing" title="Notes & write-ups" description="Things I've learned worth writing down." />
+    <>
+      <Seo title={t('nav.writing')} description={t('writing.description')} path="/writing" />
+      <Page>
+        <PageHeader eyebrow={t('writing.eyebrow')} title={t('writing.title')} description={t('writing.description')} />
 
         <ul className="grid gap-5 md:grid-cols-2">
           {posts.map((post, i) => (
@@ -23,17 +30,12 @@ export default function Writing() {
               <article className="card group relative h-full p-6 transition-colors hover:border-accent/50">
                 <p className="text-xs uppercase tracking-wider text-muted">
                   {formatDate(post.date)}
-                  {post.readingMinutes ? ` · ${post.readingMinutes} min read` : ''}
+                  {post.readingMinutes ? ` · ${post.readingMinutes} ${t('common.minRead')}` : ''}
                 </p>
 
-                <h3 className="mt-2 text-lg font-semibold text-fg">
+                <h2 className="mt-2 text-lg font-semibold text-fg">
                   {post.externalUrl ? (
-                    <a
-                      href={post.externalUrl}
-                      target="_blank"
-                      rel="noreferrer noopener"
-                      className="after:absolute after:inset-0"
-                    >
+                    <a href={post.externalUrl} target="_blank" rel="noreferrer noopener" className="after:absolute after:inset-0">
                       {post.title}
                     </a>
                   ) : (
@@ -41,7 +43,7 @@ export default function Writing() {
                       {post.title}
                     </Link>
                   )}
-                </h3>
+                </h2>
 
                 <p className="mt-2 text-sm leading-relaxed text-muted">{post.summary}</p>
 
@@ -58,11 +60,11 @@ export default function Writing() {
                 <p className="mt-4 inline-flex items-center gap-1 text-sm font-medium text-accent">
                   {post.externalUrl ? (
                     <>
-                      Read externally <FiExternalLink aria-hidden="true" />
+                      {t('writing.readExternally')} <FiExternalLink aria-hidden="true" />
                     </>
                   ) : (
                     <>
-                      Read more <FiArrowUpRight aria-hidden="true" />
+                      {t('common.readMore')} <FiArrowUpRight aria-hidden="true" className="rtl:-scale-x-100" />
                     </>
                   )}
                 </p>
@@ -70,7 +72,7 @@ export default function Writing() {
             </Reveal>
           ))}
         </ul>
-      </div>
-    </section>
+      </Page>
+    </>
   )
 }

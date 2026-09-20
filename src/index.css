@@ -142,3 +142,36 @@ html.lenis body {
 .lenis.lenis-stopped {
   overflow: hidden;
 }
+
+/* Print: the résumé page should come out as a clean one-column document. */
+@media print {
+  @page {
+    margin: 14mm;
+  }
+
+  html,
+  body {
+    background: #fff !important;
+    color: #000 !important;
+  }
+
+  header[class*='fixed'],
+  footer,
+  .print\:hidden {
+    display: none !important;
+  }
+
+  .resume-sheet {
+    font-size: 10.5pt;
+    line-height: 1.45;
+  }
+
+  .resume-sheet a {
+    color: #000 !important;
+    text-decoration: none;
+  }
+
+  .break-inside-avoid {
+    break-inside: avoid;
+  }
+}
