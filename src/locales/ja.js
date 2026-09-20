@@ -36,7 +36,6 @@ export default {
     backToHome: 'ホームに戻る',
     allProjects: 'すべてのプロジェクト',
     allWriting: 'すべての記事',
-    current: '現職',
     language: '言語',
     changeLanguage: '言語を変更',
     theme: 'テーマ',

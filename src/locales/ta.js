@@ -36,7 +36,6 @@ export default {
     backToHome: 'முகப்புக்குத் திரும்பு',
     allProjects: 'அனைத்து திட்டங்கள்',
     allWriting: 'அனைத்து எழுத்துக்கள்',
-    current: 'தற்போதைய',
     language: 'மொழி',
     changeLanguage: 'மொழியை மாற்று',
     theme: 'தீம்',

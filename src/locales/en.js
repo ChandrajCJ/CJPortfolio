@@ -41,7 +41,6 @@ export default {
     backToHome: 'Back to home',
     allProjects: 'All projects',
     allWriting: 'All writing',
-    current: 'Current',
     language: 'Language',
     changeLanguage: 'Change language',
     theme: 'Theme',

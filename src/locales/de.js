@@ -36,7 +36,6 @@ export default {
     backToHome: 'Zurück zur Startseite',
     allProjects: 'Alle Projekte',
     allWriting: 'Alle Artikel',
-    current: 'Aktuell',
     language: 'Sprache',
     changeLanguage: 'Sprache ändern',
     theme: 'Design',

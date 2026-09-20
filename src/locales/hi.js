@@ -36,7 +36,6 @@ export default {
     backToHome: 'होम पर वापस',
     allProjects: 'सभी प्रोजेक्ट्स',
     allWriting: 'सभी लेख',
-    current: 'वर्तमान',
     language: 'भाषा',
     changeLanguage: 'भाषा बदलें',
     theme: 'थीम',

@@ -96,14 +96,7 @@ export default function ExperienceContent() {
                 }`}
               />
 
-              <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
-                <h3 className="text-xl font-semibold text-fg md:text-2xl">{t(`experience.${job.id}.role`)}</h3>
-                {job.current && (
-                  <span className="rounded-full bg-emerald-500/15 px-2.5 py-0.5 text-xs font-semibold text-emerald-400">
-                    {t('common.current')}
-                  </span>
-                )}
-              </div>
+              <h3 className="text-xl font-semibold text-fg md:text-2xl">{t(`experience.${job.id}.role`)}</h3>
 
               <p className="mt-1 text-sm font-medium text-accent">{job.company}</p>
               <p className="text-xs uppercase tracking-wider text-muted font-mono">
@@ -121,13 +114,6 @@ export default function ExperienceContent() {
                 ))}
               </ul>
 
-              <ul className="mt-5 flex flex-wrap gap-1.5">
-                {job.tech.map((tech) => (
-                  <li key={tech}>
-                    <TechPill>{tech}</TechPill>
-                  </li>
-                ))}
-              </ul>
             </Reveal>
           ))}
         </ol>

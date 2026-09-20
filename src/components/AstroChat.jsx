@@ -3,6 +3,7 @@ import { FiMessageCircle, FiRefreshCw, FiSend, FiX } from 'react-icons/fi'
 import { AnimatePresence, motion, useReducedMotion } from 'framer-motion'
 import { profile } from '../data/profile'
 import { useI18n } from '../i18n/context'
+import RichText from './RichText'
 
 const ENDPOINT = '/api/astro'
 const MAX_CHARS = 1000
@@ -98,7 +99,7 @@ export default function AstroChat() {
         aria-expanded={open}
         aria-controls="astro-panel"
         aria-label={open ? t('chat.close') : t('chat.open')}
-        className="btn-accent fixed bottom-5 end-5 z-[70] grid h-14 w-14 place-items-center rounded-full shadow-xl shadow-black/30 transition-transform hover:scale-105"
+        className="btn-accent fixed bottom-20 end-5 z-[70] grid h-14 w-14 place-items-center rounded-full shadow-xl shadow-black/30 transition-transform hover:scale-105"
       >
         {open ? <FiX aria-hidden="true" size={22} /> : <FiMessageCircle aria-hidden="true" size={22} />}
       </button>
@@ -113,7 +114,7 @@ export default function AstroChat() {
             aria-modal="false"
             aria-label={`${t('chat.name')} — ${t('chat.subtitle')}`}
             dir={dir}
-            className="fixed bottom-24 end-5 z-[70] flex max-h-[min(34rem,calc(100vh-8rem))] w-[calc(100vw-2.5rem)] max-w-sm flex-col overflow-hidden rounded-2xl border border-line bg-bg shadow-2xl"
+            className="fixed bottom-40 end-5 z-[70] flex max-h-[min(32rem,calc(100vh-13rem))] w-[calc(100vw-2.5rem)] max-w-sm flex-col overflow-hidden rounded-2xl border border-line bg-bg shadow-2xl"
           >
             <header className="flex items-center justify-between gap-3 border-b border-line bg-surface px-4 py-3">
               <div className="flex items-center gap-2.5">
@@ -138,24 +139,28 @@ export default function AstroChat() {
               )}
             </header>
 
-            <div ref={listRef} className="thin-scroll flex-1 space-y-3 overflow-y-auto px-4 py-4">
+            <div
+              ref={listRef}
+              data-lenis-prevent
+              className="thin-scroll flex-1 space-y-3 overflow-y-auto overscroll-contain px-4 py-4"
+            >
               <div className="flex gap-2">
-                <p className="max-w-[85%] rounded-2xl rounded-ss-sm bg-surface px-3.5 py-2.5 text-sm leading-relaxed text-fg">
+                <div className="max-w-[85%] rounded-2xl rounded-ss-sm bg-surface px-3.5 py-2.5 text-sm leading-relaxed text-fg">
                   {t('chat.greeting')}
-                </p>
+                </div>
               </div>
 
               {messages.map((m, i) => (
                 <div key={i} className={`flex ${m.role === 'user' ? 'justify-end' : 'justify-start'}`}>
-                  <p
-                    className={`max-w-[85%] whitespace-pre-wrap rounded-2xl px-3.5 py-2.5 text-sm leading-relaxed ${
-                      m.role === 'user'
-                        ? 'btn-accent rounded-ee-sm'
-                        : 'rounded-ss-sm bg-surface text-fg'
-                    }`}
-                  >
-                    {m.content}
-                  </p>
+                  {m.role === 'user' ? (
+                    <p className="btn-accent max-w-[85%] whitespace-pre-wrap rounded-2xl rounded-ee-sm px-3.5 py-2.5 text-sm leading-relaxed">
+                      {m.content}
+                    </p>
+                  ) : (
+                    <RichText className="max-w-[85%] rounded-2xl rounded-ss-sm bg-surface px-3.5 py-2.5 text-sm text-fg">
+                      {m.content}
+                    </RichText>
+                  )}
                 </div>
               ))}
 
@@ -211,6 +216,7 @@ export default function AstroChat() {
                     }
                   }}
                   placeholder={t('chat.placeholder')}
+                  data-lenis-prevent
                   className="thin-scroll max-h-24 flex-1 resize-none rounded-xl border border-line bg-bg px-3 py-2 text-sm text-fg placeholder:text-muted/60"
                 />
                 <button

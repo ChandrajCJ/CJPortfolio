@@ -10,12 +10,19 @@ const ICONS = {
   instagram: FaInstagram,
 }
 
+/**
+ * Official brand colours on hover.
+ *
+ * GitHub's mark is monochrome (#181717), which would be invisible on the dark
+ * themes, so it resolves to the theme foreground - which is what GitHub itself
+ * does in dark mode. Email has no brand, so it takes the site accent.
+ */
 const HOVER = {
-  github: 'hover:text-[#8b949e]',
-  linkedin: 'hover:text-[#0a66c2]',
+  github: 'hover:text-fg',
+  linkedin: 'hover:text-[#0A66C2]',
   email: 'hover:text-accent',
-  whatsapp: 'hover:text-[#25d366]',
-  instagram: 'hover:text-[#e1306c]',
+  whatsapp: 'hover:text-[#25D366]',
+  instagram: 'hover:text-[#E4405F]',
 }
 
 export default function SocialLinks({ className = '', size = 'md' }) {

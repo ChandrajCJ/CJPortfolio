@@ -36,7 +36,6 @@ export default {
     backToHome: 'العودة إلى الرئيسية',
     allProjects: 'كل المشاريع',
     allWriting: 'كل المقالات',
-    current: 'حالي',
     language: 'اللغة',
     changeLanguage: 'تغيير اللغة',
     theme: 'المظهر',
