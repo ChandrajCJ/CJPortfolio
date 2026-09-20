@@ -7,7 +7,7 @@ export default {
   meta: {
     role: 'Software Engineer',
     tagline:
-      'I build secure, scalable web platforms — authentication infrastructure, micro-frontend performance, and AI-assisted developer tooling.',
+      'I build secure, scalable web platforms authentication infrastructure, micro-frontend performance, and AI-assisted developer tooling.',
     summary:
       'Software engineer with experience building secure, scalable web platforms across enterprise SaaS and multi-cloud environments. Proven track record delivering authentication infrastructure (SSO, MFA, OAuth, RBAC), micro-frontend performance optimization, and core platform features serving customers across multiple hyperscalers and global regions. Skilled in leveraging AI-assisted development tools to accelerate delivery and improve code quality.',
   },
