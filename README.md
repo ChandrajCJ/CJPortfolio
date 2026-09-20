@@ -84,7 +84,7 @@ Runs on **Google Gemini**, whose free tier needs no credit card.
   inline it into the client bundle and leak it.
 - Without the key, `/api/astro` returns 503 and the widget degrades to a
   "contact me directly" message, so the site is fine to deploy without one.
-- Defaults to `gemini-2.0-flash`; override with `GEMINI_MODEL`.
+- Defaults to `gemini-3.6-flash`; override with `GEMINI_MODEL`.
 - Its knowledge base is `netlify/functions/_knowledge.js`. Update it when the CV
   changes, or Astro will answer from stale facts.
 - Grounding: it answers only from that profile, refuses to invent details, and

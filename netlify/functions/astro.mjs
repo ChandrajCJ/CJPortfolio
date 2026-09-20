@@ -2,8 +2,12 @@ import { GoogleGenAI } from '@google/genai'
 import { SYSTEM_PROMPT } from './_knowledge.js'
 
 // Flash-class models sit inside Gemini's free tier and are more than enough for
-// answering questions about a CV. Override with GEMINI_MODEL if needed.
-const MODEL = process.env.GEMINI_MODEL || 'gemini-2.0-flash'
+// answering questions about a CV.
+//
+// Model names retire: gemini-2.0-flash was removed and the API returned a 404
+// naming its replacement. If that happens again, GEMINI_MODEL overrides this
+// without a code change, and the 404 detail tells you what to set it to.
+const MODEL = process.env.GEMINI_MODEL || 'gemini-3.6-flash'
 const MAX_MESSAGE_CHARS = 1000
 const MAX_HISTORY = 12
 
