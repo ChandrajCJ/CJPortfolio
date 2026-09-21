@@ -54,9 +54,7 @@ export default function ExperienceContent() {
             <ul className="mt-6 flex flex-wrap gap-1.5">
               {regions.map((r) => (
                 <li key={r.id}>
-                  <TechPill>
-                    {r.label} · {r.city}
-                  </TechPill>
+                  <TechPill>{r.label}</TechPill>
                 </li>
               ))}
               {hyperscalers.map((h) => (

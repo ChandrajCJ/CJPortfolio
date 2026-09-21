@@ -138,6 +138,45 @@
     @apply rounded-xl border border-line bg-surface;
   }
 
+  /*
+   * Social icon hover colours.
+   *
+   * Each brand ships a light-background variant because the standard colour
+   * fails on white - WhatsApp green measures 1.88:1 there. Every pairing below
+   * clears 3:1, the floor for a non-text graphic.
+   *
+   * GitHub is monochrome (#181717), so it takes the theme foreground, which is
+   * what GitHub itself does in dark mode.
+   */
+  .hover-github:hover {
+    color: rgb(var(--fg));
+  }
+  .hover-linkedin:hover {
+    color: #0a66c2;
+  }
+  .hover-whatsapp:hover {
+    color: #25d366;
+  }
+  .hover-instagram:hover {
+    color: #a855f7;
+  }
+  .hover-email:hover {
+    color: #ea4335;
+  }
+
+  :root.light .hover-whatsapp:hover,
+  :root.paper .hover-whatsapp:hover {
+    color: #128c7e;
+  }
+  :root.light .hover-instagram:hover,
+  :root.paper .hover-instagram:hover {
+    color: #833ab4;
+  }
+  :root.light .hover-email:hover,
+  :root.paper .hover-email:hover {
+    color: #c5221f;
+  }
+
   /* Radial spotlight driven by --spot-x/--spot-y, set by TiltCard on pointer move. */
   .spotlight::before {
     content: '';
