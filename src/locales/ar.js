@@ -138,6 +138,11 @@ export default {
     production: 'الإنتاج',
     staging: 'التجريب',
     development: 'التطوير',
+    names: {
+      na: 'أمريكا الشمالية',
+      eu: 'أوروبا',
+      au: 'أستراليا',
+    },
     hint: 'اسحب للتدوير',
   },
 

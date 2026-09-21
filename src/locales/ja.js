@@ -138,6 +138,11 @@ export default {
     production: '本番',
     staging: 'ステージング',
     development: '開発',
+    names: {
+      na: '北米',
+      eu: 'ヨーロッパ',
+      au: 'オーストラリア',
+    },
     hint: 'ドラッグで回転',
   },
 

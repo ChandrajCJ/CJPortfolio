@@ -138,6 +138,11 @@ export default {
     production: 'Production',
     staging: 'Staging',
     development: 'Development',
+    names: {
+      na: 'வட அமெரிக்கா',
+      eu: 'ஐரோப்பா',
+      au: 'ஆஸ்திரேலியா',
+    },
     hint: 'சுழற்ற இழுக்கவும்',
   },
 

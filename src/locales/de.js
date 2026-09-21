@@ -138,6 +138,11 @@ export default {
     production: 'Produktion',
     staging: 'Staging',
     development: 'Entwicklung',
+    names: {
+      na: 'Nordamerika',
+      eu: 'Europa',
+      au: 'Australien',
+    },
     hint: 'Zum Drehen ziehen',
   },
 

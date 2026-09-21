@@ -138,6 +138,11 @@ export default {
     production: 'Production',
     staging: 'Staging',
     development: 'Development',
+    names: {
+      na: 'उत्तरी अमेरिका',
+      eu: 'यूरोप',
+      au: 'ऑस्ट्रेलिया',
+    },
     hint: 'घुमाने के लिए खींचें',
   },
 

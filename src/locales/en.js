@@ -143,6 +143,11 @@ export default {
     production: 'Production',
     staging: 'Staging',
     development: 'Development',
+    names: {
+      na: 'North America',
+      eu: 'Europe',
+      au: 'Australia',
+    },
     hint: 'Drag to rotate',
   },
 
