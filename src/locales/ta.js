@@ -250,9 +250,9 @@ export default {
     description:
       'சுவாரஸ்யமான சிக்கல்கள், ஒத்துழைப்புகள் மற்றும் புதிய வாய்ப்புகளுக்குத் திறந்திருக்கிறேன். வழக்கமாக ஒரு நாள் அல்லது இரண்டில் பதிலளிப்பேன்.',
     name: 'பெயர்',
-    namePlaceholder: 'Ada Lovelace',
+    namePlaceholder: 'உங்கள் பெயர்',
     email: 'மின்னஞ்சல்',
-    emailPlaceholder: 'ada@example.com',
+    emailPlaceholder: 'you@example.com',
     message: 'செய்தி',
     messagePlaceholder: 'நீங்கள் எதில் வேலை செய்கிறீர்கள்?',
     send: 'செய்தி அனுப்பு',

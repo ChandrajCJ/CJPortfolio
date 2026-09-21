@@ -250,9 +250,9 @@ export default {
     description:
       'दिलचस्प समस्याओं, सहयोग और नए अवसरों के लिए खुला हूँ। आमतौर पर एक-दो दिन में उत्तर देता हूँ।',
     name: 'नाम',
-    namePlaceholder: 'Ada Lovelace',
+    namePlaceholder: 'आपका नाम',
     email: 'ईमेल',
-    emailPlaceholder: 'ada@example.com',
+    emailPlaceholder: 'you@example.com',
     message: 'संदेश',
     messagePlaceholder: 'आप किस पर काम कर रहे हैं?',
     send: 'संदेश भेजें',

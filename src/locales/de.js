@@ -250,9 +250,9 @@ export default {
     description:
       'Offen für spannende Probleme, Zusammenarbeit und neue Gelegenheiten. Ich antworte meist innerhalb von ein bis zwei Tagen.',
     name: 'Name',
-    namePlaceholder: 'Ada Lovelace',
+    namePlaceholder: 'Dein Name',
     email: 'E-Mail',
-    emailPlaceholder: 'ada@example.com',
+    emailPlaceholder: 'you@example.com',
     message: 'Nachricht',
     messagePlaceholder: 'Woran arbeitest du gerade?',
     send: 'Nachricht senden',

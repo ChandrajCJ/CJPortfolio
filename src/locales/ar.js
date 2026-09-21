@@ -250,9 +250,9 @@ export default {
     description:
       'منفتح على المشكلات المثيرة للاهتمام والتعاون والفرص الجديدة. عادةً أردّ خلال يوم أو يومين.',
     name: 'الاسم',
-    namePlaceholder: 'Ada Lovelace',
+    namePlaceholder: 'اسمك',
     email: 'البريد الإلكتروني',
-    emailPlaceholder: 'ada@example.com',
+    emailPlaceholder: 'you@example.com',
     message: 'الرسالة',
     messagePlaceholder: 'على ماذا تعمل؟',
     send: 'إرسال الرسالة',

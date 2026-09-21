@@ -250,9 +250,9 @@ export default {
     description:
       '興味深い課題、協業、新しい機会を歓迎しています。通常1〜2日以内に返信します。',
     name: 'お名前',
-    namePlaceholder: 'Ada Lovelace',
+    namePlaceholder: 'お名前',
     email: 'メールアドレス',
-    emailPlaceholder: 'ada@example.com',
+    emailPlaceholder: 'you@example.com',
     message: 'メッセージ',
     messagePlaceholder: '今どんなことに取り組んでいますか？',
     send: 'メッセージを送信',

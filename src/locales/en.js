@@ -255,9 +255,9 @@ export default {
     description:
       'Open to interesting problems, collaborations, and new opportunities. I usually reply within a day or two.',
     name: 'Name',
-    namePlaceholder: 'Ada Lovelace',
+    namePlaceholder: 'Your name',
     email: 'Email',
-    emailPlaceholder: 'ada@example.com',
+    emailPlaceholder: 'you@example.com',
     message: 'Message',
     messagePlaceholder: 'What are you working on?',
     send: 'Send message',
