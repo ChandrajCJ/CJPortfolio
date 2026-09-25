@@ -2,7 +2,7 @@ import { useMemo, useRef } from 'react'
 import { useFrame } from '@react-three/fiber'
 import { OrbitControls } from '@react-three/drei'
 import * as THREE from 'three'
-import { origin, regions } from '../../data/topology'
+import { endpoints, origin } from '../../data/topology'
 import borders from '../../data/borders.json'
 import { GLOBE_PALETTES } from './globePalettes'
 
@@ -97,7 +97,7 @@ function Arc({ to, delay = 0, palette }) {
     return new THREE.CatmullRomCurve3(points)
   }, [to])
 
-  const geometry = useMemo(() => new THREE.TubeGeometry(curve, 96, 0.011, 8, false), [curve])
+  const geometry = useMemo(() => new THREE.TubeGeometry(curve, 96, 0.009, 8, false), [curve])
 
   useFrame((state) => {
     const t = (state.clock.elapsedTime * 0.28 + delay) % 1
@@ -111,7 +111,7 @@ function Arc({ to, delay = 0, palette }) {
         <meshBasicMaterial ref={line} color={palette.accent} transparent opacity={0.55} />
       </mesh>
       <mesh ref={dot}>
-        <sphereGeometry args={[0.035, 12, 12]} />
+        <sphereGeometry args={[0.028, 12, 12]} />
         <meshBasicMaterial color={palette.dot} />
       </mesh>
     </group>
@@ -131,11 +131,11 @@ function Marker({ point, origin: isOrigin = false, palette }) {
   return (
     <group position={pos}>
       <mesh>
-        <sphereGeometry args={[isOrigin ? 0.062 : 0.048, 16, 16]} />
+        <sphereGeometry args={[isOrigin ? 0.058 : 0.042, 16, 16]} />
         <meshBasicMaterial color={palette.dot} />
       </mesh>
       <mesh ref={halo}>
-        <sphereGeometry args={[isOrigin ? 0.12 : 0.09, 16, 16]} />
+        <sphereGeometry args={[isOrigin ? 0.1 : 0.072, 16, 16]} />
         <meshBasicMaterial color={isOrigin ? palette.accent : palette.marker} transparent opacity={0.4} />
       </mesh>
     </group>
@@ -166,12 +166,13 @@ export default function GlobeScene({ palette = GLOBE_PALETTES.grey }) {
         <Borders palette={palette} />
 
         <Marker point={origin} origin palette={palette} />
-        {regions.map((r) => (
-          <Marker key={r.id} point={r} palette={palette} />
+        {endpoints.map((e) => (
+          <Marker key={e.id} point={e} palette={palette} />
         ))}
 
-        {regions.map((r, i) => (
-          <Arc key={r.id} to={r} delay={i * 0.33} palette={palette} />
+        {endpoints.map((e, i) => (
+          // Stagger the travelling dots so they don't move in lockstep.
+          <Arc key={e.id} to={e} delay={i / endpoints.length} palette={palette} />
         ))}
       </group>
 
