@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react'
 import { FiCheck, FiGlobe } from 'react-icons/fi'
 import { LOCALES, LOCALE_CODES } from '../i18n/config'
 import { useI18n } from '../i18n/context'
+import Tooltip from './Tooltip'
 
 export default function LanguageSwitcher() {
   const { locale, setLocale, t } = useI18n()
@@ -24,18 +25,19 @@ export default function LanguageSwitcher() {
 
   return (
     <div ref={wrapRef} className="relative">
-      <button
-        type="button"
-        onClick={() => setOpen((v) => !v)}
-        aria-haspopup="menu"
-        aria-expanded={open}
-        aria-label={t('common.changeLanguage')}
-        title={t('common.changeLanguage')}
-        className="flex h-10 items-center gap-1.5 rounded-full border border-line bg-surface px-3 text-fg transition-colors hover:bg-elevated"
-      >
-        <FiGlobe aria-hidden="true" />
-        <span className="text-xs font-semibold uppercase">{locale}</span>
-      </button>
+      <Tooltip label={t('common.changeLanguage')} side="bottom" hidden={open}>
+        <button
+          type="button"
+          onClick={() => setOpen((v) => !v)}
+          aria-haspopup="menu"
+          aria-expanded={open}
+          aria-label={t('common.changeLanguage')}
+          className="flex h-10 items-center gap-1.5 rounded-full border border-line bg-surface px-3 text-fg transition-colors hover:bg-elevated"
+        >
+          <FiGlobe aria-hidden="true" />
+          <span className="text-xs font-semibold uppercase">{locale}</span>
+        </button>
+      </Tooltip>
 
       {open && (
         <ul

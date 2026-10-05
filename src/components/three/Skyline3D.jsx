@@ -1,9 +1,10 @@
 import { Suspense, useEffect, useRef, useState } from 'react'
 import { Canvas } from '@react-three/fiber'
-import GlobeScene from './GlobeScene'
-import { GLOBE_PALETTES } from './globePalettes'
+import { useReducedMotion } from 'framer-motion'
+import SkylineScene from './SkylineScene'
+import SkylineFallback from './SkylineFallback'
+import { SKYLINE_PALETTES } from './skylinePalettes'
 import { useTheme } from '../../context/themeContext'
-import GlobeFallback from './GlobeFallback'
 
 function supportsWebGL() {
   try {
@@ -14,14 +15,12 @@ function supportsWebGL() {
   }
 }
 
-export default function Globe3D() {
+export default function Skyline3D() {
   const { theme } = useTheme()
+  const reduced = useReducedMotion()
   const wrapRef = useRef(null)
   const [ok] = useState(supportsWebGL)
   const [active, setActive] = useState(true)
-  // Orbit controls claim every touch on the canvas, which would trap a phone
-  // user's scroll. Fine pointers drag to rotate; touch just watches it spin.
-  const [interactive] = useState(() => window.matchMedia('(pointer: fine)').matches)
 
   useEffect(() => {
     const el = wrapRef.current
@@ -36,19 +35,20 @@ export default function Globe3D() {
     }
   }, [])
 
-  if (!ok) return <GlobeFallback />
+  // Reduced motion gets the flat heatmap: an orbitable 3D object is motion.
+  if (!ok || reduced) return <SkylineFallback />
 
   return (
-    <div ref={wrapRef} className="aspect-square w-full">
+    <div ref={wrapRef} className="h-full min-h-0 w-full">
       <Canvas
-        camera={{ position: [0, 0.6, 4.6], fov: 45 }}
+        camera={{ position: [0, 8.2, 12.1], fov: 34 }}
         dpr={[1, 1.75]}
         frameloop={active ? 'always' : 'never'}
         gl={{ antialias: true, alpha: true, powerPreference: 'high-performance' }}
         style={{ background: 'transparent' }}
       >
         <Suspense fallback={null}>
-          <GlobeScene palette={GLOBE_PALETTES[theme] ?? GLOBE_PALETTES.grey} interactive={interactive} />
+          <SkylineScene palette={SKYLINE_PALETTES[theme] ?? SKYLINE_PALETTES.dark} />
         </Suspense>
       </Canvas>
     </div>

@@ -51,16 +51,11 @@ export default function ProjectCard({ project }) {
         <p className="mt-2 flex-1 text-sm leading-relaxed text-muted">{t(`projects.${project.slug}.blurb`)}</p>
 
         <ul className="mt-4 flex flex-wrap gap-1.5">
-          {project.tech.slice(0, 4).map((tech) => (
+          {project.tech.map((tech) => (
             <li key={tech}>
               <TechPill>{tech}</TechPill>
             </li>
           ))}
-          {project.tech.length > 4 && (
-            <li>
-              <TechPill>+{project.tech.length - 4}</TechPill>
-            </li>
-          )}
         </ul>
 
         <div className="relative z-10 mt-5 flex items-center gap-4 border-t border-line pt-4 text-sm">

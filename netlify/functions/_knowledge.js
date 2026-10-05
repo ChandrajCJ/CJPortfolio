@@ -9,7 +9,7 @@ Role: Software Engineer at Contentstack
 Location: Puducherry, India
 Email: chandraj1710@gmail.com
 Portfolio: https://developedbycj.netlify.app
-GitHub: https://github.com/ChandrajCJ
+GitHub: https://github.com/ChandrajCJ and https://github.com/Chandraj1710
 LinkedIn: https://www.linkedin.com/in/chandraj-n-1a5937258/
 Spoken languages: English, Tamil, Hindi
 

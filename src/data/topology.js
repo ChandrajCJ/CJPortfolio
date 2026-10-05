@@ -2,10 +2,10 @@
  * Deployment topology behind the centralized login service, rendered by the 3D
  * globe.
  *
- * `regions` are the three broad regions the CV cites and drive the pills and
- * the "Regions" figure. `endpoints` are the seven production environments the
- * globe actually draws an arc to, so the arc count matches
- * environmentCounts.production rather than being decorative.
+ * `regions` are the three broad regions the CV cites and name the globe's
+ * caption. `endpoints` are the seven production environments the globe draws
+ * an arc to, so the arc count matches the "7 production environments" in the
+ * experience copy rather than being decorative.
  */
 
 /** Where Chandraj works from - the origin for every connection arc. */
@@ -46,8 +46,6 @@ export const endpoints = [
   { id: 'ap-southeast', region: 'au', city: 'Sydney', lat: -33.9, lon: 151.2 },
 ]
 
-export const hyperscalers = ['AWS', 'GCP', 'Azure']
 
-export const environmentCounts = { production: endpoints.length, staging: 3, development: 22 }
 
 export default regions

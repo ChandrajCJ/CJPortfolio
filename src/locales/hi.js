@@ -41,7 +41,6 @@ export default {
     theme: 'थीम',
     changeTheme: 'थीम बदलें',
     minRead: 'मिनट पढ़ाई',
-    builtWith: 'React और Tailwind से बनाया गया',
     opensInNewTab: 'नए टैब में खुलता है',
     more: 'और',
   },
@@ -83,13 +82,6 @@ export default {
     cinema: 'सिनेमा',
   },
 
-  stats: {
-    heading: 'आँकड़ों में प्रभाव',
-    environments: { label: 'Production वातावरण', detail: '3 hyperscalers · 3 क्षेत्र' },
-    uptime: { label: 'अपटाइम', detail: 'केंद्रीकृत login सेवा' },
-    latency: { label: 'तेज़ frontend', detail: 'micro-frontend latency आधी हुई' },
-    vulns: { label: 'बंद की गई कमज़ोरियाँ', detail: 'स्वचालित Snyk समाधान' },
-  },
 
   experience: {
     eyebrow: 'अनुभव',
@@ -97,47 +89,105 @@ export default {
     description:
       'एक एंटरप्राइज़ SaaS प्लेटफ़ॉर्म के लिए authentication इंफ्रास्ट्रक्चर, access control, और AI-सहायित डेवलपर टूलिंग।',
     present: 'वर्तमान',
+    promoted: 'पदोन्नति',
+    groups: {
+      identity: 'पहचान और एक्सेस',
+      ai: 'AI टूलिंग',
+      platform: 'प्लेटफ़ॉर्म',
+    },
     'contentstack-ase': {
       role: 'एसोसिएट सॉफ़्टवेयर इंजीनियर',
       summary:
         'multi-cloud, multi-region SaaS प्लेटफ़ॉर्म पर authentication और access-control इंफ्रास्ट्रक्चर का स्वामित्व, और इंजीनियरिंग संगठन द्वारा रोज़ इस्तेमाल होने वाले AI टूल्स का निर्माण।',
-      highlights: [
-        '7 production वातावरणों (3 hyperscalers — AWS, GCP, Azure; 3 क्षेत्र — NA, EU, AU), 3 staging और 22 development वातावरणों में उपयोगकर्ताओं को प्रमाणित करने वाली केंद्रीकृत login सेवा की वास्तुकला बनाई और लागू की — SSO, MFA/OTP, backup codes और पासवर्ड रिकवरी के साथ 100% अपटाइम बनाए रखा।',
-        'monolith और 4 microservices में एंड-टू-एंड सूक्ष्म Role-Based Access Control (RBAC) डिज़ाइन किया और लागू किया, जिससे access-control की सूक्ष्मता बेहतर हुई और उद्योग सुरक्षा मानकों के अनुरूप बनी।',
-        'प्रत्येक क्षेत्र के लिए login अनुभव में द्विदिश (Bi-Di) बहुभाषी समर्थन बनाया, साथ ही एक CMS-configurable login पेज जिससे मार्केटिंग टीम सामग्री गतिशील रूप से प्रबंधित कर सके।',
-        'ग्राहक-सामना करने वाले API के लिए OAuth 2.0 लागू किया, जिससे मानक-अनुरूप, token-आधारित प्राधिकरण प्रवाह के माध्यम से सुरक्षित तृतीय-पक्ष एकीकरण संभव हुए।',
-        'Snyk कमज़ोरियों का पता लगाने और उन्हें ठीक करने के लिए Claude routines से स्वचालन बनाया — स्वचालित रूप से pull requests बनाकर और Slack पर पोस्ट करके खुली कमज़ोरियाँ 500+ से घटाकर शून्य कीं।',
-        'AI-संचालित code-review स्वचालन विकसित किया जो pull requests को संबंधित Jira टिकट के स्वीकृति मानदंडों के विरुद्ध सत्यापित करता है, जिससे समीक्षा की गुणवत्ता और निरंतरता बेहतर हुई।',
-        'एक AI agent लागू किया जो Slack में ग्राहक समस्याओं का उत्तर देता है, उत्पाद दस्तावेज़ीकरण, पूर्व चैट इतिहास, डेटा लॉग और codebase से संदर्भ लेकर।',
-        'authentication और प्लेटफ़ॉर्म वर्कफ़्लो पर केंद्रित पुन: प्रयोज्य AI skills बनाईं और बनाए रखीं, जिससे onboarding की कठिनाई और तैयारी का समय कम हुआ।',
-        'monolith और 10+ microservices में नई संगठन-व्यापी ब्रांडिंग अपनाई, जिससे हर ग्राहक-सामना सतह पर एकसमान अनुभव सुनिश्चित हुआ।',
-        'SSO, SCIM, Teams, उपयोगकर्ता प्रबंधन और सुरक्षा सहित मुख्य प्लेटफ़ॉर्म सुविधाओं में योगदान दिया।',
-      ],
+      highlights: {
+        login: {
+          title: 'हर वातावरण के लिए एक ही login',
+          detail:
+            '**7 production वातावरणों** (3 hyperscalers — AWS, GCP, Azure; 3 क्षेत्र — NA, EU, AU), **3 staging** और **22 development** वातावरणों में उपयोगकर्ताओं को प्रमाणित करने वाली केंद्रीकृत login सेवा की वास्तुकला बनाई और लागू की — SSO, MFA/OTP, backup codes और पासवर्ड रिकवरी के साथ **100% अपटाइम** बनाए रखा।',
+        },
+        rbac: {
+          title: 'सूक्ष्म Role-Based Access Control',
+          detail:
+            'monolith और **4 microservices** में एंड-टू-एंड सूक्ष्म Role-Based Access Control (RBAC) डिज़ाइन किया और लागू किया, जिससे access-control की सूक्ष्मता बेहतर हुई और उद्योग सुरक्षा मानकों के अनुरूप बनी।',
+        },
+        bidi: {
+          title: 'हर क्षेत्र के लिए login पेज',
+          detail:
+            'प्रत्येक क्षेत्र के लिए login अनुभव में द्विदिश (Bi-Di) बहुभाषी समर्थन बनाया, साथ ही एक CMS-configurable login पेज जिससे मार्केटिंग टीम सामग्री गतिशील रूप से प्रबंधित कर सके।',
+        },
+        oauth: {
+          title: 'ग्राहक API के लिए OAuth 2.0',
+          detail:
+            'ग्राहक-सामना करने वाले API के लिए OAuth 2.0 लागू किया, जिससे मानक-अनुरूप, token-आधारित प्राधिकरण प्रवाह के माध्यम से सुरक्षित तृतीय-पक्ष एकीकरण संभव हुए।',
+        },
+        snyk: {
+          title: 'कमज़ोरियाँ, अपने-आप ठीक',
+          detail:
+            'Snyk कमज़ोरियों का पता लगाने और उन्हें ठीक करने के लिए Claude routines से स्वचालन बनाया — स्वचालित रूप से pull requests बनाकर और Slack पर पोस्ट करके खुली कमज़ोरियाँ **500+ से घटाकर शून्य** कीं।',
+        },
+        review: {
+          title: 'Jira टिकट के विरुद्ध pull request समीक्षा',
+          detail:
+            'AI-संचालित code-review स्वचालन विकसित किया जो pull requests को संबंधित Jira टिकट के स्वीकृति मानदंडों के विरुद्ध सत्यापित करता है, जिससे समीक्षा की गुणवत्ता और निरंतरता बेहतर हुई।',
+        },
+        slackAgent: {
+          title: 'Slack में एक सहायता AI agent',
+          detail:
+            'एक AI agent लागू किया जो Slack में ग्राहक समस्याओं का उत्तर देता है, उत्पाद दस्तावेज़ीकरण, पूर्व चैट इतिहास, डेटा लॉग और codebase से संदर्भ लेकर।',
+        },
+        skills: {
+          title: 'इंजीनियरों के लिए पुन: प्रयोज्य AI skills',
+          detail:
+            'authentication और प्लेटफ़ॉर्म वर्कफ़्लो पर केंद्रित पुन: प्रयोज्य AI skills बनाईं और बनाए रखीं, जिससे onboarding की कठिनाई और तैयारी का समय कम हुआ।',
+        },
+        branding: {
+          title: 'हर सतह पर नई ब्रांडिंग',
+          detail:
+            'monolith और **10+ microservices** में नई संगठन-व्यापी ब्रांडिंग अपनाई, जिससे हर ग्राहक-सामना सतह पर एकसमान अनुभव सुनिश्चित हुआ।',
+        },
+        core: {
+          title: 'मुख्य प्लेटफ़ॉर्म सुविधाएँ',
+          detail:
+            'SSO, SCIM, Teams, उपयोगकर्ता प्रबंधन और सुरक्षा सहित मुख्य प्लेटफ़ॉर्म सुविधाओं में योगदान दिया।',
+        },
+      },
     },
     'contentstack-intern': {
       role: 'एसोसिएट सॉफ़्टवेयर इंजीनियरिंग इंटर्न',
       summary:
         'बहु-कारक प्रमाणीकरण, क्रॉस-प्रोडक्ट SSO, और मापने योग्य micro-frontend परफ़ॉर्मेंस सुधार दिए।',
-      highlights: [
-        'सभी प्रमुख authenticator ऐप्स के साथ संगत TOTP-आधारित Multi-Factor Authentication लागू किया, SMS-आधारित 2FA फ़ॉलबैक और backup codes के साथ, उद्योग सुरक्षा मानकों का पालन करते हुए।',
-        'नए अधिग्रहित उत्पाद (Lytics) को Contentstack के साथ SSO-आधारित authentication बनाकर एकीकृत किया, जिससे एक ही क्रेडेंशियल सेट से निर्बाध cross-SaaS अनुभव मिला।',
-        'micro-frontend परफ़ॉर्मेंस (React 18 + Module Federation) को अनुकूलित किया, frontend एप्लिकेशन latency 2 गुना घटाई, और वास्तुकला निर्णयों के मार्गदर्शन हेतु तुलनात्मक बेंचमार्क डेटा दस्तावेज़ित किया।',
-        '10+ micro-frontends में OPA नीति-आधारित नेविगेशन और app switcher लागू किया, बार-बार रिलीज़ में एकसमान व्यवहार के लिए एंड-टू-एंड टेस्ट स्वचालन के साथ।',
-        'सब्सक्राइबर्स को अपडेट रखने और उत्पाद SEO सुधारने के लिए संगठन हेतु RSS feed बनाई।',
-      ],
+      highlights: {
+        mfa: {
+          title: 'Authenticator ऐप वाला MFA',
+          detail:
+            'सभी प्रमुख authenticator ऐप्स के साथ संगत TOTP-आधारित Multi-Factor Authentication लागू किया, SMS-आधारित 2FA फ़ॉलबैक और backup codes के साथ, उद्योग सुरक्षा मानकों का पालन करते हुए।',
+        },
+        lytics: {
+          title: 'अधिग्रहित उत्पाद के साथ SSO',
+          detail:
+            'नए अधिग्रहित उत्पाद (Lytics) को Contentstack के साथ SSO-आधारित authentication बनाकर एकीकृत किया, जिससे एक ही क्रेडेंशियल सेट से निर्बाध cross-SaaS अनुभव मिला।',
+        },
+        mfe: {
+          title: 'दोगुने तेज़ micro-frontends',
+          detail:
+            'micro-frontend परफ़ॉर्मेंस (React 18 + Module Federation) को अनुकूलित किया, frontend एप्लिकेशन latency **2 गुना** घटाई, और वास्तुकला निर्णयों के मार्गदर्शन हेतु तुलनात्मक बेंचमार्क डेटा दस्तावेज़ित किया।',
+        },
+        opaNav: {
+          title: 'नीति-आधारित नेविगेशन',
+          detail:
+            '**10+ micro-frontends** में OPA नीति-आधारित नेविगेशन और app switcher लागू किया, बार-बार रिलीज़ में एकसमान व्यवहार के लिए एंड-टू-एंड टेस्ट स्वचालन के साथ।',
+        },
+        rss: {
+          title: 'उत्पाद अपडेट के लिए RSS feed',
+          detail:
+            'सब्सक्राइबर्स को अपडेट रखने और उत्पाद SEO सुधारने के लिए संगठन हेतु RSS feed बनाई।',
+        },
+      },
     },
   },
 
   globe: {
-    eyebrow: 'वैश्विक पैमाना',
     title: 'प्लेटफ़ॉर्म कहाँ चलता है',
-    description:
-      'केंद्रीकृत login सेवा तीन hyperscalers और तीन क्षेत्रों में उपयोगकर्ताओं को प्रमाणित करती है — 7 production, 3 staging और 22 development वातावरणों के साथ।',
-    regions: 'क्षेत्र',
-    hyperscalers: 'Hyperscalers',
-    production: 'Production',
-    staging: 'Staging',
-    development: 'Development',
     names: {
       na: 'उत्तरी अमेरिका',
       eu: 'यूरोप',
@@ -178,14 +228,22 @@ export default {
     verify: 'सत्यापित करें',
   },
 
+  contributions: {
+    eyebrow: 'ओपन सोर्स',
+    title: 'मैं क्या बना रहा हूँ',
+    description: 'पिछले एक वर्ष की सार्वजनिक GitHub गतिविधि, मेरे दोनों खातों को मिलाकर।',
+    total: 'योगदान',
+    activeDays: 'सक्रिय दिन',
+    streak: 'सबसे लंबी शृंखला',
+    busiest: 'सबसे व्यस्त दिन',
+    hint: 'घुमाने के लिए खींचें',
+    accounts: '{count} खाते संयुक्त · {date} को अपडेट किया गया',
+  },
+
   projects: {
     eyebrow: 'प्रोजेक्ट्स',
     title: 'मैंने क्या बनाया',
     description: 'production काम और साइड प्रोजेक्ट्स का मिश्रण। पूरा विवरण देखने के लिए कोई भी कार्ड खोलें।',
-    filterAll: 'सभी',
-    filterHeading: 'तकनीक के अनुसार प्रोजेक्ट्स फ़िल्टर करें',
-    shown: '{count} प्रोजेक्ट्स दिखाए गए',
-    none: 'अभी तक कोई प्रोजेक्ट {tech} का उपयोग नहीं करता।',
     highlights: 'मुख्य बिंदु',
     builtWith: 'इनसे बनाया गया',
     moreProjects: 'और प्रोजेक्ट्स',

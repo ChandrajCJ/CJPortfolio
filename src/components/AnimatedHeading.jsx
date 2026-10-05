@@ -15,7 +15,7 @@ export default function AnimatedHeading({ text, as: Tag = 'h2', className = '', 
       aria-label={text}
       initial="hidden"
       whileInView="show"
-      viewport={{ once: true, margin: '-80px' }}
+      viewport={{ once: true, margin: '-80px 0px' }}
       transition={{ staggerChildren: 0.055, delayChildren: delay }}
     >
       {words.map((word, i) => (

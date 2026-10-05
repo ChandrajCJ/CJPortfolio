@@ -32,7 +32,7 @@ export default function Footer() {
         </div>
 
         <p className="mt-10 border-t border-line pt-6 text-xs text-muted">
-          © {new Date().getFullYear()} {profile.name} · {t('common.builtWith')}
+          © {new Date().getFullYear()} {profile.name}
         </p>
       </div>
     </footer>

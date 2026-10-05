@@ -1,12 +1,13 @@
 import { FiDownload, FiExternalLink, FiPrinter } from 'react-icons/fi'
 import { profile } from '../data/profile'
-import { experience } from '../data/experience'
+import { experience, highlightIds } from '../data/experience'
 import { education } from '../data/education'
 import { certifications } from '../data/certifications'
 import { skillGroups } from '../data/skills'
 import { projects } from '../data/projects'
 import { useI18n } from '../i18n/context'
 import Seo from '../components/Seo'
+import Emphasis from '../components/Emphasis'
 
 function Section({ title, children }) {
   return (
@@ -96,10 +97,14 @@ export default function ResumePage() {
                     </p>
                   </div>
                   <ul className="mt-2 space-y-1.5">
-                    {(t(`experience.${job.id}.highlights`) ?? []).map((point) => (
-                      <li key={point} className="flex gap-2 text-sm leading-relaxed text-muted print:text-black">
+                    {highlightIds(job).map((id) => (
+                      <li key={id} className="flex gap-2 text-sm leading-relaxed text-muted print:text-black">
                         <span aria-hidden="true">•</span>
-                        <span>{point}</span>
+                        <span>
+                          <Emphasis className="font-semibold text-fg print:text-black">
+                            {t(`experience.${job.id}.highlights.${id}.detail`)}
+                          </Emphasis>
+                        </span>
                       </li>
                     ))}
                   </ul>

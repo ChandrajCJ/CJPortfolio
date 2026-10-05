@@ -46,7 +46,6 @@ export default {
     theme: 'Theme',
     changeTheme: 'Change theme',
     minRead: 'min read',
-    builtWith: 'Built with React & Tailwind',
     opensInNewTab: 'opens in a new tab',
     more: 'More',
   },
@@ -88,13 +87,6 @@ export default {
     cinema: 'Cinema',
   },
 
-  stats: {
-    heading: 'Impact by the numbers',
-    environments: { label: 'Production environments', detail: '3 hyperscalers · 3 regions' },
-    uptime: { label: 'Uptime', detail: 'Centralized login service' },
-    latency: { label: 'Faster frontend', detail: 'Micro-frontend latency cut in half' },
-    vulns: { label: 'Vulnerabilities closed', detail: 'Automated Snyk remediation' },
-  },
 
   experience: {
     eyebrow: 'Experience',
@@ -102,47 +94,105 @@ export default {
     description:
       'Authentication infrastructure, access control, and AI-assisted developer tooling for an enterprise SaaS platform.',
     present: 'Present',
+    promoted: 'Promoted',
+    groups: {
+      identity: 'Identity and access',
+      ai: 'AI tooling',
+      platform: 'Platform',
+    },
     'contentstack-ase': {
       role: 'Associate Software Engineer',
       summary:
         'Own authentication and access-control infrastructure across a multi-cloud, multi-region SaaS platform, and build AI tooling that the wider engineering org uses day to day.',
-      highlights: [
-        'Architected and implemented a centralized login service authenticating users across 7 production environments (3 hyperscalers — AWS, GCP, Azure; 3 regions — NA, EU, AU), 3 staging, and 22 development environments, maintaining 100% uptime with SSO, MFA/OTP, backup codes, and password recovery.',
-        'Designed and shipped end-to-end granular Role-Based Access Control (RBAC) across the monolith and 4 microservices, improving access-control granularity and aligning with industry security standards.',
-        'Built bi-directional (Bi-Di) multi-language support into the login experience per region, plus a CMS-configurable login page letting marketing manage content dynamically.',
-        'Implemented OAuth 2.0 for customer-facing APIs, enabling secure third-party integrations through a standards-compliant, token-based authorization flow with scoped access.',
-        'Built automations using Claude routines to detect and remediate Snyk vulnerabilities, reducing open findings from 500+ to zero by automatically raising pull requests and posting them to Slack for review.',
-        'Developed AI-powered code-review automations that validate pull requests against the acceptance criteria of the linked Jira ticket, improving review quality and consistency.',
-        'Implemented an AI agent that responds to customer issues in Slack, drawing context from product documentation, prior chat history, data logs, and the codebase.',
-        'Created and maintained reusable AI skills for engineering teams focused on authentication and platform workflows, reducing onboarding friction and ramp-up time.',
-        'Adopted new organization-wide branding across the monolith and 10+ microservices for a cohesive experience on every customer-facing surface.',
-        'Contributed to core platform features including SSO, SCIM, Teams, user management, and security.',
-      ],
+      highlights: {
+        login: {
+          title: 'One login for every environment',
+          detail:
+            'Architected and implemented a centralized login service authenticating users across **7 production environments** (3 hyperscalers — AWS, GCP, Azure; 3 regions — NA, EU, AU), **3 staging**, and **22 development environments**, maintaining **100% uptime** with SSO, MFA/OTP, backup codes, and password recovery.',
+        },
+        rbac: {
+          title: 'Granular role-based access control',
+          detail:
+            'Designed and shipped end-to-end granular Role-Based Access Control (RBAC) across the monolith and **4 microservices**, improving access-control granularity and aligning with industry security standards.',
+        },
+        bidi: {
+          title: 'A login page for every region',
+          detail:
+            'Built bi-directional (Bi-Di) multi-language support into the login experience per region, plus a CMS-configurable login page letting marketing manage content dynamically.',
+        },
+        oauth: {
+          title: 'OAuth 2.0 for customer APIs',
+          detail:
+            'Implemented OAuth 2.0 for customer-facing APIs, enabling secure third-party integrations through a standards-compliant, token-based authorization flow with scoped access.',
+        },
+        snyk: {
+          title: 'Vulnerabilities fixed automatically',
+          detail:
+            'Built automations using Claude routines to detect and remediate Snyk vulnerabilities, reducing open findings from **500+ to zero** by automatically raising pull requests and posting them to Slack for review.',
+        },
+        review: {
+          title: 'Pull requests reviewed against the ticket',
+          detail:
+            'Developed AI-powered code-review automations that validate pull requests against the acceptance criteria of the linked Jira ticket, improving review quality and consistency.',
+        },
+        slackAgent: {
+          title: 'A support agent in Slack',
+          detail:
+            'Implemented an AI agent that responds to customer issues in Slack, drawing context from product documentation, prior chat history, data logs, and the codebase.',
+        },
+        skills: {
+          title: 'Reusable AI skills for engineers',
+          detail:
+            'Created and maintained reusable AI skills for engineering teams focused on authentication and platform workflows, reducing onboarding friction and ramp-up time.',
+        },
+        branding: {
+          title: 'New branding on every surface',
+          detail:
+            'Adopted new organization-wide branding across the monolith and **10+ microservices** for a cohesive experience on every customer-facing surface.',
+        },
+        core: {
+          title: 'Core platform features',
+          detail:
+            'Contributed to core platform features including SSO, SCIM, Teams, user management, and security.',
+        },
+      },
     },
     'contentstack-intern': {
       role: 'Associate Software Engineering Intern',
       summary:
         'Delivered multi-factor authentication, cross-product SSO, and measurable micro-frontend performance gains.',
-      highlights: [
-        'Implemented TOTP-based Multi-Factor Authentication compatible across all major authenticator apps, with SMS-based 2FA fallback and backup codes, following industry security standards.',
-        'Integrated a newly acquired product (Lytics) by building SSO-based authentication between Contentstack and Lytics, delivering a seamless cross-SaaS experience with a single set of credentials.',
-        'Optimized micro-frontend performance (React 18 + Module Federation), reducing frontend application latency by 2x, and documented comparative benchmark data to guide architecture decisions.',
-        'Implemented OPA policy-based navigation and app switcher across 10+ micro-frontends, backed by end-to-end test automation for consistent behaviour across frequent releases.',
-        'Built an RSS feed for the organization to keep subscribers updated and improve product SEO.',
-      ],
+      highlights: {
+        mfa: {
+          title: 'Authenticator-app MFA',
+          detail:
+            'Implemented TOTP-based Multi-Factor Authentication compatible across all major authenticator apps, with SMS-based 2FA fallback and backup codes, following industry security standards.',
+        },
+        lytics: {
+          title: 'Single sign-on with an acquired product',
+          detail:
+            'Integrated a newly acquired product (Lytics) by building SSO-based authentication between Contentstack and Lytics, delivering a seamless cross-SaaS experience with a single set of credentials.',
+        },
+        mfe: {
+          title: 'Micro-frontends twice as fast',
+          detail:
+            'Optimized micro-frontend performance (React 18 + Module Federation), reducing frontend application latency by **2x**, and documented comparative benchmark data to guide architecture decisions.',
+        },
+        opaNav: {
+          title: 'Policy-driven navigation',
+          detail:
+            'Implemented OPA policy-based navigation and app switcher across **10+ micro-frontends**, backed by end-to-end test automation for consistent behaviour across frequent releases.',
+        },
+        rss: {
+          title: 'An RSS feed for product updates',
+          detail:
+            'Built an RSS feed for the organization to keep subscribers updated and improve product SEO.',
+        },
+      },
     },
   },
 
   globe: {
-    eyebrow: 'Global scale',
     title: 'Where the platform runs',
-    description:
-      'The centralized login service authenticates users across three hyperscalers and three regions, with 7 production, 3 staging and 22 development environments.',
-    regions: 'Regions',
-    hyperscalers: 'Hyperscalers',
-    production: 'Production',
-    staging: 'Staging',
-    development: 'Development',
     names: {
       na: 'North America',
       eu: 'Europe',
@@ -183,14 +233,22 @@ export default {
     verify: 'Verify',
   },
 
+  contributions: {
+    eyebrow: 'Open source',
+    title: "What I've been shipping",
+    description: 'Public GitHub activity over the last year, combined across both of my accounts.',
+    total: 'Contributions',
+    activeDays: 'Active days',
+    streak: 'Longest streak',
+    busiest: 'Busiest day',
+    hint: 'Drag to rotate',
+    accounts: 'Combined across {count} accounts · updated {date}',
+  },
+
   projects: {
     eyebrow: 'Projects',
     title: "Things I've built",
     description: 'A mix of production work and side projects. Open any card for the full write-up.',
-    filterAll: 'All',
-    filterHeading: 'Filter projects by technology',
-    shown: '{count} projects shown',
-    none: 'No projects use {tech} yet.',
     highlights: 'Highlights',
     builtWith: 'Built with',
     moreProjects: 'More projects',

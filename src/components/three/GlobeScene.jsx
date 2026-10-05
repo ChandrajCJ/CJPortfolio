@@ -1,5 +1,5 @@
-import { useMemo, useRef } from 'react'
-import { useFrame } from '@react-three/fiber'
+import { useLayoutEffect, useMemo, useRef } from 'react'
+import { useFrame, useThree } from '@react-three/fiber'
 import { OrbitControls } from '@react-three/drei'
 import * as THREE from 'three'
 import { endpoints, origin } from '../../data/topology'
@@ -7,6 +7,10 @@ import borders from '../../data/borders.json'
 import { GLOBE_PALETTES } from './globePalettes'
 
 const R = 1.6
+const DOT = 0.028 // travelling dot radius
+const FILL = 0.94 // share of the canvas half-width the outermost arc may reach
+const SPIN = 0.07 // auto-rotation, radians per second
+const RESUME_AFTER = 2 // seconds of idle after a drag before auto-rotation resumes
 
 /** Lat/lon (degrees) -> point on a sphere of radius `r`. */
 function toVec3(lat, lon, r = R) {
@@ -18,6 +22,54 @@ function toVec3(lat, lon, r = R) {
     r * Math.sin(phi) * Math.sin(theta),
   )
 }
+
+/** Angle between two lat/lon points, in radians. */
+function separation(a, b) {
+  const dot = toVec3(a.lat, a.lon, 1).dot(toVec3(b.lat, b.lon, 1))
+  return Math.acos(THREE.MathUtils.clamp(dot, -1, 1))
+}
+
+/**
+ * How high an arc rises at its midpoint, as a fraction of R. Proportional to
+ * distance so a short hop reads as short, but capped well below the old
+ * 0.14-0.56 range: those lifts carried every arc past the edge of the canvas
+ * once the globe turned it side-on.
+ */
+const liftFor = (omega) => 0.05 + 0.2 * (omega / Math.PI)
+
+/** Radius of a sphere that contains every arc and travelling dot. */
+const ENVELOPE = R * (1 + Math.max(...endpoints.map((e) => liftFor(separation(origin, e))))) + DOT
+
+/**
+ * Pulls the camera back until the envelope fits the canvas with a margin.
+ *
+ * A sphere projects to the same circle from every direction, so fitting the
+ * envelope (not the arcs as they currently sit) holds through auto-rotation and
+ * any drag, and the globe never has to change size while it spins.
+ */
+function FrameEnvelope() {
+  const { camera, size } = useThree()
+
+  useLayoutEffect(() => {
+    const halfV = THREE.MathUtils.degToRad(camera.fov / 2)
+    const halfH = Math.atan(Math.tan(halfV) * (size.width / Math.max(size.height, 1)))
+    // Angular radius the envelope may cover so its outline lands at FILL.
+    const reach = Math.atan(FILL * Math.tan(Math.min(halfV, halfH)))
+    camera.position.setLength(ENVELOPE / Math.sin(reach))
+  }, [camera, size])
+
+  return null
+}
+
+/**
+ * Starting spin that puts the origin just right of centre. Every arc starts
+ * there, so the first frame shows the hub and the fan of connections to Europe,
+ * and auto-rotation then carries the view west towards the Americas.
+ */
+const INITIAL_SPIN = (() => {
+  const o = toVec3(origin.lat, origin.lon)
+  return 0.3 - Math.atan2(o.x, o.z)
+})()
 
 /**
  * Country borders and coastlines, projected onto the sphere as line segments.
@@ -64,16 +116,11 @@ function Arc({ to, delay = 0, palette }) {
   const line = useRef(null)
 
   const curve = useMemo(() => {
-    const a = toVec3(origin.lat, origin.lon)
-    const b = toVec3(to.lat, to.lon)
-
-    const na = a.clone().normalize()
-    const nb = b.clone().normalize()
-    const omega = Math.acos(THREE.MathUtils.clamp(na.dot(nb), -1, 1))
+    const na = toVec3(origin.lat, origin.lon, 1)
+    const nb = toVec3(to.lat, to.lon, 1)
+    const omega = separation(origin, to)
     const sinOmega = Math.sin(omega)
-
-    // Longer hops arc higher, so they read clearly against the globe.
-    const height = 0.14 + 0.42 * (omega / Math.PI)
+    const height = liftFor(omega)
 
     const steps = 96
     const points = []
@@ -111,7 +158,7 @@ function Arc({ to, delay = 0, palette }) {
         <meshBasicMaterial ref={line} color={palette.accent} transparent opacity={0.55} />
       </mesh>
       <mesh ref={dot}>
-        <sphereGeometry args={[0.028, 12, 12]} />
+        <sphereGeometry args={[DOT, 12, 12]} />
         <meshBasicMaterial color={palette.dot} />
       </mesh>
     </group>
@@ -142,16 +189,24 @@ function Marker({ point, origin: isOrigin = false, palette }) {
   )
 }
 
-export default function GlobeScene({ palette = GLOBE_PALETTES.grey }) {
+export default function GlobeScene({ palette = GLOBE_PALETTES.grey, interactive = true }) {
   const group = useRef(null)
+  const clock = useThree((state) => state.clock)
+  const dragging = useRef(false)
+  const resumeAt = useRef(0)
 
-  useFrame((_, delta) => {
-    if (group.current) group.current.rotation.y += delta * 0.07
+  // Hold still while the visitor is dragging, and for a moment after, so the
+  // globe doesn't slide away from whatever they turned it to look at.
+  useFrame((state, delta) => {
+    if (!group.current || dragging.current || state.clock.elapsedTime < resumeAt.current) return
+    group.current.rotation.y += delta * SPIN
   })
 
   return (
     <>
-      <group ref={group} rotation={[0, -Math.PI / 2, 0]}>
+      <FrameEnvelope />
+
+      <group ref={group} rotation={[0, INITIAL_SPIN, 0]}>
         {/* Opaque core so borders on the far side stay hidden. */}
         <mesh>
           <sphereGeometry args={[R * 0.99, 48, 48]} />
@@ -176,13 +231,22 @@ export default function GlobeScene({ palette = GLOBE_PALETTES.grey }) {
         ))}
       </group>
 
-      <OrbitControls
-        enablePan={false}
-        enableZoom={false}
-        rotateSpeed={0.45}
-        minPolarAngle={Math.PI / 5}
-        maxPolarAngle={(4 * Math.PI) / 5}
-      />
+      {interactive && (
+        <OrbitControls
+          enablePan={false}
+          enableZoom={false}
+          rotateSpeed={0.45}
+          onStart={() => {
+            dragging.current = true
+          }}
+          onEnd={() => {
+            dragging.current = false
+            resumeAt.current = clock.elapsedTime + RESUME_AFTER
+          }}
+          minPolarAngle={Math.PI / 5}
+          maxPolarAngle={(4 * Math.PI) / 5}
+        />
+      )}
     </>
   )
 }

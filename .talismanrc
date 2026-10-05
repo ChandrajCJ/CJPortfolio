@@ -5,3 +5,12 @@ fileignoreconfig:
   - filename: package-lock.json
     ignore_detectors:
       - filecontent
+
+# Talisman's pattern detector reads anything shaped like `key = '...'` as a
+# secret assignment. These are React list keys, a keyboard Escape check and a
+# translation key - identifiers, not credentials.
+allowed_patterns:
+  - 'key=\{'
+  - 'e\.key === ''Escape'''
+  - 'const onKey = \(e\) =>'
+  - 'locationKey: ''puducherry'''

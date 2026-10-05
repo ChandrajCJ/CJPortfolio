@@ -13,7 +13,10 @@ const easeOutExpo = (t) => (t === 1 ? 1 : 1 - Math.pow(2, -10 * t))
 export default function CountUp({ to, decimals = 0, duration = 1600, className = '' }) {
   const ref = useRef(null)
   const hasRun = useRef(false)
-  const inView = useInView(ref, { once: true, margin: '-60px' })
+  // Vertical inset only. A bare '-60px' shrinks the left and right edges too,
+  // so a narrow "0" sitting near the left gutter never counted as in view and
+  // the counter stayed at 0.
+  const inView = useInView(ref, { once: true, margin: '-60px 0px' })
   const reduced = useReducedMotion()
   const [value, setValue] = useState(0)
 

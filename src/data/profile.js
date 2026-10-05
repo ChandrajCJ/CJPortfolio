@@ -13,7 +13,7 @@ export const profile = {
   locationKey: 'puducherry',
 
   socials: [
-    { label: 'GitHub', href: 'https://github.com/ChandrajCJ', icon: 'github' },
+    { label: 'GitHub', href: 'https://github.com/Chandraj1710', icon: 'github' },
     { label: 'LinkedIn', href: 'https://www.linkedin.com/in/chandraj-n-1a5937258/', icon: 'linkedin' },
     { label: 'Email', href: 'mailto:chandraj1710@gmail.com', icon: 'email' },
     { label: 'WhatsApp', href: 'https://wa.me/7824983530', icon: 'whatsapp' },

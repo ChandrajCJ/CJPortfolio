@@ -11,7 +11,6 @@ export const projects = [
   { slug: 'studentportal', year: 2023, featured: false, image: 'studentportal', tech: ['HTML', 'CSS'], demo: null, repo: null, needsReview: true },
 ]
 
-export const allTech = [...new Set(projects.flatMap((p) => p.tech))].sort((a, b) => a.localeCompare(b))
 export const getProject = (slug) => projects.find((p) => p.slug === slug) ?? null
 
 export default projects

@@ -41,7 +41,6 @@ export default {
     theme: 'Design',
     changeTheme: 'Design ändern',
     minRead: 'Min. Lesezeit',
-    builtWith: 'Gebaut mit React & Tailwind',
     opensInNewTab: 'wird in neuem Tab geöffnet',
     more: 'Mehr',
   },
@@ -83,13 +82,6 @@ export default {
     cinema: 'Kino',
   },
 
-  stats: {
-    heading: 'Wirkung in Zahlen',
-    environments: { label: 'Produktionsumgebungen', detail: '3 Hyperscaler · 3 Regionen' },
-    uptime: { label: 'Verfügbarkeit', detail: 'Zentraler Login-Dienst' },
-    latency: { label: 'Schnelleres Frontend', detail: 'Micro-Frontend-Latenz halbiert' },
-    vulns: { label: 'Geschlossene Schwachstellen', detail: 'Automatisierte Snyk-Behebung' },
-  },
 
   experience: {
     eyebrow: 'Erfahrung',
@@ -97,47 +89,105 @@ export default {
     description:
       'Authentifizierungsinfrastruktur, Zugriffssteuerung und KI-gestütztes Developer-Tooling für eine Enterprise-SaaS-Plattform.',
     present: 'Heute',
+    promoted: 'Befördert',
+    groups: {
+      identity: 'Identität und Zugriff',
+      ai: 'KI-Werkzeuge',
+      platform: 'Plattform',
+    },
     'contentstack-ase': {
       role: 'Associate Software Engineer',
       summary:
         'Verantworte Authentifizierungs- und Zugriffssteuerungsinfrastruktur einer Multi-Cloud- und Multi-Region-SaaS-Plattform und baue KI-Werkzeuge, die die gesamte Engineering-Organisation täglich nutzt.',
-      highlights: [
-        'Zentralen Login-Dienst konzipiert und umgesetzt, der Nutzer über 7 Produktionsumgebungen (3 Hyperscaler — AWS, GCP, Azure; 3 Regionen — NA, EU, AU), 3 Staging- und 22 Entwicklungsumgebungen authentifiziert, bei 100 % Verfügbarkeit mit SSO, MFA/OTP, Backup-Codes und Passwortwiederherstellung.',
-        'Feingranulare rollenbasierte Zugriffssteuerung (RBAC) durchgängig über den Monolithen und 4 Microservices entworfen und ausgeliefert, wodurch die Granularität der Zugriffssteuerung verbessert und an Sicherheitsstandards der Branche angeglichen wurde.',
-        'Bidirektionale (Bi-Di) Mehrsprachigkeit pro Region in den Login-Ablauf eingebaut, dazu eine über das CMS konfigurierbare Login-Seite, mit der das Marketing Inhalte dynamisch pflegen kann.',
-        'OAuth 2.0 für kundenseitige APIs implementiert und damit sichere Drittanbieter-Integrationen über einen standardkonformen, tokenbasierten Autorisierungsfluss mit Scopes ermöglicht.',
-        'Automatisierungen mit Claude Routines gebaut, die Snyk-Schwachstellen erkennen und beheben und offene Befunde von über 500 auf null reduziert haben, indem automatisch Pull Requests erstellt und zur Prüfung in Slack gepostet wurden.',
-        'KI-gestützte Code-Review-Automatisierungen entwickelt, die Pull Requests gegen die Akzeptanzkriterien des verknüpften Jira-Tickets prüfen und so Qualität und Konsistenz der Reviews verbessern.',
-        'Einen KI-Agenten umgesetzt, der Kundenanliegen in Slack beantwortet und dabei Kontext aus Produktdokumentation, früherem Chatverlauf, Datenlogs und der Codebasis heranzieht.',
-        'Wiederverwendbare KI-Skills für Engineering-Teams erstellt und gepflegt, mit Fokus auf Authentifizierung und Plattform-Workflows, was Einarbeitungsaufwand und Anlaufzeit reduziert hat.',
-        'Neues unternehmensweites Branding über den Monolithen und mehr als 10 Microservices eingeführt, für ein einheitliches Erlebnis auf jeder kundenseitigen Oberfläche.',
-        'An zentralen Plattformfunktionen mitgewirkt, darunter SSO, SCIM, Teams, Benutzerverwaltung und Sicherheit.',
-      ],
+      highlights: {
+        login: {
+          title: 'Ein Login für jede Umgebung',
+          detail:
+            'Zentralen Login-Dienst konzipiert und umgesetzt, der Nutzer über **7 Produktionsumgebungen** (3 Hyperscaler — AWS, GCP, Azure; 3 Regionen — NA, EU, AU), **3 Staging-** und **22 Entwicklungsumgebungen** authentifiziert, bei **100 % Verfügbarkeit** mit SSO, MFA/OTP, Backup-Codes und Passwortwiederherstellung.',
+        },
+        rbac: {
+          title: 'Feingranulare rollenbasierte Zugriffe',
+          detail:
+            'Feingranulare rollenbasierte Zugriffssteuerung (RBAC) durchgängig über den Monolithen und **4 Microservices** entworfen und ausgeliefert, wodurch die Granularität der Zugriffssteuerung verbessert und an Sicherheitsstandards der Branche angeglichen wurde.',
+        },
+        bidi: {
+          title: 'Eine Login-Seite für jede Region',
+          detail:
+            'Bidirektionale (Bi-Di) Mehrsprachigkeit pro Region in den Login-Ablauf eingebaut, dazu eine über das CMS konfigurierbare Login-Seite, mit der das Marketing Inhalte dynamisch pflegen kann.',
+        },
+        oauth: {
+          title: 'OAuth 2.0 für Kunden-APIs',
+          detail:
+            'OAuth 2.0 für kundenseitige APIs implementiert und damit sichere Drittanbieter-Integrationen über einen standardkonformen, tokenbasierten Autorisierungsfluss mit Scopes ermöglicht.',
+        },
+        snyk: {
+          title: 'Schwachstellen automatisch behoben',
+          detail:
+            'Automatisierungen mit Claude Routines gebaut, die Snyk-Schwachstellen erkennen und beheben und offene Befunde von **über 500 auf null** reduziert haben, indem automatisch Pull Requests erstellt und zur Prüfung in Slack gepostet wurden.',
+        },
+        review: {
+          title: 'Pull Requests gegen das Ticket geprüft',
+          detail:
+            'KI-gestützte Code-Review-Automatisierungen entwickelt, die Pull Requests gegen die Akzeptanzkriterien des verknüpften Jira-Tickets prüfen und so Qualität und Konsistenz der Reviews verbessern.',
+        },
+        slackAgent: {
+          title: 'Ein Support-Agent in Slack',
+          detail:
+            'Einen KI-Agenten umgesetzt, der Kundenanliegen in Slack beantwortet und dabei Kontext aus Produktdokumentation, früherem Chatverlauf, Datenlogs und der Codebasis heranzieht.',
+        },
+        skills: {
+          title: 'Wiederverwendbare KI-Skills für Teams',
+          detail:
+            'Wiederverwendbare KI-Skills für Engineering-Teams erstellt und gepflegt, mit Fokus auf Authentifizierung und Plattform-Workflows, was Einarbeitungsaufwand und Anlaufzeit reduziert hat.',
+        },
+        branding: {
+          title: 'Neues Branding auf jeder Oberfläche',
+          detail:
+            'Neues unternehmensweites Branding über den Monolithen und **mehr als 10 Microservices** eingeführt, für ein einheitliches Erlebnis auf jeder kundenseitigen Oberfläche.',
+        },
+        core: {
+          title: 'Zentrale Plattformfunktionen',
+          detail:
+            'An zentralen Plattformfunktionen mitgewirkt, darunter SSO, SCIM, Teams, Benutzerverwaltung und Sicherheit.',
+        },
+      },
     },
     'contentstack-intern': {
       role: 'Associate Software Engineering Intern',
       summary:
         'Multi-Faktor-Authentifizierung, produktübergreifendes SSO und messbare Micro-Frontend-Performancegewinne geliefert.',
-      highlights: [
-        'TOTP-basierte Multi-Faktor-Authentifizierung implementiert, kompatibel mit allen gängigen Authenticator-Apps, mit SMS-2FA als Rückfalloption und Backup-Codes, nach Sicherheitsstandards der Branche.',
-        'Ein neu übernommenes Produkt (Lytics) integriert, indem SSO-basierte Authentifizierung zwischen Contentstack und Lytics gebaut wurde — ein nahtloses produktübergreifendes Erlebnis mit nur einem Satz Zugangsdaten.',
-        'Micro-Frontend-Performance (React 18 + Module Federation) optimiert, die Latenz der Frontend-Anwendung um das Zweifache reduziert und vergleichende Benchmark-Daten zur Orientierung für Architekturentscheidungen dokumentiert.',
-        'OPA-richtlinienbasierte Navigation und App-Switcher über mehr als 10 Micro-Frontends umgesetzt, abgesichert durch End-to-End-Testautomatisierung für konsistentes Verhalten über häufige Releases hinweg.',
-        'Einen RSS-Feed für die Organisation gebaut, um Abonnenten auf dem Laufenden zu halten und die Produkt-SEO zu verbessern.',
-      ],
+      highlights: {
+        mfa: {
+          title: 'MFA per Authenticator-App',
+          detail:
+            'TOTP-basierte Multi-Faktor-Authentifizierung implementiert, kompatibel mit allen gängigen Authenticator-Apps, mit SMS-2FA als Rückfalloption und Backup-Codes, nach Sicherheitsstandards der Branche.',
+        },
+        lytics: {
+          title: 'Single Sign-on mit einem übernommenen Produkt',
+          detail:
+            'Ein neu übernommenes Produkt (Lytics) integriert, indem SSO-basierte Authentifizierung zwischen Contentstack und Lytics gebaut wurde — ein nahtloses produktübergreifendes Erlebnis mit nur einem Satz Zugangsdaten.',
+        },
+        mfe: {
+          title: 'Doppelt so schnelle Micro-Frontends',
+          detail:
+            'Micro-Frontend-Performance (React 18 + Module Federation) optimiert, die Latenz der Frontend-Anwendung **um das Zweifache** reduziert und vergleichende Benchmark-Daten zur Orientierung für Architekturentscheidungen dokumentiert.',
+        },
+        opaNav: {
+          title: 'Richtlinienbasierte Navigation',
+          detail:
+            'OPA-richtlinienbasierte Navigation und App-Switcher über **mehr als 10 Micro-Frontends** umgesetzt, abgesichert durch End-to-End-Testautomatisierung für konsistentes Verhalten über häufige Releases hinweg.',
+        },
+        rss: {
+          title: 'Ein RSS-Feed für Produktneuigkeiten',
+          detail:
+            'Einen RSS-Feed für die Organisation gebaut, um Abonnenten auf dem Laufenden zu halten und die Produkt-SEO zu verbessern.',
+        },
+      },
     },
   },
 
   globe: {
-    eyebrow: 'Globale Reichweite',
     title: 'Wo die Plattform läuft',
-    description:
-      'Der zentrale Login-Dienst authentifiziert Nutzer über drei Hyperscaler und drei Regionen hinweg, mit 7 Produktions-, 3 Staging- und 22 Entwicklungsumgebungen.',
-    regions: 'Regionen',
-    hyperscalers: 'Hyperscaler',
-    production: 'Produktion',
-    staging: 'Staging',
-    development: 'Entwicklung',
     names: {
       na: 'Nordamerika',
       eu: 'Europa',
@@ -178,14 +228,22 @@ export default {
     verify: 'Überprüfen',
   },
 
+  contributions: {
+    eyebrow: 'Open Source',
+    title: 'Woran ich arbeite',
+    description: 'Öffentliche GitHub-Aktivität des letzten Jahres, aus beiden Konten zusammengeführt.',
+    total: 'Beiträge',
+    activeDays: 'Aktive Tage',
+    streak: 'Längste Serie',
+    busiest: 'Aktivster Tag',
+    hint: 'Zum Drehen ziehen',
+    accounts: 'Aus {count} Konten zusammengeführt · Stand {date}',
+  },
+
   projects: {
     eyebrow: 'Projekte',
     title: 'Was ich gebaut habe',
     description: 'Eine Mischung aus Produktionsarbeit und Nebenprojekten. Öffne eine Karte für den vollständigen Bericht.',
-    filterAll: 'Alle',
-    filterHeading: 'Projekte nach Technologie filtern',
-    shown: '{count} Projekte angezeigt',
-    none: 'Noch nutzt kein Projekt {tech}.',
     highlights: 'Highlights',
     builtWith: 'Gebaut mit',
     moreProjects: 'Weitere Projekte',

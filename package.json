@@ -12,7 +12,8 @@
     "generate:og": "node scripts/generate-og.mjs",
     "generate:sitemap": "node scripts/generate-sitemap.mjs",
     "prebuild": "node scripts/generate-sitemap.mjs",
-    "generate:borders": "node scripts/generate-borders.mjs"
+    "generate:borders": "node scripts/generate-borders.mjs",
+    "fetch:contributions": "node scripts/fetch-contributions.mjs"
   },
   "dependencies": {
     "@emailjs/browser": "^3.12.1",

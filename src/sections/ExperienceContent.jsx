@@ -1,10 +1,11 @@
 import { lazy, Suspense, useRef } from 'react'
 import { motion, useReducedMotion, useScroll, useSpring } from 'framer-motion'
+import { FiArrowUp } from 'react-icons/fi'
 import { experience } from '../data/experience'
-import { environmentCounts, hyperscalers, regions } from '../data/topology'
+import { regions } from '../data/topology'
 import { useI18n } from '../i18n/context'
 import Reveal from '../components/Reveal'
-import TechPill from '../components/TechPill'
+import Emphasis from '../components/Emphasis'
 import GlobeFallback from '../components/three/GlobeFallback'
 
 const Globe3D = lazy(() => import('../components/three/Globe3D'))
@@ -19,60 +20,6 @@ export default function ExperienceContent() {
 
   return (
     <>
-      <section aria-labelledby="globe-heading" className="card mb-16 overflow-hidden p-6 md:p-8">
-        <div className="grid items-center gap-8 md:grid-cols-2">
-          <div>
-            <p className="text-sm font-semibold uppercase tracking-[0.2em] text-muted font-mono">{t('globe.eyebrow')}</p>
-            <h3 id="globe-heading" className="mt-2 text-2xl font-bold text-fg md:text-3xl">
-              {t('globe.title')}
-            </h3>
-            <p className="mt-4 text-sm leading-relaxed text-muted">{t('globe.description')}</p>
-
-            <dl className="mt-6 grid grid-cols-2 gap-4 sm:grid-cols-3">
-              <div>
-                <dt className="text-xs uppercase tracking-wider text-muted font-mono">{t('globe.regions')}</dt>
-                <dd className="text-accent text-2xl font-bold">{regions.length}</dd>
-              </div>
-              <div>
-                <dt className="text-xs uppercase tracking-wider text-muted font-mono">{t('globe.hyperscalers')}</dt>
-                <dd className="text-accent text-2xl font-bold">{hyperscalers.length}</dd>
-              </div>
-              <div>
-                <dt className="text-xs uppercase tracking-wider text-muted font-mono">{t('globe.production')}</dt>
-                <dd className="text-accent text-2xl font-bold">{environmentCounts.production}</dd>
-              </div>
-              <div>
-                <dt className="text-xs uppercase tracking-wider text-muted font-mono">{t('globe.staging')}</dt>
-                <dd className="text-2xl font-bold text-fg">{environmentCounts.staging}</dd>
-              </div>
-              <div>
-                <dt className="text-xs uppercase tracking-wider text-muted font-mono">{t('globe.development')}</dt>
-                <dd className="text-2xl font-bold text-fg">{environmentCounts.development}</dd>
-              </div>
-            </dl>
-
-            <ul className="mt-6 flex flex-wrap gap-1.5">
-              {regions.map((r) => (
-                <li key={r.id}>
-                  <TechPill>{t(`globe.names.${r.id}`)}</TechPill>
-                </li>
-              ))}
-              {hyperscalers.map((h) => (
-                <li key={h}>
-                  <TechPill>{h}</TechPill>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          <div>
-            <Suspense fallback={<GlobeFallback />}>
-              <Globe3D />
-            </Suspense>
-            <p className="mt-3 text-center text-xs text-muted">{t('globe.hint')}</p>
-          </div>
-        </div>
-      </section>
 
       <div ref={listRef} className="relative">
         <div aria-hidden="true" className="absolute start-0 top-0 h-full w-px bg-line" />
@@ -84,35 +31,88 @@ export default function ExperienceContent() {
           />
         )}
 
-        <ol className="space-y-12 ps-6 md:ps-10">
-          {experience.map((job, i) => (
-            <Reveal as="li" key={job.id} delay={i * 0.08} className="relative">
+        <ol className="space-y-20 ps-6 md:ps-10">
+          {experience.map((job) => (
+            <li key={job.id} className="relative">
               <span
                 aria-hidden="true"
-                className={`absolute -start-[26px] top-2 h-3.5 w-3.5 rounded-full border-4 border-bg md:-start-[42px] ${
+                className={`absolute -start-[30px] top-2 h-3.5 w-3.5 rounded-full border-4 border-bg md:-start-[46px] ${
                   job.current ? 'bg-accent' : 'bg-line'
                 }`}
               />
 
-              <h3 className="text-xl font-semibold text-fg md:text-2xl">{t(`experience.${job.id}.role`)}</h3>
+              <div className="grid gap-8 lg:grid-cols-[minmax(0,19rem)_minmax(0,1fr)] lg:gap-10 xl:grid-cols-[minmax(0,22rem)_minmax(0,1fr)] xl:gap-14">
+                {/* Role details stay pinned on wide screens while the highlights scroll past. */}
+                <Reveal className="lg:sticky lg:top-24 lg:self-start">
+                  <p className="font-mono text-xs uppercase tracking-wider text-muted">
+                    {job.start} — {job.end ?? t('experience.present')}
+                  </p>
+                  <h3 className="mt-2 text-xl font-semibold text-fg md:text-2xl">{t(`experience.${job.id}.role`)}</h3>
+                  <p className="mt-1 text-sm font-medium text-accent">{job.company}</p>
+                  <p className="mt-4 text-sm leading-relaxed text-muted">{t(`experience.${job.id}.summary`)}</p>
 
-              <p className="mt-1 text-sm font-medium text-accent">{job.company}</p>
-              <p className="text-xs uppercase tracking-wider text-muted font-mono">
-                {job.start} — {job.end ?? t('experience.present')}
-              </p>
+                  {job.globe && (
+                    <figure className="mt-6">
+                      {/* Capped by viewport height so the pinned column never outgrows the screen: 26.5rem is the sticky top offset plus the role text and caption at their tallest (1024px wide), plus a margin. */}
+                      <div className="mx-auto w-full max-w-[16rem] lg:mx-0 lg:max-w-[min(100%,calc(100vh-26.5rem))]">
+                        <Suspense fallback={<GlobeFallback />}>
+                          <Globe3D />
+                        </Suspense>
+                      </div>
+                      <figcaption className="mt-3 text-center lg:text-start">
+                        <p className="font-mono text-[11px] uppercase tracking-[0.14em] text-muted">{t('globe.title')}</p>
+                        <p className="mt-1 text-xs text-muted">
+                          {regions.map((r) => t(`globe.names.${r.id}`)).join(' · ')}
+                        </p>
+                        <p className="mt-1 text-[11px] text-muted [@media(pointer:coarse)]:hidden">{t('globe.hint')}</p>
+                      </figcaption>
+                    </figure>
+                  )}
+                </Reveal>
 
-              <p className="mt-4 text-sm leading-relaxed text-muted">{t(`experience.${job.id}.summary`)}</p>
+                <div className="xp-list space-y-8">
+                  {job.groups.map((group, gi) => (
+                    <Reveal key={group.id} delay={gi * 0.06}>
+                      <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.18em] text-muted">
+                        {t(`experience.groups.${group.id}`)}
+                      </p>
+                      <ul className="mt-2">
+                        {group.items.map((id) => (
+                          <li
+                            key={id}
+                            className="xp-row border-s-2 border-line py-3 ps-4 transition-colors duration-300 hover:border-accent"
+                          >
+                            <h4 className="xp-title font-semibold text-fg transition-colors duration-300">
+                              {t(`experience.${job.id}.highlights.${id}.title`)}
+                            </h4>
+                            <p className="xp-detail mt-1.5 text-sm leading-relaxed text-muted transition-colors duration-300">
+                              <Emphasis className="font-semibold text-fg transition-colors duration-300">
+                                {t(`experience.${job.id}.highlights.${id}.detail`)}
+                              </Emphasis>
+                            </p>
+                          </li>
+                        ))}
+                      </ul>
+                    </Reveal>
+                  ))}
+                </div>
+              </div>
 
-              <ul className="mt-4 space-y-2.5">
-                {(t(`experience.${job.id}.highlights`) ?? []).map((point) => (
-                  <li key={point} className="flex gap-3 text-sm leading-relaxed text-muted">
-                    <span aria-hidden="true" className="mt-2 h-1 w-1 shrink-0 rounded-full bg-accent" />
-                    <span>{point}</span>
-                  </li>
-                ))}
-              </ul>
-
-            </Reveal>
+              {job.promotedFrom && (
+                <div className="relative mt-14 flex items-center gap-3">
+                  <span
+                    aria-hidden="true"
+                    className="absolute -start-[33px] grid h-5 w-5 place-items-center rounded-full border border-line bg-bg text-accent md:-start-[49px]"
+                  >
+                    <FiArrowUp className="h-3 w-3" />
+                  </span>
+                  <p className="font-mono text-xs uppercase tracking-[0.14em] text-muted">
+                    {t('experience.promoted')} · {job.start}
+                  </p>
+                  <span aria-hidden="true" className="flex-1 border-t border-dashed border-line" />
+                </div>
+              )}
+            </li>
           ))}
         </ol>
       </div>

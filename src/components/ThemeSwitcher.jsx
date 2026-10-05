@@ -3,6 +3,7 @@ import { FiCheck, FiCircle, FiDroplet, FiFeather, FiMoon, FiSun, FiTerminal } fr
 import { useTheme } from '../context/themeContext'
 import { useI18n } from '../i18n/context'
 import { THEMES as THEME_LIST } from '../data/themes'
+import Tooltip from './Tooltip'
 
 const ICONS = {
   grey: FiCircle,
@@ -40,17 +41,18 @@ export default function ThemeSwitcher() {
 
   return (
     <div ref={wrapRef} className="relative">
-      <button
-        type="button"
-        onClick={() => setOpen((v) => !v)}
-        aria-haspopup="menu"
-        aria-expanded={open}
-        aria-label={t('common.changeTheme')}
-        title={t('common.changeTheme')}
-        className="grid h-10 w-10 place-items-center rounded-full border border-line bg-surface text-fg transition-colors hover:bg-elevated"
-      >
-        <Current aria-hidden="true" />
-      </button>
+      <Tooltip label={`${t('common.changeTheme')} · ${t(`themes.${theme}`)}`} side="bottom" hidden={open}>
+        <button
+          type="button"
+          onClick={() => setOpen((v) => !v)}
+          aria-haspopup="menu"
+          aria-expanded={open}
+          aria-label={`${t('common.changeTheme')} (${t(`themes.${theme}`)})`}
+          className="grid h-10 w-10 place-items-center rounded-full border border-line bg-surface text-fg transition-colors hover:bg-elevated"
+        >
+          <Current aria-hidden="true" />
+        </button>
+      </Tooltip>
 
       {open && (
         <ul

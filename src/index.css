@@ -231,6 +231,22 @@
   }
 }
 
+/*
+ * Experience highlights: the row under the pointer stays bright and its
+ * siblings recede, so the eye lands on one achievement at a time. Hover-capable
+ * devices only, so a tap on a phone doesn't leave the list stuck dimmed. Both
+ * states use the existing text tokens, so dimmed copy keeps its contrast.
+ */
+@media (hover: hover) {
+  .xp-list:has(.xp-row:hover) .xp-row:not(:hover) :is(.xp-title, strong) {
+    color: rgb(var(--muted));
+  }
+
+  .xp-row:hover .xp-detail {
+    color: rgb(var(--fg) / 0.85);
+  }
+}
+
 /* Lenis requires these while smooth scrolling is active. */
 html.lenis,
 html.lenis body {
