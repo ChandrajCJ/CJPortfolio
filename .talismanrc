@@ -11,6 +11,6 @@ fileignoreconfig:
 # translation key - identifiers, not credentials.
 allowed_patterns:
   - 'key=\{'
-  - 'e\.key === ''Escape'''
+  - 'e\.key [!=]== ''Escape'''
   - 'const onKey = \(e\) =>'
   - 'locationKey: ''puducherry'''

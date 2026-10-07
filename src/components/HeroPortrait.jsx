@@ -1,13 +1,10 @@
 import { useState } from 'react'
 import { profile } from '../data/profile'
-import { origin } from '../data/topology'
 import { useI18n } from '../i18n/context'
 
 /**
  * Hero visual. Renders public/portrait.jpg when present, otherwise a framed
  * monogram, so the layout is identical either way and the photo is a drop-in.
- *
- * The coordinate caption is the same origin the topology globe arcs from.
  */
 export default function HeroPortrait() {
   const [failed, setFailed] = useState(false)
@@ -19,9 +16,6 @@ export default function HeroPortrait() {
     .join('')
     .slice(0, 2)
     .toUpperCase()
-
-  const lat = `${Math.abs(origin.lat).toFixed(2)}°${origin.lat >= 0 ? 'N' : 'S'}`
-  const lon = `${Math.abs(origin.lon).toFixed(2)}°${origin.lon >= 0 ? 'E' : 'W'}`
 
   return (
     <figure className="mx-auto w-full max-w-sm md:max-w-md">
@@ -47,17 +41,8 @@ export default function HeroPortrait() {
           </picture>
         )}
 
-        {/* Corner ticks - a small technical framing device. */}
-        <span aria-hidden="true" className="absolute left-3 top-3 h-3 w-3 border-l border-t border-fg/25" />
-        <span aria-hidden="true" className="absolute right-3 top-3 h-3 w-3 border-r border-t border-fg/25" />
-        <span aria-hidden="true" className="absolute bottom-3 left-3 h-3 w-3 border-b border-l border-fg/25" />
-        <span aria-hidden="true" className="absolute bottom-3 right-3 h-3 w-3 border-b border-r border-fg/25" />
       </div>
 
-      <figcaption className="mt-3 flex items-center justify-between gap-3 font-mono text-[11px] uppercase tracking-[0.14em] text-muted">
-        <span>{t(`education.locations.${profile.locationKey}`)}</span>
-        <span dir="ltr">{`${lat} ${lon}`}</span>
-      </figcaption>
     </figure>
   )
 }

@@ -1,6 +1,6 @@
 import { useRef } from 'react'
 import { Link } from 'react-router-dom'
-import { FiArrowRight, FiDownload } from 'react-icons/fi'
+import { ArrowRight, DownloadSimple } from '@phosphor-icons/react'
 import { motion, useReducedMotion, useScroll, useTransform } from 'framer-motion'
 import { TypeAnimation } from 'react-type-animation'
 import { profile } from '../data/profile'
@@ -35,7 +35,7 @@ export default function Hero() {
   const rolesList = Array.isArray(roles) ? roles : [t('meta.role')]
 
   return (
-    <section ref={ref} className="relative overflow-hidden px-5 pb-16 pt-28 md:px-8 md:pb-20 md:pt-36">
+    <section ref={ref} className="relative flex min-h-[100dvh] flex-col justify-center overflow-hidden px-5 pb-16 pt-24 md:px-8 md:pb-20 md:pt-24">
       <div
         aria-hidden="true"
         className="pointer-events-none absolute -top-40 left-1/2 h-[560px] w-[900px] -translate-x-1/2 rounded-full bg-accent/10 blur-3xl"
@@ -43,7 +43,7 @@ export default function Hero() {
 
       <motion.div
         style={scrollStyle}
-        className="relative mx-auto grid max-w-content items-center gap-10 md:grid-cols-[1.1fr_0.9fr]"
+        className="relative mx-auto grid w-full max-w-content items-center gap-10 md:grid-cols-[1.1fr_0.9fr]"
       >
         <motion.div {...enter}>
           <h1 className="text-4xl font-bold leading-[1.08] tracking-tight md:text-6xl">
@@ -77,7 +77,7 @@ export default function Hero() {
                 download
                 className="btn-accent inline-flex h-12 items-center gap-2 rounded-full px-7 font-medium transition-opacity hover:opacity-90"
               >
-                {t('common.downloadCV')} <FiDownload aria-hidden="true" />
+                {t('common.downloadCV')} <DownloadSimple aria-hidden="true" />
               </a>
             </Magnetic>
             <Magnetic>
@@ -85,7 +85,7 @@ export default function Hero() {
                 to="/experience"
                 className="inline-flex h-12 items-center gap-2 rounded-full border border-line bg-surface px-7 font-medium text-fg transition-colors hover:bg-elevated"
               >
-                {t('home.exploreMore')} <FiArrowRight aria-hidden="true" className="rtl:rotate-180" />
+                {t('home.exploreMore')} <ArrowRight aria-hidden="true" className="rtl:rotate-180" />
               </Link>
             </Magnetic>
           </div>

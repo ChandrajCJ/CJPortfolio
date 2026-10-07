@@ -2,7 +2,7 @@ export default {
   meta: {
     role: 'Softwareentwickler',
     tagline:
-      'Ich baue sichere, skalierbare Webplattformen — Authentifizierungsinfrastruktur, Micro-Frontend-Performance und KI-gestütztes Developer-Tooling.',
+      'Ich baue sichere, skalierbare Webplattformen: Authentifizierungsinfrastruktur, Micro-Frontend-Performance und KI-gestütztes Developer-Tooling.',
     summary:
       'Softwareentwickler mit Erfahrung im Aufbau sicherer, skalierbarer Webplattformen in Enterprise-SaaS- und Multi-Cloud-Umgebungen. Nachweisliche Erfolge bei Authentifizierungsinfrastruktur (SSO, MFA, OAuth, RBAC), Micro-Frontend-Performanceoptimierung und Kernfunktionen der Plattform für Kunden über mehrere Hyperscaler und Regionen hinweg. Versiert im Einsatz KI-gestützter Entwicklungswerkzeuge, um Auslieferung zu beschleunigen und Codequalität zu verbessern.',
   },
@@ -58,7 +58,6 @@ export default {
     greeting: 'Hallo, ich bin {name}',
     scrollCta: 'Scrollen zum Entdecken',
     aboutTitle: 'Wer ich bin',
-    aboutEyebrow: 'Über mich',
     currently: 'Aktuell',
     education: 'Ausbildung',
     basedIn: 'Standort',
@@ -103,7 +102,7 @@ export default {
         login: {
           title: 'Ein Login für jede Umgebung',
           detail:
-            'Zentralen Login-Dienst konzipiert und umgesetzt, der Nutzer über **7 Produktionsumgebungen** (3 Hyperscaler — AWS, GCP, Azure; 3 Regionen — NA, EU, AU), **3 Staging-** und **22 Entwicklungsumgebungen** authentifiziert, bei **100 % Verfügbarkeit** mit SSO, MFA/OTP, Backup-Codes und Passwortwiederherstellung.',
+            'Zentralen Login-Dienst konzipiert und umgesetzt, der Nutzer über **7 Produktionsumgebungen** (3 Hyperscaler: AWS, GCP, Azure; 3 Regionen: NA, EU, AU), **3 Staging-** und **22 Entwicklungsumgebungen** authentifiziert, bei **100 % Verfügbarkeit** mit SSO, MFA/OTP, Backup-Codes und Passwortwiederherstellung.',
         },
         rbac: {
           title: 'Feingranulare rollenbasierte Zugriffe',
@@ -165,7 +164,7 @@ export default {
         lytics: {
           title: 'Single Sign-on mit einem übernommenen Produkt',
           detail:
-            'Ein neu übernommenes Produkt (Lytics) integriert, indem SSO-basierte Authentifizierung zwischen Contentstack und Lytics gebaut wurde — ein nahtloses produktübergreifendes Erlebnis mit nur einem Satz Zugangsdaten.',
+            'Ein neu übernommenes Produkt (Lytics) integriert, indem SSO-basierte Authentifizierung zwischen Contentstack und Lytics gebaut wurde: ein nahtloses produktübergreifendes Erlebnis mit nur einem Satz Zugangsdaten.',
         },
         mfe: {
           title: 'Doppelt so schnelle Micro-Frontends',
@@ -241,7 +240,6 @@ export default {
   },
 
   projects: {
-    eyebrow: 'Projekte',
     title: 'Was ich gebaut habe',
     description: 'Eine Mischung aus Produktionsarbeit und Nebenprojekten. Öffne eine Karte für den vollständigen Bericht.',
     highlights: 'Highlights',
@@ -303,7 +301,6 @@ export default {
   },
 
   contact: {
-    eyebrow: 'Kontakt',
     title: 'Lass uns sprechen',
     description:
       'Offen für spannende Probleme, Zusammenarbeit und neue Gelegenheiten. Ich antworte meist innerhalb von ein bis zwei Tagen.',
@@ -315,7 +312,7 @@ export default {
     messagePlaceholder: 'Woran arbeitest du gerade?',
     send: 'Nachricht senden',
     sending: 'Wird gesendet…',
-    sent: 'Danke — deine Nachricht ist unterwegs.',
+    sent: 'Danke. Deine Nachricht ist unterwegs.',
     errorGeneric: 'Das hat nicht geklappt. Schreib mir bitte direkt an {email}.',
     errorUnconfigured: 'Das Kontaktformular ist noch nicht eingerichtet. Schreib mir bitte an {email}.',
     errors: {
@@ -341,11 +338,13 @@ export default {
     open: 'Mit Astro chatten',
     close: 'Chat schließen',
     greeting:
-      'Hallo! Ich bin Astro — ich beantworte Fragen zu Chandrajs Erfahrung, Fähigkeiten und Projekten. Was möchtest du wissen?',
+      'Hallo! Ich bin Astro. Ich beantworte Fragen zu Chandrajs Erfahrung, Fähigkeiten und Projekten. Was möchtest du wissen?',
     placeholder: 'Frag nach meiner Erfahrung…',
     send: 'Senden',
     thinking: 'Astro schreibt…',
     error: 'Der Server war gerade nicht erreichbar. Bitte versuche es gleich noch einmal.',
+    busy: 'Der KI-Dienst ist gerade ausgelastet. Versuch es in ein paar Sekunden noch einmal.',
+    retry: 'Erneut versuchen',
     unconfigured: 'Astro ist in dieser Umgebung noch nicht eingerichtet. Du erreichst Chandraj direkt unter {email}.',
     disclaimer: 'KI-generiert. Kann Fehler enthalten.',
     clear: 'Unterhaltung löschen',

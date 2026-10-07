@@ -4,7 +4,6 @@ import Footer from './components/Footer'
 import Cursor from './components/Cursor'
 import Analytics from './components/Analytics'
 import SmoothScroll from './components/SmoothScroll'
-import ScrollProgress from './components/ScrollProgress'
 import Grain from './components/Grain'
 import ScrollManager from './components/ScrollManager'
 import AstroChat from './components/AstroChat'
@@ -31,7 +30,6 @@ export default function App() {
       <SmoothScroll />
       <ScrollManager />
       <Analytics />
-      <ScrollProgress />
       <Grain />
       <Cursor />
       <Header />

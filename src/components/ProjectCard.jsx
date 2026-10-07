@@ -1,11 +1,11 @@
 import { Link } from 'react-router-dom'
-import { FiArrowUpRight, FiExternalLink, FiGithub } from 'react-icons/fi'
+import { ArrowSquareOut, ArrowUpRight, GithubLogo } from '@phosphor-icons/react'
 import { getProjectImage } from '../lib/images'
 import { useI18n } from '../i18n/context'
 import TechPill from './TechPill'
 import TiltCard from './TiltCard'
 
-export default function ProjectCard({ project }) {
+export default function ProjectCard({ project, featured = false }) {
   const { t } = useI18n()
   const image = getProjectImage(project.image)
   const title = t(`projects.${project.slug}.title`)
@@ -21,7 +21,7 @@ export default function ProjectCard({ project }) {
           <img
             src={image.src}
             srcSet={image.srcSet}
-            sizes="(min-width: 1024px) 360px, (min-width: 768px) 45vw, 90vw"
+            sizes={featured ? '(min-width: 1024px) 560px, (min-width: 768px) 45vw, 90vw' : '(min-width: 1024px) 360px, (min-width: 768px) 45vw, 90vw'}
             alt=""
             width="640"
             height="360"
@@ -38,7 +38,7 @@ export default function ProjectCard({ project }) {
 
       <div className="relative z-[2] flex flex-1 flex-col p-5">
         <div className="flex items-start justify-between gap-3">
-          <h3 className="text-lg font-semibold text-fg">
+          <h3 className={`font-semibold text-fg ${featured ? 'text-xl' : 'text-lg'}`}>
             <Link to={`/projects/${project.slug}`} className="after:absolute after:inset-0 focus-visible:underline">
               {title}
             </Link>
@@ -60,7 +60,7 @@ export default function ProjectCard({ project }) {
 
         <div className="relative z-10 mt-5 flex items-center gap-4 border-t border-line pt-4 text-sm">
           <Link to={`/projects/${project.slug}`} className="inline-flex items-center gap-1 font-medium text-accent">
-            {t('common.details')} <FiArrowUpRight aria-hidden="true" className="rtl:-scale-x-100" />
+            {t('common.details')} <ArrowUpRight aria-hidden="true" className="rtl:-scale-x-100" />
           </Link>
           {project.demo && (
             <a
@@ -69,10 +69,10 @@ export default function ProjectCard({ project }) {
               rel="noreferrer noopener"
               className="inline-flex items-center gap-1.5 text-muted transition-colors hover:text-fg"
             >
-              <FiExternalLink aria-hidden="true" />
+              <ArrowSquareOut aria-hidden="true" />
               <span>{t('common.liveDemo')}</span>
               <span className="sr-only">
-                — {title} ({t('common.opensInNewTab')})
+                , {title} ({t('common.opensInNewTab')})
               </span>
             </a>
           )}
@@ -83,10 +83,10 @@ export default function ProjectCard({ project }) {
               rel="noreferrer noopener"
               className="inline-flex items-center gap-1.5 text-muted transition-colors hover:text-fg"
             >
-              <FiGithub aria-hidden="true" />
+              <GithubLogo aria-hidden="true" />
               <span>{t('common.code')}</span>
               <span className="sr-only">
-                — {title} ({t('common.opensInNewTab')})
+                , {title} ({t('common.opensInNewTab')})
               </span>
             </a>
           )}

@@ -1,6 +1,6 @@
 import { lazy, Suspense, useRef } from 'react'
 import { motion, useReducedMotion, useScroll, useSpring } from 'framer-motion'
-import { FiArrowUp } from 'react-icons/fi'
+import { ArrowUp } from '@phosphor-icons/react'
 import { experience } from '../data/experience'
 import { regions } from '../data/topology'
 import { useI18n } from '../i18n/context'
@@ -44,8 +44,8 @@ export default function ExperienceContent() {
               <div className="grid gap-8 lg:grid-cols-[minmax(0,19rem)_minmax(0,1fr)] lg:gap-10 xl:grid-cols-[minmax(0,22rem)_minmax(0,1fr)] xl:gap-14">
                 {/* Role details stay pinned on wide screens while the highlights scroll past. */}
                 <Reveal className="lg:sticky lg:top-24 lg:self-start">
-                  <p className="font-mono text-xs uppercase tracking-wider text-muted">
-                    {job.start} — {job.end ?? t('experience.present')}
+                  <p className="text-sm text-muted">
+                    {job.start} - {job.end ?? t('experience.present')}
                   </p>
                   <h3 className="mt-2 text-xl font-semibold text-fg md:text-2xl">{t(`experience.${job.id}.role`)}</h3>
                   <p className="mt-1 text-sm font-medium text-accent">{job.company}</p>
@@ -60,9 +60,9 @@ export default function ExperienceContent() {
                         </Suspense>
                       </div>
                       <figcaption className="mt-3 text-center lg:text-start">
-                        <p className="font-mono text-[11px] uppercase tracking-[0.14em] text-muted">{t('globe.title')}</p>
+                        <p className="text-xs font-medium text-fg">{t('globe.title')}</p>
                         <p className="mt-1 text-xs text-muted">
-                          {regions.map((r) => t(`globe.names.${r.id}`)).join(' · ')}
+                          {regions.map((r) => t(`globe.names.${r.id}`)).join(', ')}
                         </p>
                         <p className="mt-1 text-[11px] text-muted [@media(pointer:coarse)]:hidden">{t('globe.hint')}</p>
                       </figcaption>
@@ -73,7 +73,7 @@ export default function ExperienceContent() {
                 <div className="xp-list space-y-8">
                   {job.groups.map((group, gi) => (
                     <Reveal key={group.id} delay={gi * 0.06}>
-                      <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.18em] text-muted">
+                      <p className="text-xs font-medium text-muted">
                         {t(`experience.groups.${group.id}`)}
                       </p>
                       <ul className="mt-2">
@@ -104,10 +104,11 @@ export default function ExperienceContent() {
                     aria-hidden="true"
                     className="absolute -start-[33px] grid h-5 w-5 place-items-center rounded-full border border-line bg-bg text-accent md:-start-[49px]"
                   >
-                    <FiArrowUp className="h-3 w-3" />
+                    <ArrowUp className="h-3 w-3" />
                   </span>
-                  <p className="font-mono text-xs uppercase tracking-[0.14em] text-muted">
-                    {t('experience.promoted')} · {job.start}
+                  <p className="flex gap-2 text-xs">
+                    <span className="font-medium text-fg">{t('experience.promoted')}</span>
+                    <span className="text-muted">{job.start}</span>
                   </p>
                   <span aria-hidden="true" className="flex-1 border-t border-dashed border-line" />
                 </div>

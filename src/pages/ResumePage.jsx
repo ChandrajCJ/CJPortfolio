@@ -1,4 +1,4 @@
-import { FiDownload, FiExternalLink, FiPrinter } from 'react-icons/fi'
+import { ArrowSquareOut, DownloadSimple, Printer } from '@phosphor-icons/react'
 import { profile } from '../data/profile'
 import { experience, highlightIds } from '../data/experience'
 import { education } from '../data/education'
@@ -39,14 +39,14 @@ export default function ResumePage() {
             onClick={() => window.print()}
             className="inline-flex h-11 items-center gap-2 rounded-full border border-line bg-surface px-5 text-sm font-medium text-fg transition-colors hover:bg-elevated"
           >
-            <FiPrinter aria-hidden="true" /> {t('resume.print')}
+            <Printer aria-hidden="true" /> {t('resume.print')}
           </button>
           <a
             href={profile.cv}
             download
             className="btn-accent inline-flex h-11 items-center gap-2 rounded-full px-5 text-sm font-medium"
           >
-            <FiDownload aria-hidden="true" /> {t('resume.downloadPdf')}
+            <DownloadSimple aria-hidden="true" /> {t('resume.downloadPdf')}
           </a>
         </div>
 
@@ -93,7 +93,7 @@ export default function ResumePage() {
                       {t(`experience.${job.id}.role`)}, {job.company}
                     </h3>
                     <p className="text-xs font-medium text-muted print:text-black" dir="ltr">
-                      {job.start} — {job.end ?? t('experience.present')}
+                      {job.start} - {job.end ?? t('experience.present')}
                     </p>
                   </div>
                   <ul className="mt-2 space-y-1.5">
@@ -149,7 +149,7 @@ export default function ResumePage() {
                       className="mt-1 inline-flex items-center gap-1 text-xs text-accent underline underline-offset-2 print:text-black"
                     >
                       {p.demo.replace('https://', '').replace(/\/$/, '')}
-                      <FiExternalLink aria-hidden="true" className="print:hidden" />
+                      <ArrowSquareOut aria-hidden="true" className="print:hidden" />
                     </a>
                   )}
                 </div>

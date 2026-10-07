@@ -13,7 +13,7 @@ const fill = (str, vars) => String(str).replace(/\{(\w+)\}/g, (_, k) => vars[k] 
 
 export default function ContributionsSection() {
   const { t, locale } = useI18n()
-  const { total, activeDays, longestStreak, busiestDay, accounts, generatedAt, days } = contributions
+  const { total, activeDays, longestStreak, busiestDay, accounts, generatedAt } = contributions
 
   const stats = [
     { id: 'total', value: total },
@@ -42,7 +42,7 @@ export default function ContributionsSection() {
         </div>
       </div>
 
-      <p className="mt-2 shrink-0 text-center font-mono text-[11px] uppercase tracking-[0.14em] text-muted">
+      <p className="mt-2 shrink-0 text-center text-xs text-muted">
         {t('contributions.hint')}
       </p>
 
@@ -57,8 +57,8 @@ export default function ContributionsSection() {
         ))}
       </dl>
 
-      <p className="mt-5 shrink-0 font-mono text-[11px] uppercase tracking-[0.14em] text-muted">
-        {fill(t('contributions.accounts'), { count: accounts.length, date: updated })} · {days.length}d
+      <p className="mt-5 shrink-0 text-xs text-muted">
+        {fill(t('contributions.accounts'), { count: accounts.length, date: updated })}
       </p>
     </Section>
   )

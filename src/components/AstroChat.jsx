@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
-import { FiMessageCircle, FiRefreshCw, FiSend, FiX } from 'react-icons/fi'
+import { ArrowsClockwise, ChatCircle, PaperPlaneTilt, X } from '@phosphor-icons/react'
 import { AnimatePresence, motion, useReducedMotion } from 'framer-motion'
 import { profile } from '../data/profile'
 import { useI18n } from '../i18n/context'
@@ -16,7 +16,7 @@ export default function AstroChat() {
   const [open, setOpen] = useState(false)
   const [input, setInput] = useState('')
   const [messages, setMessages] = useState([])
-  const [status, setStatus] = useState('idle') // idle | sending | error | unconfigured
+  const [status, setStatus] = useState('idle') // idle | sending | busy | error | unconfigured
 
   const listRef = useRef(null)
   const inputRef = useRef(null)
@@ -44,29 +44,29 @@ export default function AstroChat() {
     const next = [...messages, { role: 'user', content: trimmed }]
     setMessages(next)
     setInput('')
-    setStatus('sending')
+    await request(next)
+  }
 
+  /** Re-asks the last question after a failure, without making the visitor retype it. */
+  function retry() {
+    if (status === 'sending' || messages.at(-1)?.role !== 'user') return
+    request(messages)
+  }
+
+  async function request(conversation) {
+    setStatus('sending')
     try {
       const res = await fetch(ENDPOINT, {
         method: 'POST',
         headers: { 'content-type': 'application/json' },
-        body: JSON.stringify({ messages: next }),
+        body: JSON.stringify({ messages: conversation }),
       })
+      const data = await res.json().catch(() => null)
 
-      if (res.status === 503) {
-        setStatus('unconfigured')
-        return
-      }
-      if (!res.ok) {
-        setStatus('error')
-        return
-      }
-
-      const data = await res.json()
-      if (!data?.reply) {
-        setStatus('error')
-        return
-      }
+      if (data?.error === 'unconfigured') return setStatus('unconfigured')
+      // The model was overloaded even after the function's own retries.
+      if (data?.error === 'busy' || data?.error === 'rate_limited') return setStatus('busy')
+      if (!res.ok || !data?.reply) return setStatus('error')
 
       setMessages((m) => [...m, { role: 'assistant', content: data.reply }])
       setStatus('idle')
@@ -101,7 +101,7 @@ export default function AstroChat() {
         aria-label={open ? t('chat.close') : t('chat.open')}
         className="btn-accent fixed bottom-20 end-5 z-[70] grid h-14 w-14 place-items-center rounded-full shadow-xl shadow-black/30 transition-transform hover:scale-105"
       >
-        {open ? <FiX aria-hidden="true" size={22} /> : <FiMessageCircle aria-hidden="true" size={22} />}
+        {open ? <X aria-hidden="true" size={22} /> : <ChatCircle aria-hidden="true" size={22} />}
       </button>
 
       <AnimatePresence>
@@ -112,7 +112,7 @@ export default function AstroChat() {
             id="astro-panel"
             role="dialog"
             aria-modal="false"
-            aria-label={`${t('chat.name')} — ${t('chat.subtitle')}`}
+            aria-label={`${t('chat.name')}, ${t('chat.subtitle')}`}
             dir={dir}
             className="fixed bottom-40 end-5 z-[70] flex max-h-[min(32rem,calc(100vh-13rem))] w-[calc(100vw-2.5rem)] max-w-sm flex-col overflow-hidden rounded-2xl border border-line bg-bg shadow-2xl"
           >
@@ -134,7 +134,7 @@ export default function AstroChat() {
                   title={t('chat.clear')}
                   className="grid h-8 w-8 place-items-center rounded-full text-muted transition-colors hover:bg-elevated hover:text-fg"
                 >
-                  <FiRefreshCw aria-hidden="true" size={15} />
+                  <ArrowsClockwise aria-hidden="true" size={15} />
                 </button>
               )}
             </header>
@@ -182,7 +182,19 @@ export default function AstroChat() {
 
               <p aria-live="polite" className="text-xs text-muted">
                 {status === 'sending' && <span className="italic">{t('chat.thinking')}</span>}
-                {status === 'error' && <span className="text-red-400">{t('chat.error')}</span>}
+                {(status === 'error' || status === 'busy') && (
+                  <span className="flex flex-wrap items-center gap-x-2 gap-y-1">
+                    <span className="text-red-400">{t(status === 'busy' ? 'chat.busy' : 'chat.error')}</span>
+                    <button
+                      type="button"
+                      onClick={retry}
+                      className="inline-flex items-center gap-1 font-medium text-fg underline-offset-2 hover:underline"
+                    >
+                      <ArrowsClockwise aria-hidden="true" />
+                      {t('chat.retry')}
+                    </button>
+                  </span>
+                )}
                 {status === 'unconfigured' && (
                   <span className="text-red-400">
                     {String(t('chat.unconfigured')).replace('{email}', profile.email)}
@@ -225,7 +237,7 @@ export default function AstroChat() {
                   aria-label={t('chat.send')}
                   className="btn-accent grid h-10 w-10 shrink-0 place-items-center rounded-xl transition-opacity disabled:opacity-40"
                 >
-                  <FiSend aria-hidden="true" size={16} className="rtl:-scale-x-100" />
+                  <PaperPlaneTilt aria-hidden="true" size={16} className="rtl:-scale-x-100" />
                 </button>
               </div>
               <p className="mt-2 text-center text-[10px] text-muted">{t('chat.disclaimer')}</p>

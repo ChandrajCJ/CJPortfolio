@@ -7,7 +7,7 @@ export default {
   meta: {
     role: 'Software Engineer',
     tagline:
-      'I build secure, scalable web platforms authentication infrastructure, micro-frontend performance, and AI-assisted developer tooling.',
+      'I build secure, scalable web platforms: authentication infrastructure, micro-frontend performance, and AI-assisted developer tooling.',
     summary:
       'Software engineer with experience building secure, scalable web platforms across enterprise SaaS and multi-cloud environments. Proven track record delivering authentication infrastructure (SSO, MFA, OAuth, RBAC), micro-frontend performance optimization, and core platform features serving customers across multiple hyperscalers and global regions. Skilled in leveraging AI-assisted development tools to accelerate delivery and improve code quality.',
   },
@@ -30,7 +30,7 @@ export default {
   },
 
   common: {
-    downloadCV: 'Download CV',
+    downloadCV: 'Download résumé',
     getInTouch: 'Get in touch',
     viewLive: 'View live',
     liveDemo: 'Live',
@@ -63,7 +63,6 @@ export default {
     greeting: "Hello, I'm {name}",
     scrollCta: 'Scroll to explore',
     aboutTitle: 'Who I am',
-    aboutEyebrow: 'About',
     currently: 'Currently',
     education: 'Education',
     basedIn: 'Based in',
@@ -108,7 +107,7 @@ export default {
         login: {
           title: 'One login for every environment',
           detail:
-            'Architected and implemented a centralized login service authenticating users across **7 production environments** (3 hyperscalers — AWS, GCP, Azure; 3 regions — NA, EU, AU), **3 staging**, and **22 development environments**, maintaining **100% uptime** with SSO, MFA/OTP, backup codes, and password recovery.',
+            'Architected and implemented a centralized login service authenticating users across **7 production environments** (3 hyperscalers: AWS, GCP, Azure; 3 regions: NA, EU, AU), **3 staging**, and **22 development environments**, maintaining **100% uptime** with SSO, MFA/OTP, backup codes, and password recovery.',
         },
         rbac: {
           title: 'Granular role-based access control',
@@ -246,7 +245,6 @@ export default {
   },
 
   projects: {
-    eyebrow: 'Projects',
     title: "Things I've built",
     description: 'A mix of production work and side projects. Open any card for the full write-up.',
     highlights: 'Highlights',
@@ -308,7 +306,6 @@ export default {
   },
 
   contact: {
-    eyebrow: 'Contact',
     title: "Let's connect",
     description:
       'Open to interesting problems, collaborations, and new opportunities. I usually reply within a day or two.',
@@ -320,7 +317,7 @@ export default {
     messagePlaceholder: 'What are you working on?',
     send: 'Send message',
     sending: 'Sending…',
-    sent: 'Thanks — your message is on its way.',
+    sent: 'Thanks. Your message is on its way.',
     errorGeneric: "That didn't send. Please email me directly at {email}.",
     errorUnconfigured: "The contact form isn't configured yet. Please email me at {email}.",
     errors: {
@@ -346,11 +343,13 @@ export default {
     open: 'Chat with Astro',
     close: 'Close chat',
     greeting:
-      "Hi! I'm Astro — I can answer questions about Chandraj's experience, skills and projects. What would you like to know?",
+      "Hi, I'm Astro. I can answer questions about Chandraj's experience, skills and projects. What would you like to know?",
     placeholder: 'Ask about my experience…',
     send: 'Send',
     thinking: 'Astro is typing…',
     error: "I couldn't reach the server just now. Please try again in a moment.",
+    busy: 'The AI service is busy right now. Try again in a few seconds.',
+    retry: 'Try again',
     unconfigured:
       'Astro is not configured on this deployment yet. You can reach Chandraj directly at {email}.',
     disclaimer: 'AI-generated. May be inaccurate.',

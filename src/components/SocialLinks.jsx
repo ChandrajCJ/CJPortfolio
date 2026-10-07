@@ -1,15 +1,14 @@
-import { FaGithub, FaInstagram, FaLinkedin, FaWhatsapp } from 'react-icons/fa'
-import { FiMail } from 'react-icons/fi'
+import { EnvelopeSimple, GithubLogo, InstagramLogo, LinkedinLogo, WhatsappLogo } from '@phosphor-icons/react'
 import { profile } from '../data/profile'
 import { useI18n } from '../i18n/context'
 import Tooltip from './Tooltip'
 
 const ICONS = {
-  github: FaGithub,
-  linkedin: FaLinkedin,
-  email: FiMail,
-  whatsapp: FaWhatsapp,
-  instagram: FaInstagram,
+  github: GithubLogo,
+  linkedin: LinkedinLogo,
+  email: EnvelopeSimple,
+  whatsapp: WhatsappLogo,
+  instagram: InstagramLogo,
 }
 
 /** Colours live in index.css so they can vary per theme - see .hover-* there. */
@@ -28,7 +27,7 @@ export default function SocialLinks({ className = '', size = 'md' }) {
   return (
     <ul className={`flex items-center gap-5 ${className}`}>
       {profile.socials.map(({ label, href, icon }) => {
-        const Icon = ICONS[icon] ?? FiMail
+        const Icon = ICONS[icon] ?? EnvelopeSimple
         const external = !href.startsWith('mailto:')
         // Brand names stay as they are; "Email" is the one label that translates.
         const name = icon === 'email' ? t('contact.email') : label

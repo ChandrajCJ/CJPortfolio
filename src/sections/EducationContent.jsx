@@ -1,4 +1,4 @@
-import { FiBookOpen } from 'react-icons/fi'
+import { BookOpen } from '@phosphor-icons/react'
 import { education } from '../data/education'
 import { useI18n } from '../i18n/context'
 import Reveal from '../components/Reveal'
@@ -17,9 +17,9 @@ export default function EducationContent() {
               aria-hidden="true"
               className="bg-accent absolute -start-[41px] grid h-6 w-6 place-items-center rounded-full text-xs text-onAccent"
             >
-              <FiBookOpen />
+              <BookOpen />
             </span>
-            <p className="text-xs font-medium uppercase tracking-wider text-muted font-mono">{item.date}</p>
+            <p className="text-xs font-medium text-muted">{item.date}</p>
             <h3 className="mt-1 text-lg font-semibold text-fg">{t(`education.${item.id}.title`)}</h3>
             <p className="text-sm text-muted">{item.institute}</p>
             <p className="text-sm text-muted">{t(`education.locations.${item.locationKey}`)}</p>

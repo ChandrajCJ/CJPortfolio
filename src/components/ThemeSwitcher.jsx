@@ -1,23 +1,23 @@
 import { useEffect, useRef, useState } from 'react'
-import { FiCheck, FiCircle, FiDroplet, FiFeather, FiMoon, FiSun, FiTerminal } from 'react-icons/fi'
+import { Check, Circle, Drop, Feather, Moon, Sun, TerminalWindow } from '@phosphor-icons/react'
 import { useTheme } from '../context/themeContext'
 import { useI18n } from '../i18n/context'
 import { THEMES as THEME_LIST } from '../data/themes'
 import Tooltip from './Tooltip'
 
 const ICONS = {
-  grey: FiCircle,
-  dark: FiMoon,
-  ocean: FiDroplet,
-  terminal: FiTerminal,
-  light: FiSun,
-  paper: FiFeather,
+  grey: Circle,
+  dark: Moon,
+  ocean: Drop,
+  terminal: TerminalWindow,
+  light: Sun,
+  paper: Feather,
 }
 
-const THEMES = THEME_LIST.map((t) => ({ id: t.id, Icon: ICONS[t.id] ?? FiCircle }))
+const THEMES = THEME_LIST.map((t) => ({ id: t.id, Icon: ICONS[t.id] ?? Circle }))
 
 /** Menu rather than a two-way toggle, so all three themes are reachable. */
-export default function ThemeSwitcher() {
+export default function ThemeSwitcher({ bare = false }) {
   const { theme, setTheme } = useTheme()
   const { t } = useI18n()
   const [open, setOpen] = useState(false)
@@ -41,14 +41,14 @@ export default function ThemeSwitcher() {
 
   return (
     <div ref={wrapRef} className="relative">
-      <Tooltip label={`${t('common.changeTheme')} · ${t(`themes.${theme}`)}`} side="bottom" hidden={open}>
+      <Tooltip label={`${t('common.theme')}: ${t(`themes.${theme}`)}`} side="bottom" hidden={open}>
         <button
           type="button"
           onClick={() => setOpen((v) => !v)}
           aria-haspopup="menu"
           aria-expanded={open}
           aria-label={`${t('common.changeTheme')} (${t(`themes.${theme}`)})`}
-          className="grid h-10 w-10 place-items-center rounded-full border border-line bg-surface text-fg transition-colors hover:bg-elevated"
+          className={`grid h-10 w-10 place-items-center rounded-full text-fg transition-colors hover:bg-elevated ${bare ? '' : 'border border-line bg-surface'}`}
         >
           <Current aria-hidden="true" />
         </button>
@@ -80,7 +80,7 @@ export default function ThemeSwitcher() {
                     <Icon aria-hidden="true" />
                     {t(`themes.${id}`)}
                   </span>
-                  {selected && <FiCheck aria-hidden="true" className="text-accent" />}
+                  {selected && <Check aria-hidden="true" className="text-accent" />}
                 </button>
               </li>
             )

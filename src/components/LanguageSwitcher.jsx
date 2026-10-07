@@ -1,10 +1,10 @@
 import { useEffect, useRef, useState } from 'react'
-import { FiCheck, FiGlobe } from 'react-icons/fi'
+import { Check, Globe } from '@phosphor-icons/react'
 import { LOCALES, LOCALE_CODES } from '../i18n/config'
 import { useI18n } from '../i18n/context'
 import Tooltip from './Tooltip'
 
-export default function LanguageSwitcher() {
+export default function LanguageSwitcher({ bare = false }) {
   const { locale, setLocale, t } = useI18n()
   const [open, setOpen] = useState(false)
   const wrapRef = useRef(null)
@@ -32,9 +32,9 @@ export default function LanguageSwitcher() {
           aria-haspopup="menu"
           aria-expanded={open}
           aria-label={t('common.changeLanguage')}
-          className="flex h-10 items-center gap-1.5 rounded-full border border-line bg-surface px-3 text-fg transition-colors hover:bg-elevated"
+          className={`flex h-10 items-center gap-1.5 rounded-full px-3 text-fg transition-colors hover:bg-elevated ${bare ? '' : 'border border-line bg-surface'}`}
         >
-          <FiGlobe aria-hidden="true" />
+          <Globe aria-hidden="true" />
           <span className="text-xs font-semibold uppercase">{locale}</span>
         </button>
       </Tooltip>
@@ -68,7 +68,7 @@ export default function LanguageSwitcher() {
                     <span aria-hidden="true">{l.flag}</span>
                     <span>{l.native}</span>
                   </span>
-                  {selected && <FiCheck aria-hidden="true" className="text-accent" />}
+                  {selected && <Check aria-hidden="true" className="text-accent" />}
                 </button>
               </li>
             )

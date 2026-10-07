@@ -1,5 +1,5 @@
 import { Link, useParams } from 'react-router-dom'
-import { FiArrowLeft, FiExternalLink, FiGithub } from 'react-icons/fi'
+import { ArrowLeft, ArrowSquareOut, GithubLogo } from '@phosphor-icons/react'
 import { getProject, projects } from '../data/projects'
 import { getProjectImage } from '../lib/images'
 import { useI18n } from '../i18n/context'
@@ -28,7 +28,7 @@ export default function ProjectDetail() {
           to="/projects"
           className="inline-flex items-center gap-2 text-sm font-medium text-muted transition-colors hover:text-fg"
         >
-          <FiArrowLeft aria-hidden="true" className="rtl:rotate-180" /> {t('common.allProjects')}
+          <ArrowLeft aria-hidden="true" className="rtl:rotate-180" /> {t('common.allProjects')}
         </Link>
 
         <header className="mt-8">
@@ -46,7 +46,7 @@ export default function ProjectDetail() {
                 rel="noreferrer noopener"
                 className="btn-accent inline-flex h-11 items-center gap-2 rounded-full px-5 text-sm font-medium"
               >
-                {t('common.viewLive')} <FiExternalLink aria-hidden="true" />
+                {t('common.viewLive')} <ArrowSquareOut aria-hidden="true" />
               </a>
             )}
             {project.repo && (
@@ -56,7 +56,7 @@ export default function ProjectDetail() {
                 rel="noreferrer noopener"
                 className="inline-flex h-11 items-center gap-2 rounded-full border border-line bg-surface px-5 text-sm font-medium text-fg"
               >
-                <FiGithub aria-hidden="true" /> {t('common.sourceCode')}
+                <GithubLogo aria-hidden="true" /> {t('common.sourceCode')}
               </a>
             )}
           </div>
@@ -103,7 +103,7 @@ export default function ProjectDetail() {
 
         {others.length > 0 && (
           <nav aria-label={t('projects.moreProjects')} className="mt-16 border-t border-line pt-8">
-            <h2 className="text-sm font-semibold uppercase tracking-wider text-muted font-mono">{t('projects.moreProjects')}</h2>
+            <h2 className="text-sm font-semibold text-fg">{t('projects.moreProjects')}</h2>
             <ul className="mt-4 divide-y divide-line">
               {others.map((p) => (
                 <li key={p.slug}>

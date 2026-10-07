@@ -21,7 +21,7 @@ export default function Seo({ title, description, path = '/', image, type = 'web
   const { t, locale } = useI18n()
 
   const role = t('meta.role')
-  const fullTitle = title ? `${title} — ${profile.name}` : `${profile.name} — ${role}`
+  const fullTitle = title ? `${title} | ${profile.name}` : `${profile.name} | ${role}`
   const desc = description ?? t('meta.tagline')
   const url = `${profile.siteUrl}${path}`
   const img = image ?? `${profile.siteUrl}/og-image.png`

@@ -1,5 +1,5 @@
 import { Link, useParams } from 'react-router-dom'
-import { FiArrowLeft } from 'react-icons/fi'
+import { ArrowLeft } from '@phosphor-icons/react'
 import { getPost } from '../data/posts'
 import { useI18n } from '../i18n/context'
 import Seo from '../components/Seo'
@@ -22,7 +22,7 @@ export default function PostDetail() {
           to="/writing"
           className="inline-flex items-center gap-2 text-sm font-medium text-muted transition-colors hover:text-fg"
         >
-          <FiArrowLeft aria-hidden="true" className="rtl:rotate-180" /> {t('common.allWriting')}
+          <ArrowLeft aria-hidden="true" className="rtl:rotate-180" /> {t('common.allWriting')}
         </Link>
 
         <header className="mt-8">

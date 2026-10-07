@@ -1,5 +1,5 @@
 import { useRef, useState } from 'react'
-import { FiLoader, FiSend } from 'react-icons/fi'
+import { CircleNotch, PaperPlaneTilt } from '@phosphor-icons/react'
 import emailjs from '@emailjs/browser'
 import { profile } from '../data/profile'
 import { useI18n } from '../i18n/context'
@@ -65,7 +65,6 @@ export default function ContactSection() {
     <Section id="contact">
       <div className="grid gap-12 md:grid-cols-2">
         <div>
-          <p className="mb-3 text-sm font-semibold uppercase tracking-[0.2em] text-muted font-mono">{t('contact.eyebrow')}</p>
           <h2 className="text-fg text-3xl font-bold md:text-4xl">{t('contact.title')}</h2>
           <p className="mb-8 mt-4 text-base leading-relaxed text-muted">{t('contact.description')}</p>
           <a
@@ -143,11 +142,11 @@ export default function ContactSection() {
             >
               {status === 'sending' ? (
                 <>
-                  <FiLoader aria-hidden="true" className="motion-safe:animate-spin" /> {t('contact.sending')}
+                  <CircleNotch aria-hidden="true" className="motion-safe:animate-spin" /> {t('contact.sending')}
                 </>
               ) : (
                 <>
-                  {t('contact.send')} <FiSend aria-hidden="true" className="rtl:-scale-x-100" />
+                  {t('contact.send')} <PaperPlaneTilt aria-hidden="true" className="rtl:-scale-x-100" />
                 </>
               )}
             </button>

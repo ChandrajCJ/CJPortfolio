@@ -11,7 +11,6 @@ export default function ExpertiseSection() {
     <Section
       id="skills"
       alt
-      eyebrow={t('skills.eyebrow')}
       title={t('skills.title')}
       description={t('skills.description')}
     >
