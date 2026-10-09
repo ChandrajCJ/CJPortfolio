@@ -7,6 +7,8 @@ const WEBSITE_ID = import.meta.env.VITE_UMAMI_WEBSITE_ID || '153fb724-a0e1-4646-
 const SRC = import.meta.env.VITE_UMAMI_SRC || 'https://cloud.umami.is/script.js'
 // Comma-separated hostnames to count, so local builds and deploy previews stay out of the stats.
 const DOMAINS = import.meta.env.VITE_UMAMI_DOMAINS || 'developedbycj.netlify.app'
+// Read once, from the URL the visitor arrived on, before any client-side redirect.
+const ARRIVAL_REF = new URLSearchParams(window.location.search).get('ref')
 
 /**
  * Privacy-friendly, cookie-free analytics via Umami. Never loaded in
@@ -15,7 +17,8 @@ const DOMAINS = import.meta.env.VITE_UMAMI_DOMAINS || 'developedbycj.netlify.app
  * Page views (including client-side route changes) are tracked by the script.
  * Clicks on elements with `data-umami-event` are tracked automatically; other
  * events go through lib/track.js. A `?ref=` tag on the link a visitor arrived
- * by (e.g. ?ref=acme on a job application) is recorded as a "ref" event.
+ * by is recorded as a "ref" event: the shared links are tagged ?ref=resume,
+ * ?ref=linkedin and ?ref=text.
  */
 export default function Analytics() {
   useEffect(() => {
@@ -28,8 +31,7 @@ export default function Analytics() {
     script.dataset.websiteId = WEBSITE_ID
     if (DOMAINS) script.dataset.domains = DOMAINS
     script.onload = () => {
-      const ref = new URLSearchParams(window.location.search).get('ref')
-      if (ref) track('ref', { ref: ref.slice(0, 50) })
+      if (ARRIVAL_REF) track('ref', { ref: ARRIVAL_REF.slice(0, 50) })
     }
     document.head.appendChild(script)
   }, [])
