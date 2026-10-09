@@ -241,6 +241,8 @@ export default function Header() {
             <Link
               to="/resume"
               aria-label={t('nav.resume')}
+              data-umami-event="resume-open"
+              data-umami-event-from="nav"
               className="hidden h-10 w-10 place-items-center rounded-full text-fg transition-colors hover:bg-elevated md:grid"
             >
               <DownloadSimple aria-hidden="true" />
@@ -309,6 +311,8 @@ export default function Header() {
             <Link
               to="/resume"
               onClick={() => setSheet(false)}
+              data-umami-event="resume-open"
+              data-umami-event-from="nav-phone"
               className="btn-accent flex items-center justify-center gap-2 rounded-full px-5 py-3.5 text-base font-semibold"
             >
               <DownloadSimple aria-hidden="true" />

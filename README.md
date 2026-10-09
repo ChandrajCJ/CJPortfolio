@@ -162,8 +162,12 @@ Copy `.env.example` to `.env`:
 - `VITE_EMAILJS_SERVICE_ID`, `VITE_EMAILJS_TEMPLATE_ID`, `VITE_EMAILJS_PUBLIC_KEY`
   — contact form. These are public-by-design browser keys, so **restrict the
   allowed domains in the EmailJS dashboard** or the form can be used to spam you.
-- `VITE_PLAUSIBLE_DOMAIN` — optional analytics. Leave blank and no third-party
-  script is loaded at all.
+- `VITE_UMAMI_WEBSITE_ID`, `VITE_UMAMI_DOMAINS` — optional overrides for the
+  cookie-free Umami analytics; the live site's ID and hostname are the defaults
+  in `src/components/Analytics.jsx`. Never loaded in development, and only
+  counted on the live hostname. Besides page views it records résumé
+  downloads, chat opens and questions (never their text), contact sends,
+  social and project clicks, and a `?ref=` tag on the link a visitor arrived by.
 
 ## Performance
 

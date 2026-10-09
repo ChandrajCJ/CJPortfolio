@@ -40,7 +40,12 @@ export default function ProjectCard({ project, featured = false, astro }) {
       <div className="relative z-[2] flex flex-1 flex-col p-5">
         <div className="flex items-start justify-between gap-3">
           <h3 className={`font-semibold text-fg ${featured ? 'text-xl' : 'text-lg'}`}>
-            <Link to={`/projects/${project.slug}`} className="after:absolute after:inset-0 focus-visible:underline">
+            <Link
+              to={`/projects/${project.slug}`}
+              data-umami-event="project-open"
+              data-umami-event-project={project.slug}
+              className="after:absolute after:inset-0 focus-visible:underline"
+            >
               {title}
             </Link>
           </h3>
@@ -60,13 +65,20 @@ export default function ProjectCard({ project, featured = false, astro }) {
         </ul>
 
         <div className="relative z-10 mt-5 flex items-center gap-4 border-t border-line pt-4 text-sm">
-          <Link to={`/projects/${project.slug}`} className="inline-flex items-center gap-1 font-medium text-accent">
+          <Link
+            to={`/projects/${project.slug}`}
+            data-umami-event="project-open"
+            data-umami-event-project={project.slug}
+            className="inline-flex items-center gap-1 font-medium text-accent"
+          >
             {t('common.details')} <ArrowUpRight aria-hidden="true" className="rtl:-scale-x-100" />
           </Link>
           {project.demo && (
             <a
               href={project.demo}
               target="_blank"
+              data-umami-event="project-demo"
+              data-umami-event-project={project.slug}
               rel="noreferrer noopener"
               className="inline-flex items-center gap-1.5 text-muted transition-colors hover:text-fg"
             >
@@ -81,6 +93,8 @@ export default function ProjectCard({ project, featured = false, astro }) {
             <a
               href={project.repo}
               target="_blank"
+              data-umami-event="project-code"
+              data-umami-event-project={project.slug}
               rel="noreferrer noopener"
               className="inline-flex items-center gap-1.5 text-muted transition-colors hover:text-fg"
             >

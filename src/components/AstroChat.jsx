@@ -5,6 +5,7 @@ import { profile } from '../data/profile'
 import { useI18n } from '../i18n/context'
 import RichText from './RichText'
 import { onDock } from '../lib/astroBus'
+import { track } from '../lib/track'
 
 const ENDPOINT = '/api/astro'
 const MAX_CHARS = 1000
@@ -40,7 +41,9 @@ export default function AstroChat() {
   useEffect(() => onDock((stop) => setArrived(stop === 'chat')), [])
 
   useEffect(() => {
-    if (open) setNudged(true)
+    if (!open) return
+    setNudged(true)
+    track('chat-open')
   }, [open])
 
   useEffect(() => {
@@ -54,6 +57,8 @@ export default function AstroChat() {
     const next = [...messages, { role: 'user', content: trimmed }]
     setMessages(next)
     setInput('')
+    // Only that a question was asked, and whether it was a suggested one: never its text.
+    track('chat-question', { suggested: suggestionList.includes(text) })
     await request(next)
   }
 

@@ -75,6 +75,8 @@ export default function Hero() {
               <a
                 href={profile.cv}
                 download
+                data-umami-event="resume-download"
+                data-umami-event-from="hero"
                 className="btn-accent inline-flex h-12 items-center gap-2 rounded-full px-7 font-medium transition-opacity hover:opacity-90"
               >
                 {t('common.downloadCV')} <DownloadSimple aria-hidden="true" />

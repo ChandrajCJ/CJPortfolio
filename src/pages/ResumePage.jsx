@@ -37,6 +37,7 @@ export default function ResumePage() {
           <button
             type="button"
             onClick={() => window.print()}
+            data-umami-event="resume-print"
             className="inline-flex h-11 items-center gap-2 rounded-full border border-line bg-surface px-5 text-sm font-medium text-fg transition-colors hover:bg-elevated"
           >
             <Printer aria-hidden="true" /> {t('resume.print')}
@@ -44,6 +45,8 @@ export default function ResumePage() {
           <a
             href={profile.cv}
             download
+            data-umami-event="resume-download"
+            data-umami-event-from="resume-page"
             className="btn-accent inline-flex h-11 items-center gap-2 rounded-full px-5 text-sm font-medium"
           >
             <DownloadSimple aria-hidden="true" /> {t('resume.downloadPdf')}

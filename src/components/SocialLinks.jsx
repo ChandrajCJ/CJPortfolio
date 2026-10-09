@@ -37,6 +37,8 @@ export default function SocialLinks({ className = '', size = 'md' }) {
               <a
                 href={href}
                 aria-label={name}
+                data-umami-event="social-click"
+                data-umami-event-network={icon}
                 {...(external ? { target: '_blank', rel: 'noreferrer noopener' } : {})}
                 className={`block text-muted transition-colors ${HOVER[icon] ?? 'hover-github'}`}
               >
