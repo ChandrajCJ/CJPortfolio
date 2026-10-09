@@ -66,7 +66,7 @@ export default function AboutSection() {
         </Reveal>
 
         <Reveal delay={0.22} className="md:col-span-2">
-          <div className="card flex h-full flex-col justify-center p-6">
+          <div data-astro="hobbies" className="card flex h-full flex-col justify-center p-6">
             <p className="text-xs font-medium text-muted">{t('home.hobbies')}</p>
             <ul className="mt-4 flex flex-wrap gap-x-7 gap-y-3">
               {profile.hobbies.map((id) => {

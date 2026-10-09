@@ -31,7 +31,7 @@ export default function ProjectsSection() {
               delay={Math.min(i, 5) * 0.05}
               className={`list-none ${span} ${lastOdd ? 'sm:col-span-2' : ''}`}
             >
-              <ProjectCard project={project} featured={project.featured} />
+              <ProjectCard project={project} featured={project.featured} astro={i === 0 ? 'project' : undefined} />
             </Reveal>
           )
         })}

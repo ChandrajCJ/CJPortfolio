@@ -5,7 +5,7 @@ import { motion, useMotionValue, useReducedMotion, useSpring, useTransform } fro
  * 3D tilt plus a radial spotlight that tracks the pointer. The spotlight is a
  * CSS custom property, so it costs no React renders.
  */
-export default function TiltCard({ children, className = '', max = 8, as = 'div' }) {
+export default function TiltCard({ children, className = '', max = 8, as = 'div', ...rest }) {
   const ref = useRef(null)
   const reduced = useReducedMotion()
 
@@ -19,7 +19,11 @@ export default function TiltCard({ children, className = '', max = 8, as = 'div'
 
   if (reduced) {
     const Tag = as
-    return <Tag className={className}>{children}</Tag>
+    return (
+      <Tag {...rest} className={className}>
+        {children}
+      </Tag>
+    )
   }
 
   const onMove = (e) => {
@@ -41,6 +45,7 @@ export default function TiltCard({ children, className = '', max = 8, as = 'div'
 
   return (
     <MotionTag
+      {...rest}
       ref={ref}
       onMouseMove={onMove}
       onMouseLeave={reset}

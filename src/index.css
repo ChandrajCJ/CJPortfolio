@@ -297,3 +297,115 @@ html.lenis body {
     break-inside: avoid;
   }
 }
+
+/* Astro trail: the orb that travels the home page (components/AstroTrail.jsx). */
+.astro-orb,
+.astro-tail {
+  position: relative;
+  display: block;
+  border-radius: 9999px;
+  background: rgb(var(--accent));
+  transform: translate(-50%, -50%) scale(0);
+  opacity: 0;
+  transition:
+    transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1),
+    opacity 0.3s ease;
+}
+
+.astro-orb {
+  width: 14px;
+  height: 14px;
+  box-shadow:
+    0 0 0 2px rgb(var(--bg)),
+    0 0 16px 3px rgb(var(--accent) / 0.45);
+}
+
+.astro-tail-1 {
+  width: 8px;
+  height: 8px;
+}
+
+.astro-tail-2 {
+  width: 5px;
+  height: 5px;
+}
+
+.astro-layer[data-ready] .astro-orb {
+  transform: translate(-50%, -50%) scale(1);
+  opacity: 1;
+}
+
+.astro-layer[data-ready] .astro-tail-1 {
+  transform: translate(-50%, -50%) scale(1);
+  opacity: 0.45;
+}
+
+.astro-layer[data-ready] .astro-tail-2 {
+  transform: translate(-50%, -50%) scale(1);
+  opacity: 0.22;
+}
+
+/* Resting: a slow ping, so it reads as "here" rather than a stray dot. */
+.astro-layer[data-state='docked'] .astro-orb::after {
+  content: '';
+  position: absolute;
+  inset: -2px;
+  border-radius: inherit;
+  border: 1.5px solid rgb(var(--accent));
+  animation: astro-ping 1.8s ease-out infinite;
+}
+
+/* Home: the orb folds into the chat button, which takes over the pulse. */
+.astro-layer[data-state='home'] .astro-orb,
+.astro-layer[data-state='home'] .astro-tail,
+.astro-layer[data-state='off'] .astro-orb,
+.astro-layer[data-state='off'] .astro-tail,
+.astro-layer[data-state='wait'] .astro-orb,
+.astro-layer[data-state='wait'] .astro-tail {
+  transform: translate(-50%, -50%) scale(0.3);
+  opacity: 0;
+}
+
+/* On the signature the orb shrinks to the size of the j's dot it sits on. */
+.astro-layer[data-at='jdot'] .astro-orb {
+  transform: translate(-50%, -50%) scale(0.65);
+}
+
+[data-astro][data-astro-docked]:not([data-astro='globe']):not([data-astro='chat']):not([data-astro='jdot']) {
+  box-shadow:
+    0 0 0 1px rgb(var(--accent) / 0.85),
+    0 0 0 6px rgb(var(--accent) / 0.12);
+  animation: astro-ring 0.45s ease-out;
+}
+
+[data-astro='chat'][data-astro-docked] {
+  animation: astro-call 1.8s ease-out infinite;
+}
+
+@keyframes astro-ping {
+  from {
+    transform: scale(1);
+    opacity: 0.8;
+  }
+  to {
+    transform: scale(2.8);
+    opacity: 0;
+  }
+}
+
+@keyframes astro-ring {
+  from {
+    box-shadow:
+      0 0 0 1px rgb(var(--accent) / 0),
+      0 0 0 14px rgb(var(--accent) / 0);
+  }
+}
+
+@keyframes astro-call {
+  0% {
+    box-shadow: 0 0 0 0 rgb(var(--accent) / 0.55);
+  }
+  100% {
+    box-shadow: 0 0 0 16px rgb(var(--accent) / 0);
+  }
+}

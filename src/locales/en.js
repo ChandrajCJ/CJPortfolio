@@ -337,6 +337,13 @@ export default {
     readExternally: 'Read externally',
   },
 
+  art: {
+    demo: 'Demo code',
+    verified: 'Signature verified',
+    findings: 'Open Snyk findings',
+    ltr: 'Left to right',
+    rtl: 'Right to left',
+  },
   chat: {
     name: 'Astro',
     subtitle: "Chandraj's AI assistant",
@@ -350,6 +357,7 @@ export default {
     error: "I couldn't reach the server just now. Please try again in a moment.",
     busy: 'The AI service is busy right now. Try again in a few seconds.',
     retry: 'Try again',
+    nudge: 'Ask me anything',
     unconfigured:
       'Astro is not configured on this deployment yet. You can reach Chandraj directly at {email}.',
     disclaimer: 'AI-generated. May be inaccurate.',

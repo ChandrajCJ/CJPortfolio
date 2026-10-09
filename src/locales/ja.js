@@ -332,6 +332,13 @@ export default {
     readExternally: '外部サイトで読む',
   },
 
+  art: {
+    demo: 'デモコード',
+    verified: '署名を検証済み',
+    findings: '未対応のSnyk指摘',
+    ltr: '左から右',
+    rtl: '右から左',
+  },
   chat: {
     name: 'Astro',
     subtitle: 'Chandraj のAIアシスタント',
@@ -345,6 +352,7 @@ export default {
     error: 'サーバーに接続できませんでした。少し時間をおいて再度お試しください。',
     busy: 'AIサービスが混み合っています。数秒後にもう一度お試しください。',
     retry: '再試行',
+    nudge: '何でも聞いてください',
     unconfigured: 'この環境では Astro はまだ設定されていません。{email} から Chandraj に直接ご連絡いただけます。',
     disclaimer: 'AIが生成した内容です。正確でない場合があります。',
     clear: '会話を消去',

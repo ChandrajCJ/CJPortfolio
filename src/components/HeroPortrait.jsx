@@ -19,7 +19,7 @@ export default function HeroPortrait() {
 
   return (
     <figure className="mx-auto w-full max-w-sm md:max-w-md">
-      <div className="relative overflow-hidden rounded-xl border border-line bg-surface">
+      <div data-astro="portrait" className="relative overflow-hidden rounded-xl border border-line bg-surface">
         {failed ? (
           <div className="grid aspect-[4/5] w-full place-items-center">
             <span className="font-mono text-6xl font-bold text-accent">{initials}</span>

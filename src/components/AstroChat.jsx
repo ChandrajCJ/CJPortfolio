@@ -4,6 +4,7 @@ import { AnimatePresence, motion, useReducedMotion } from 'framer-motion'
 import { profile } from '../data/profile'
 import { useI18n } from '../i18n/context'
 import RichText from './RichText'
+import { onDock } from '../lib/astroBus'
 
 const ENDPOINT = '/api/astro'
 const MAX_CHARS = 1000
@@ -17,6 +18,9 @@ export default function AstroChat() {
   const [input, setInput] = useState('')
   const [messages, setMessages] = useState([])
   const [status, setStatus] = useState('idle') // idle | sending | busy | error | unconfigured
+  // Astro's orb has travelled the page and landed on this button: offer a prompt, once.
+  const [arrived, setArrived] = useState(false)
+  const [nudged, setNudged] = useState(false)
 
   const listRef = useRef(null)
   const inputRef = useRef(null)
@@ -31,6 +35,12 @@ export default function AstroChat() {
     window.addEventListener('keydown', onKey)
     inputRef.current?.focus()
     return () => window.removeEventListener('keydown', onKey)
+  }, [open])
+
+  useEffect(() => onDock((stop) => setArrived(stop === 'chat')), [])
+
+  useEffect(() => {
+    if (open) setNudged(true)
   }, [open])
 
   useEffect(() => {
@@ -98,11 +108,28 @@ export default function AstroChat() {
         onClick={() => setOpen((v) => !v)}
         aria-expanded={open}
         aria-controls="astro-panel"
+        data-astro="chat"
         aria-label={open ? t('chat.close') : t('chat.open')}
         className="btn-accent fixed bottom-20 end-5 z-[70] grid h-14 w-14 place-items-center rounded-full shadow-xl shadow-black/30 transition-transform hover:scale-105"
       >
         {open ? <X aria-hidden="true" size={22} /> : <ChatCircle aria-hidden="true" size={22} />}
       </button>
+
+      <AnimatePresence>
+        {arrived && !open && !nudged && (
+          <motion.button
+            type="button"
+            onClick={() => setOpen(true)}
+            initial={reduced ? false : { opacity: 0, y: 6, scale: 0.96 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, scale: 0.96 }}
+            transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
+            className="fixed bottom-[5.625rem] end-[5.5rem] z-[70] whitespace-nowrap rounded-full border border-line bg-elevated px-3.5 py-2 text-sm font-medium text-fg shadow-lg shadow-black/20 transition-colors hover:border-accent/50"
+          >
+            {t('chat.nudge')}
+          </motion.button>
+        )}
+      </AnimatePresence>
 
       <AnimatePresence>
         {open && (

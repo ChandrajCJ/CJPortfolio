@@ -15,9 +15,10 @@ export default function SkillsContent() {
               {t(`skills.groups.${group.id}`)}
             </h3>
             <ul className="mt-4 flex flex-wrap gap-1.5">
-              {group.items.map((item) => (
+              {group.items.map((item, j) => (
                 <li key={item}>
-                  <TechPill>{item}</TechPill>
+                  {/* The first skill is one of Astro's stops on its way down the page. */}
+                  <TechPill data-astro={i === 0 && j === 0 ? 'skill' : undefined}>{item}</TechPill>
                 </li>
               ))}
             </ul>

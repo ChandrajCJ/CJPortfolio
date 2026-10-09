@@ -6,6 +6,7 @@ import ExpertiseSection from '../sections/ExpertiseSection'
 import ProjectsSection from '../sections/ProjectsSection'
 import ContributionsSection from '../sections/ContributionsSection'
 import ContactSection from '../sections/ContactSection'
+import AstroTrail from '../components/AstroTrail'
 
 /** The whole portfolio as one scrolling page; detail views stay routed. */
 export default function Home() {
@@ -19,6 +20,7 @@ export default function Home() {
       <ProjectsSection />
       <ContributionsSection />
       <ContactSection />
+      <AstroTrail />
     </>
   )
 }

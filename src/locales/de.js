@@ -332,6 +332,13 @@ export default {
     readExternally: 'Extern lesen',
   },
 
+  art: {
+    demo: 'Demo-Code',
+    verified: 'Signatur verifiziert',
+    findings: 'Offene Snyk-Befunde',
+    ltr: 'Links nach rechts',
+    rtl: 'Rechts nach links',
+  },
   chat: {
     name: 'Astro',
     subtitle: 'Chandrajs KI-Assistent',
@@ -345,6 +352,7 @@ export default {
     error: 'Der Server war gerade nicht erreichbar. Bitte versuche es gleich noch einmal.',
     busy: 'Der KI-Dienst ist gerade ausgelastet. Versuch es in ein paar Sekunden noch einmal.',
     retry: 'Erneut versuchen',
+    nudge: 'Frag mich etwas',
     unconfigured: 'Astro ist in dieser Umgebung noch nicht eingerichtet. Du erreichst Chandraj direkt unter {email}.',
     disclaimer: 'KI-generiert. Kann Fehler enthalten.',
     clear: 'Unterhaltung löschen',

@@ -4,6 +4,7 @@ import emailjs from '@emailjs/browser'
 import { profile } from '../data/profile'
 import { useI18n } from '../i18n/context'
 import Section from '../components/Section'
+import Signature from '../components/scroll-art/Signature'
 import SocialLinks from '../components/SocialLinks'
 
 const SERVICE_ID = import.meta.env.VITE_EMAILJS_SERVICE_ID
@@ -76,6 +77,7 @@ export default function ContactSection() {
           </a>
           <p className="mt-2 text-sm text-muted">{t(`education.locations.${profile.locationKey}`)}</p>
           <SocialLinks className="mt-8" size="lg" />
+          <Signature className="text-accent mt-10 w-60 md:w-72" />
         </div>
 
           <form ref={formRef} onSubmit={onSubmit} noValidate className="flex flex-col gap-5">

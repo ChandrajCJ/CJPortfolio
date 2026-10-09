@@ -5,7 +5,7 @@ import { useI18n } from '../i18n/context'
 import TechPill from './TechPill'
 import TiltCard from './TiltCard'
 
-export default function ProjectCard({ project, featured = false }) {
+export default function ProjectCard({ project, featured = false, astro }) {
   const { t } = useI18n()
   const image = getProjectImage(project.image)
   const title = t(`projects.${project.slug}.title`)
@@ -14,6 +14,7 @@ export default function ProjectCard({ project, featured = false }) {
     <TiltCard
       as="article"
       max={6}
+      data-astro={astro}
       className="card group relative flex h-full flex-col overflow-hidden transition-colors hover:border-accent/50 focus-within:border-accent/50"
     >
       <div className="aspect-[16/9] overflow-hidden bg-elevated">

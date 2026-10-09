@@ -5,6 +5,7 @@ import Section from '../components/Section'
 import CountUp from '../components/CountUp'
 import Reveal from '../components/Reveal'
 import SkylineFallback from '../components/three/SkylineFallback'
+import ContributionsLine from '../components/scroll-art/ContributionsLine'
 
 // three.js is already a lazy chunk for the globe; this reuses it.
 const Skyline3D = lazy(() => import('../components/three/Skyline3D'))
@@ -33,8 +34,10 @@ export default function ContributionsSection() {
       title={t('contributions.title')}
       description={t('contributions.description')}
     >
-      {/* Flexes to whatever height is left after the heading and the stats. */}
-      <div className="card relative min-h-[15rem] flex-1 overflow-hidden">
+      <ContributionsLine />
+
+      {/* Flexes to whatever height is left after the heading, the line and the stats. */}
+      <div className="card relative mt-4 min-h-[15rem] flex-1 overflow-hidden">
         <div className="absolute inset-3 md:inset-4">
           <Suspense fallback={<SkylineFallback />}>
             <Skyline3D />

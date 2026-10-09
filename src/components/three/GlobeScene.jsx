@@ -5,6 +5,7 @@ import * as THREE from 'three'
 import { endpoints, origin } from '../../data/topology'
 import borders from '../../data/borders.json'
 import { GLOBE_PALETTES } from './globePalettes'
+import { astro } from '../../lib/astroBus'
 
 const R = 1.6
 const DOT = 0.028 // travelling dot radius
@@ -70,6 +71,18 @@ const INITIAL_SPIN = (() => {
   const o = toVec3(origin.lat, origin.lon)
   return 0.3 - Math.atan2(o.x, o.z)
 })()
+
+/** The origin marker, and its azimuth before any spin. */
+const HOME = toVec3(origin.lat, origin.lon)
+const HOME_AZIMUTH = Math.atan2(HOME.x, HOME.z)
+const HOMING_RATE = 3 // how quickly the globe turns home for Astro, per second
+const FRONT = 0.2 // how far round the visible face the marker must be to count as showing
+const homeWorld = new THREE.Vector3()
+const toCamera = new THREE.Vector3()
+const homeScreen = { x: 0.5, y: 0.5, front: false }
+
+/** Shortest signed angle from a to b. */
+const angleTo = (a, b) => Math.atan2(Math.sin(b - a), Math.cos(b - a))
 
 /**
  * Country borders and coastlines, projected onto the sphere as line segments.
@@ -195,11 +208,31 @@ export default function GlobeScene({ palette = GLOBE_PALETTES.grey, interactive 
   const dragging = useRef(false)
   const resumeAt = useRef(0)
 
-  // Hold still while the visitor is dragging, and for a moment after, so the
-  // globe doesn't slide away from whatever they turned it to look at.
   useFrame((state, delta) => {
-    if (!group.current || dragging.current || state.clock.elapsedTime < resumeAt.current) return
-    group.current.rotation.y += delta * SPIN
+    const g = group.current
+    if (!g) return
+    // Hold still while the visitor is dragging, and for a moment after, so the
+    // globe doesn't slide away from whatever they turned it to look at.
+    if (!dragging.current) {
+      if (astro.target === 'globe') {
+        // Astro is heading here: turn home to face the camera so it can land on the marker.
+        const { x, z } = state.camera.position
+        const want = Math.atan2(x, z) - HOME_AZIMUTH
+        g.rotation.y += angleTo(g.rotation.y, want) * (1 - Math.exp(-delta * HOMING_RATE))
+      } else if (state.clock.elapsedTime >= resumeAt.current) {
+        g.rotation.y += delta * SPIN
+      }
+    }
+
+    // Tell the trail where the home marker sits on the canvas.
+    g.updateMatrixWorld()
+    homeWorld.copy(HOME).applyMatrix4(g.matrixWorld)
+    toCamera.copy(state.camera.position).normalize()
+    homeScreen.front = homeWorld.dot(toCamera) / homeWorld.length() > FRONT
+    homeWorld.project(state.camera)
+    homeScreen.x = (homeWorld.x + 1) / 2
+    homeScreen.y = (1 - homeWorld.y) / 2
+    astro.globePoint = homeScreen
   })
 
   return (
