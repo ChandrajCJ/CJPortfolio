@@ -15,6 +15,8 @@ export const astro = {
   target: null,
   /** Where the globe's home marker is, as fractions of the canvas, refreshed by the globe each frame. */
   globePoint: null,
+  /** Flags stops wait on before the orb may land, e.g. `signed` once the signature is fully written. */
+  ready: {},
 }
 
 export function setDocked(id) {

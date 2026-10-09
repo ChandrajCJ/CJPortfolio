@@ -26,6 +26,14 @@ const MAX_TRAVEL = 0.5
 const PINNED_REACH = 0.3
 /** Gap kept between a travelling orb and the viewport edges. */
 const EDGE = 16
+/**
+ * A `waitFor` stop holds the orb this many pixels short of it (hovering
+ * nearby) until its flag in astro.ready is set, then lets it land over GATE_MS.
+ */
+const HOVER_PX = 36
+const GATE_MS = 450
+/** After a `holdMs` rest is up, the orb glides to where the scroll says it should be over this long. */
+const CATCH_UP_MS = 700
 /** At the bottom of the page: rest on the last stop this long (ms), then fly home over HOP_MS. */
 const HOLD_MS = 900
 const HOP_MS = 900
@@ -45,14 +53,16 @@ const STOPS = [
   { id: 'hobbies', fx: 1, fy: 0, dx: -20, dy: 20 },
   // Lands on the home marker once the globe reports it. Centred in the view,
   // the globe is always fully on screen (its height is capped to fit).
-  { id: 'globe', fx: 0.5, fy: 0.5, pinned: true },
+  // Also rests here for a while once landed, even if scrolling continues.
+  { id: 'globe', fx: 0.5, fy: 0.5, pinned: true, holdMs: 1500 },
   { id: 'oauth', fx: 1, fy: 0, dx: -12, dy: 12 },
   { id: 'snyk', fx: 1, fy: 0, dx: -12, dy: 12 },
   { id: 'skill', fx: 1, fy: 0.5, dx: 14 },
   { id: 'project', fx: 1, fy: 0, dx: -22, dy: 22 },
   { id: 'peak', fx: 0.5, fy: 0.5 },
-  // The dot of the j in the signature: the orb lands as the tittle.
-  { id: 'jdot', fx: 0.5, fy: 0.5 },
+  // The dot of the j in the signature: the orb lands as the tittle, but only
+  // once the whole name has been written.
+  { id: 'jdot', fx: 0.5, fy: 0.5, waitFor: 'signed' },
   // Not a scroll stop: the chat button is fixed, so once the page is scrolled
   // to the end the orb rests on the last stop for a moment, then flies here.
   { id: 'chat', fx: 0.5, fy: 0.5, home: true },
@@ -102,6 +112,8 @@ export default function AstroTrail() {
     let lastTime = performance.now()
     let endSince = null // when the page reached the bottom with the orb resting on the last stop
     let hop = 0 // progress of the flight home, 0 to 1
+    let gate = 0 // how far a waiting stop has let the orb in, 0 (hovering) to 1 (landed)
+    let held = null // { id, since, release } for a stop with a timed rest
 
     const find = (selector) => {
       let el = cache.get(selector)
@@ -131,6 +143,11 @@ export default function AstroTrail() {
       const scrollY = window.scrollY
       const maxScroll = document.documentElement.scrollHeight - vh
       const rtl = document.documentElement.dir === 'rtl'
+      const bow = Math.min(140, window.innerWidth * 0.12)
+      const clampToView = (p) => ({
+        x: Math.min(window.innerWidth - EDGE, Math.max(EDGE, p.x)),
+        y: Math.min(vh - EDGE, Math.max(EDGE, p.y)),
+      })
       // Reachable range of the reading line, in viewport space for this frame.
       const first = line - scrollY
       const last = line + maxScroll - scrollY
@@ -166,7 +183,7 @@ export default function AstroTrail() {
         // `mark`: where the reading line must be for this stop to count as reached.
         let mark = Math.min(last, Math.max(first, reachAt))
         if (points.length) mark = Math.max(mark, points[points.length - 1].mark)
-        points.push({ id: stop.id, el, x, y, mark, pinned: stop.pinned })
+        points.push({ id: stop.id, el, x, y, mark, pinned: stop.pinned, waitFor: stop.waitFor, holdMs: stop.holdMs })
       }
 
       if (!points.length) {
@@ -213,6 +230,7 @@ export default function AstroTrail() {
       let docked = null
       let target
       let waiting = false
+      let leg = null
       if (i === -1) {
         // Before the first stop nears the middle (a phone's hero puts the
         // portrait low on screen), stay out of sight rather than dock early.
@@ -232,12 +250,49 @@ export default function AstroTrail() {
         // linear so the orb keeps pace with the scroll instead of running ahead.
         const soft = Math.min(1, vh / Math.max(travel, 1))
         const g = t + (smoothstep(t) - t) * soft
-        pos = arcPoint(a, b, g, i % 2 ? 1 : -1, Math.min(140, window.innerWidth * 0.12))
-        pos = {
-          x: Math.min(window.innerWidth - EDGE, Math.max(EDGE, pos.x)),
-          y: Math.min(vh - EDGE, Math.max(EDGE, pos.y)),
-        }
+        pos = clampToView(arcPoint(a, b, g, i % 2 ? 1 : -1, bow))
         target = b.id
+        leg = { a, b, g, side: i % 2 ? 1 : -1 }
+      }
+
+      // Timed rest: once landed on a holdMs stop, stay put that long even if the
+      // scroll moves on, then glide to where the scroll has got to.
+      if (docked?.holdMs) {
+        if (held?.id !== docked.id) held = { id: docked.id, since: now, release: 0 }
+        else held.release = 0
+      } else if (held && (leg?.a.id === held.id || points[points.indexOf(docked) - 1]?.id === held.id)) {
+        // The scroll has moved on to the leg after the held stop, or even onto the next stop.
+        const stop = points.find((p) => p.id === held.id)
+        if (now - held.since < stop.holdMs) {
+          pos = stop
+          docked = stop
+          target = stop.id
+        } else {
+          held.release = clamp01(held.release + dt / CATCH_UP_MS)
+          const k = smoothstep(held.release)
+          pos = { x: stop.x + (pos.x - stop.x) * k, y: stop.y + (pos.y - stop.y) * k }
+          if (held.release < 1) docked = null
+          else held = null
+        }
+      } else {
+        held = null
+      }
+
+      // Hold back from a stop that isn't ready: hover near it, land once it is.
+      const gated = points.find((p) => p.waitFor)
+      const open = gated ? Boolean(astro.ready[gated.waitFor]) : true
+      gate = clamp01(gate + ((open ? 1 : -1) * dt) / GATE_MS)
+      const capFor = (from, to) => {
+        const hover = 1 - Math.min(0.5, HOVER_PX / (Math.hypot(to.x - from.x, to.y - from.y) || 1))
+        return hover + (1 - hover) * smoothstep(gate)
+      }
+      if (docked?.waitFor && gate < 1) {
+        const k = points.indexOf(docked)
+        const from = points[k - 1] ?? docked
+        pos = clampToView(arcPoint(from, docked, capFor(from, docked), (k - 1) % 2 ? 1 : -1, bow))
+        docked = null
+      } else if (leg?.b.waitFor && leg.g > capFor(leg.a, leg.b)) {
+        pos = clampToView(arcPoint(leg.a, leg.b, capFor(leg.a, leg.b), leg.side, bow))
       }
 
       // The flight home: only from a rest on the last stop at the very bottom of the page.
@@ -247,7 +302,7 @@ export default function AstroTrail() {
       hop = clamp01(hop + (goingHome ? dt / HOP_MS : -dt / (HOP_MS / 2)))
       if (home && hop > 0) {
         const from = points[n - 1]
-        pos = arcPoint(from, home, smoothstep(hop), 1, Math.min(140, window.innerWidth * 0.12))
+        pos = arcPoint(from, home, smoothstep(hop), 1, bow)
         docked = hop >= 1 ? home : null
         target = home.id
       }

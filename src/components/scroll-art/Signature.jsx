@@ -1,7 +1,8 @@
-import { useRef } from 'react'
-import { motion, useTransform } from 'framer-motion'
+import { useEffect, useRef } from 'react'
+import { motion, useMotionValueEvent, useTransform } from 'framer-motion'
 import { signature } from '../../data/signature'
 import useDrawProgress, { span } from '../../hooks/useDrawProgress'
+import { astro } from '../../lib/astroBus'
 
 const DRAW_END = 0.85 // outlines finish here, then the ink fills in
 
@@ -25,6 +26,18 @@ function Glyph({ d, progress, from, to }) {
 export default function Signature({ className = '' }) {
   const ref = useRef(null)
   const progress = useDrawProgress(ref, ['start 95%', 'center 55%'])
+
+  // Tell the Astro orb when the name is fully written, so it lands on the j only then.
+  const written = (v) => v >= 0.999
+  useMotionValueEvent(progress, 'change', (v) => {
+    astro.ready.signed = written(v)
+  })
+  useEffect(() => {
+    astro.ready.signed = written(progress.get())
+    return () => {
+      astro.ready.signed = false
+    }
+  }, [progress])
   const n = signature.paths.length
 
   return (
