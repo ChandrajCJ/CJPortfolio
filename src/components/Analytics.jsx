@@ -17,8 +17,9 @@ const ARRIVAL_REF = new URLSearchParams(window.location.search).get('ref')
  * Page views (including client-side route changes) are tracked by the script.
  * Clicks on elements with `data-umami-event` are tracked automatically; other
  * events go through lib/track.js. A `?ref=` tag on the link a visitor arrived
- * by is recorded as a "ref" event: the shared links are tagged ?ref=resume,
- * ?ref=linkedin and ?ref=text.
+ * by is recorded as a "from-<tag>" event: the shared links are tagged
+ * ?ref=resume, ?ref=linkedin and ?ref=text, giving from-resume, from-linkedin
+ * and from-text.
  */
 export default function Analytics() {
   useEffect(() => {
@@ -31,7 +32,11 @@ export default function Analytics() {
     script.dataset.websiteId = WEBSITE_ID
     if (DOMAINS) script.dataset.domains = DOMAINS
     script.onload = () => {
-      if (ARRIVAL_REF) track('ref', { ref: ARRIVAL_REF.slice(0, 50) })
+      if (!ARRIVAL_REF) return
+      // The tag goes in the event name ("from-linkedin") so each source is its
+      // own line in Umami's event list and chart, with no property drill-down.
+      const tag = ARRIVAL_REF.toLowerCase().replace(/[^a-z0-9-]+/g, '-').slice(0, 40)
+      if (tag) track(`from-${tag}`, { ref: tag })
     }
     document.head.appendChild(script)
   }, [])
