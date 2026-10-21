@@ -5,7 +5,11 @@ import { useI18n } from '../i18n/context'
 import TechPill from './TechPill'
 import TiltCard from './TiltCard'
 
-export default function ProjectCard({ project, featured = false, astro }) {
+/**
+ * `flagship` lays the card out side by side (image beside the text) from
+ * tablet width up, for the one project that spans the whole row.
+ */
+export default function ProjectCard({ project, featured = false, flagship = false, astro }) {
   const { t } = useI18n()
   const image = getProjectImage(project.image)
   const title = t(`projects.${project.slug}.title`)
@@ -15,20 +19,30 @@ export default function ProjectCard({ project, featured = false, astro }) {
       as="article"
       max={6}
       data-astro={astro}
-      className="card group relative flex h-full flex-col overflow-hidden transition-colors hover:border-accent/50 focus-within:border-accent/50"
+      className={`card group relative flex h-full flex-col overflow-hidden transition-colors hover:border-accent/50 focus-within:border-accent/50 ${
+        flagship ? 'md:flex-row' : ''
+      }`}
     >
-      <div className="aspect-[16/9] overflow-hidden bg-elevated">
+      <div className={`aspect-[16/9] overflow-hidden bg-elevated ${flagship ? 'md:aspect-auto md:w-1/2 md:shrink-0' : ''}`}>
         {image ? (
           <img
             src={image.src}
             srcSet={image.srcSet}
-            sizes={featured ? '(min-width: 1024px) 560px, (min-width: 768px) 45vw, 90vw' : '(min-width: 1024px) 360px, (min-width: 768px) 45vw, 90vw'}
+            sizes={
+              flagship
+                ? '(min-width: 1024px) 580px, (min-width: 768px) 50vw, 90vw'
+                : featured
+                  ? '(min-width: 1024px) 560px, (min-width: 768px) 45vw, 90vw'
+                  : '(min-width: 1024px) 360px, (min-width: 768px) 45vw, 90vw'
+            }
             alt=""
             width="640"
             height="360"
             loading="lazy"
             decoding="async"
-            className="h-full w-full object-cover object-top transition-transform duration-500 group-hover:scale-105"
+            className={`h-full w-full object-cover transition-transform duration-500 group-hover:scale-105 ${
+              flagship ? 'object-left-top' : 'object-top'
+            }`}
           />
         ) : (
           <div className="grid h-full w-full place-items-center">
@@ -37,9 +51,9 @@ export default function ProjectCard({ project, featured = false, astro }) {
         )}
       </div>
 
-      <div className="relative z-[2] flex flex-1 flex-col p-5">
+      <div className={`relative z-[2] flex flex-1 flex-col p-5 ${flagship ? 'md:justify-center md:p-8' : ''}`}>
         <div className="flex items-start justify-between gap-3">
-          <h3 className={`font-semibold text-fg ${featured ? 'text-xl' : 'text-lg'}`}>
+          <h3 className={`font-semibold text-fg ${flagship ? 'text-2xl' : featured ? 'text-xl' : 'text-lg'}`}>
             <Link
               to={`/projects/${project.slug}`}
               data-umami-event="project-open"

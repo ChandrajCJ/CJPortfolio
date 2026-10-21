@@ -201,7 +201,7 @@ export default {
     description: 'Nach Bereich gruppiert statt nach selbst vergebenen Prozentwerten.',
     groups: {
       languages: 'Sprachen',
-      frontend: 'Frontend',
+      frontend: 'Frontend & Mobile',
       backend: 'Backend',
       auth: 'Auth & Security',
       data: 'Datenbanken',
@@ -245,6 +245,18 @@ export default {
     highlights: 'Highlights',
     builtWith: 'Gebaut mit',
     moreProjects: 'Weitere Projekte',
+    tagalong: {
+      title: 'Tagalong',
+      blurb: 'Gruppenreiseplaner in Echtzeit: gemeinsamer Reiseplan, Chat, Ausgaben und Fotos, für Android, iOS und das Web.',
+      description:
+        'Ein Offline-first-Gruppenreiseplaner für Android, iOS und das Web. Freunde treten über einen Einladungslink bei und bauen gemeinsam einen Live-Reiseplan mit mehreren Zielen, mit Wetter, Karten, Routenoptimierung und Kalendersynchronisierung. Dazu kommen Gruppenchat, geteilte Fotoalben, ein Reisetagebuch, Packlisten, Budgets und das Aufteilen von Ausgaben in mehreren Währungen mit UPI-Ausgleich per Fingertipp.',
+      highlights: [
+        'Live-Gruppenchat mit Umfragen, Medien, @-Erwähnungen und Lesebestätigungen sowie Live-Standortfreigabe, über ein WebSocket-Gateway auf Redis Pub/Sub.',
+        'Selbst gehostete KI (Ollama) entwirft Reisepläne aus den Ideen und Buchungen der Gruppe, fasst verpasste Chats zusammen und scannt Belege.',
+        'Aus E-Mails importierte Buchungen, präferenzabhängige Push-Benachrichtigungen, ein Android-Homescreen-Widget und Over-the-Air-Updates.',
+        'Ohne Kosten auf kostenlosen Cloud-Tarifen ausgeliefert, mit CI und über 450 automatisierten Tests.',
+      ],
+    },
     'chat-app': {
       title: 'Echtzeit-Chat-App',
       blurb: 'Serverloses 1:1-Echtzeit-Messaging mit Sprachnachrichten, Reaktionen und Lesebestätigungen.',

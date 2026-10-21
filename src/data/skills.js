@@ -6,16 +6,29 @@ export const skillGroups = [
   { id: 'languages', label: 'Languages', items: ['JavaScript', 'TypeScript', 'Python', 'C', 'C++', 'SQL'] },
   {
     id: 'frontend',
-    label: 'Frontend',
-    items: ['ReactJS', 'Next.js', 'Module Federation', 'Webpack', 'Tailwind CSS', 'Framer Motion', 'Storybook'],
+    label: 'Frontend & Mobile',
+    items: [
+      'ReactJS',
+      'React Native (Expo)',
+      'Next.js',
+      'Redux Toolkit',
+      'Module Federation',
+      'Webpack',
+      'Tailwind CSS',
+      'shadcn/ui',
+    ],
   },
-  { id: 'backend', label: 'Backend', items: ['Node.js', 'NestJS', 'Express.js', 'gRPC', 'REST APIs'] },
+  {
+    id: 'backend',
+    label: 'Backend',
+    items: ['Node.js', 'NestJS', 'Fastify', 'Express.js', 'gRPC', 'REST APIs', 'WebSockets', 'BullMQ'],
+  },
   {
     id: 'auth',
     label: 'Auth & Security',
     items: ['OAuth 2.0', 'SSO', 'SAML', 'OIDC', 'SCIM', 'RBAC', 'OPA', 'MFA / TOTP'],
   },
-  { id: 'data', label: 'Databases', items: ['SQL', 'MongoDB', 'Redis', 'Firebase', 'Supabase'] },
+  { id: 'data', label: 'Databases', items: ['PostgreSQL', 'Drizzle ORM', 'MongoDB', 'Redis', 'Firebase', 'Supabase'] },
   {
     id: 'cloud',
     label: 'Cloud & DevOps',
@@ -24,9 +37,13 @@ export const skillGroups = [
   {
     id: 'ai',
     label: 'AI / ML Engineering',
-    items: ['RAG', 'LangChain', 'Prompt Engineering', 'AI Agents', 'LLM Workflow Automation', 'Vector Embeddings'],
+    items: ['RAG', 'LangChain', 'Ollama', 'Prompt Engineering', 'AI Agents', 'LLM Automation', 'Vector Embeddings'],
   },
-  { id: 'testing', label: 'Testing & Tools', items: ['Selenium', 'Playwright', 'Git'] },
+  {
+    id: 'testing',
+    label: 'Testing & Tools',
+    items: ['Jest', 'Playwright', 'Selenium', 'Storybook', 'Automated Testing'],
+  },
 ]
 
 export default skillGroups

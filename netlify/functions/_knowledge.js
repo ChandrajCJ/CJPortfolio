@@ -23,13 +23,13 @@ accelerate delivery and improve code quality.
 
 ## Technical skills
 Languages: JavaScript, TypeScript, Python, C, C++, SQL
-Frontend: ReactJS, Next.js, Module Federation, Webpack, Tailwind CSS, Framer Motion, Storybook
-Backend: Node.js, NestJS, Express.js, gRPC, REST APIs
+Frontend & Mobile: ReactJS, React Native (Expo), Next.js, Redux Toolkit, Module Federation, Webpack, Tailwind CSS, shadcn/ui
+Backend: Node.js, NestJS, Fastify, Express.js, gRPC, REST APIs, WebSockets, BullMQ
 Auth & Security: OAuth 2.0, SSO, SAML, OIDC, SCIM, RBAC, OPA (Open Policy Agent), MFA/TOTP
-Databases: SQL, MongoDB, Redis, Firebase, Supabase
+Databases: PostgreSQL, Drizzle ORM, MongoDB, Redis, Firebase, Supabase
 Cloud & DevOps: AWS, Azure, Docker, Kubernetes, Jenkins, GoCD, ArgoCD, CI/CD
-AI / ML Engineering: RAG, LangChain, Prompt Engineering, AI Agents, LLM Workflow Automation, Vector Embeddings
-Testing & Tools: Selenium, Playwright, Git
+AI / ML Engineering: RAG, LangChain, Ollama, Prompt Engineering, AI Agents, LLM Automation, Vector Embeddings
+Testing & Tools: Jest, Playwright, Selenium, Storybook, Automated Testing
 
 ## Experience
 
@@ -71,6 +71,18 @@ B.Tech, Computer Science and Engineering — Sri Manakula Vinayagar Engineering
 College, Puducherry (2021–2025). CGPA 8.5/10.
 
 ## Projects
+- Tagalong (TypeScript, React Native, Fastify, PostgreSQL, Drizzle ORM, Redis,
+  WebSockets, BullMQ, Ollama, Firebase, Docker) - real-time group trip planner
+  for Android, iOS and the web, offline first. Friends join via invite links to
+  build a live multi-destination itinerary (weather, maps, route optimization,
+  calendar sync), with group chat (polls, media, @mentions, read receipts), live
+  location sharing, shared photo and video albums on a map, a trip journal,
+  bookings imported from email, packing lists, budgets, and multi-currency
+  expense splitting with one-tap UPI settle-up. Self-hosted AI drafts
+  itineraries, summarizes missed chat and scans receipts; a WebSocket gateway
+  runs over Redis pub/sub. Shipped at zero cost on free cloud tiers with CI and
+  450+ automated tests. Live: https://tagalong-u4wh.onrender.com
+  Code: https://github.com/ChandrajCJ/tagalong
 - Real-Time Chat App (React 18, TypeScript, Vite, Tailwind CSS, Firebase) —
   serverless 1:1 messaging with voice notes, reactions, replies, read receipts,
   and typing/presence indicators. Live: https://cjchatapp.netlify.app

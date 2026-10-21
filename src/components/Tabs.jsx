@@ -2,7 +2,8 @@ import { useId, useRef, useState } from 'react'
 
 /**
  * Accessible tablist with roving tabindex and arrow-key navigation.
- * Used for in-page tab groups on the scrolling home page.
+ * Used for in-page tab groups on the scrolling home page. A tab's optional
+ * `astro` id makes its button a stop for the Astro orb (components/AstroTrail).
  */
 export default function Tabs({ tabs, ariaLabel }) {
   const [active, setActive] = useState(tabs[0]?.id)
@@ -34,6 +35,7 @@ export default function Tabs({ tabs, ariaLabel }) {
               id={`${baseId}-tab-${tab.id}`}
               aria-selected={selected}
               aria-controls={`${baseId}-panel-${tab.id}`}
+              data-astro={tab.astro}
               tabIndex={selected ? 0 : -1}
               onClick={() => setActive(tab.id)}
               onKeyDown={(e) => {

@@ -57,8 +57,10 @@ const STOPS = [
   { id: 'globe', fx: 0.5, fy: 0.5, pinned: true, holdMs: 1500 },
   { id: 'oauth', fx: 1, fy: 0, dx: -12, dy: 12 },
   { id: 'snyk', fx: 1, fy: 0, dx: -12, dy: 12 },
-  { id: 'skill', fx: 1, fy: 0.5, dx: 14 },
-  { id: 'project', fx: 1, fy: 0, dx: -22, dy: 22 },
+  // Just after the Certifications tab label, in the empty end of the tab row.
+  { id: 'certs', fx: 1, fy: 0.5, dx: 12 },
+  // Bottom corner of the first project card, clear of its title and year.
+  { id: 'project', fx: 1, fy: 1, dx: -22, dy: -22 },
   { id: 'peak', fx: 0.5, fy: 0.5 },
   // The dot of the j in the signature: the orb lands as the tittle, but only
   // once the whole name has been written.
@@ -86,9 +88,9 @@ function arcPoint(a, b, t, side, maxBow) {
 /**
  * Astro, the chat assistant, as a small orb that travels the home page with
  * the scroll. It rests on one element per section (the portrait, the hobbies
- * tile, the globe's home marker, the OAuth and Snyk panels, a skill, the featured
- * project, the busiest day, the dot of the j in the signature) and finally
- * docks into the chat button.
+ * tile, the globe's home marker, the OAuth and Snyk panels, the Certifications
+ * tab, the featured project, the busiest day, the dot of the j in the
+ * signature) and finally docks into the chat button.
  *
  * Everything is measured from the live layout each frame and written straight
  * to the DOM, so it follows sticky columns, reveals and resizes without React

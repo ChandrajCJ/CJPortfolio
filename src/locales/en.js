@@ -206,7 +206,7 @@ export default {
     description: 'Grouped by domain rather than self-rated percentages.',
     groups: {
       languages: 'Languages',
-      frontend: 'Frontend',
+      frontend: 'Frontend & Mobile',
       backend: 'Backend',
       auth: 'Auth & Security',
       data: 'Databases',
@@ -250,6 +250,18 @@ export default {
     highlights: 'Highlights',
     builtWith: 'Built with',
     moreProjects: 'More projects',
+    tagalong: {
+      title: 'Tagalong',
+      blurb: 'Real-time group trip planner: shared itinerary, chat, expenses and photos, on Android, iOS and the web.',
+      description:
+        'An offline-first group trip planner for Android, iOS and the web. Friends join through an invite link and build a live multi-destination itinerary together, with weather, maps, route optimization and calendar sync, alongside group chat, shared photo albums, a trip journal, packing lists, budgets and multi-currency expense splitting with one-tap UPI settle-up.',
+      highlights: [
+        'Live group chat with polls, media, @mentions and read receipts, plus live location sharing, over a WebSocket gateway on Redis pub/sub.',
+        "Self-hosted AI (Ollama) drafts itineraries from the group's ideas and bookings, summarizes missed chat and scans receipts.",
+        'Bookings imported from email, preference-aware push notifications, an Android home-screen widget and over-the-air updates.',
+        'Shipped at zero cost on free cloud tiers, with CI and 450+ automated tests.',
+      ],
+    },
     'chat-app': {
       title: 'Real-Time Chat App',
       blurb: 'Serverless 1:1 real-time messaging with voice notes, reactions, and read receipts.',

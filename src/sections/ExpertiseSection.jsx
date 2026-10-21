@@ -18,7 +18,12 @@ export default function ExpertiseSection() {
         ariaLabel={t('skills.eyebrow')}
         tabs={[
           { id: 'skills', label: t('nav.skills'), content: <SkillsContent /> },
-          { id: 'certifications', label: t('nav.certifications'), content: <CertificationsContent /> },
+          {
+            id: 'certifications',
+            label: t('nav.certifications'),
+            content: <CertificationsContent />,
+            astro: 'certs',
+          },
         ]}
       />
     </Section>
